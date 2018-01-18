@@ -1,0 +1,1017 @@
+[{
+  "names": [{
+    "name": "赤",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Rouge",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Rot",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Rossa",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Red",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 1,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/1/",
+    "name": "red-blue"
+  },
+  "name": "red"
+}, {
+  "names": [{
+    "name": "緑",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Bleu",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Blau",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Blu",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Blue",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 2,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/1/",
+    "name": "red-blue"
+  },
+  "name": "blue"
+}, {
+  "names": [{
+    "name": "ピカチュウ",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Jaune",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Gelb",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Gialla",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Yellow",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 3,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/2/",
+    "name": "yellow"
+  },
+  "name": "yellow"
+}, {
+  "names": [{
+    "name": "金",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Or",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Gold",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Oro",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Gold",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 4,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/3/",
+    "name": "gold-silver"
+  },
+  "name": "gold"
+}, {
+  "names": [{
+    "name": "銀",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Argent",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Silber",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Argento",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Silver",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 5,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/3/",
+    "name": "gold-silver"
+  },
+  "name": "silver"
+}, {
+  "names": [{
+    "name": "クリスタル",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Cristal",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Kristall",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Cristallo",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Crystal",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 6,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/4/",
+    "name": "crystal"
+  },
+  "name": "crystal"
+}, {
+  "names": [{
+    "name": "ルビー",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Rubis",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Rubin",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Rubino",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Ruby",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 7,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/5/",
+    "name": "ruby-sapphire"
+  },
+  "name": "ruby"
+}, {
+  "names": [{
+    "name": "サファイア",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Saphir",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Saphir",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Zaffiro",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Sapphire",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 8,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/5/",
+    "name": "ruby-sapphire"
+  },
+  "name": "sapphire"
+}, {
+  "names": [{
+    "name": "エメラルド",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Émeraude",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Smaragd",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Smeraldo",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Emerald",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 9,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/6/",
+    "name": "emerald"
+  },
+  "name": "emerald"
+}, {
+  "names": [{
+    "name": "ファイアレッド",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Rouge Feu",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Feuerrot",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Rosso Fuoco",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "FireRed",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 10,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/7/",
+    "name": "firered-leafgreen"
+  },
+  "name": "firered"
+}, {
+  "names": [{
+    "name": "リーフグリーン",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Vert Feuille",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Blattgrün",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Verde Foglia",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "LeafGreen",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 11,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/7/",
+    "name": "firered-leafgreen"
+  },
+  "name": "leafgreen"
+}, {
+  "names": [{
+    "name": "ダイヤモンド",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Diamant",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Diamant",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Diamante",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Diamond",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 12,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/8/",
+    "name": "diamond-pearl"
+  },
+  "name": "diamond"
+}, {
+  "names": [{
+    "name": "パール",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Perle",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Perl",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Perla",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Pearl",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 13,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/8/",
+    "name": "diamond-pearl"
+  },
+  "name": "pearl"
+}, {
+  "names": [{
+    "name": "プラチナ",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Platine",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Platin",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Platino",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Platinum",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 14,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/9/",
+    "name": "platinum"
+  },
+  "name": "platinum"
+}, {
+  "names": [{
+    "name": "ハートゴールド",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Or HeartGold",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "HeartGold",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Oro HeartGold",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "HeartGold",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 15,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/10/",
+    "name": "heartgold-soulsilver"
+  },
+  "name": "heartgold"
+}, {
+  "names": [{
+    "name": "ソウルシルバー",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Argent SoulSilver",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "SoulSilver",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Argento SoulSilver",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "SoulSilver",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 16,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/10/",
+    "name": "heartgold-soulsilver"
+  },
+  "name": "soulsilver"
+}, {
+  "names": [{
+    "name": "ブラック",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Noir",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Schwarz",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Nera",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Black",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 17,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/11/",
+    "name": "black-white"
+  },
+  "name": "black"
+}, {
+  "names": [{
+    "name": "ホワイト",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Blanc",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Weiß",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Bianca",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "White",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 18,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/11/",
+    "name": "black-white"
+  },
+  "name": "white"
+}, {
+  "names": [{
+    "name": "コロシアム",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Colosseum",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Colosseum",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Colosseum",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Colosseum",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 19,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/12/",
+    "name": "colosseum"
+  },
+  "name": "colosseum"
+}, {
+  "names": [{
+    "name": "XD",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "XD",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "XD",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "XD",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "XD",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 20,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/13/",
+    "name": "xd"
+  },
+  "name": "xd"
+}, {
+  "names": [{
+    "name": "ブラック2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Noir 2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Schwarz 2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Nera 2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Black 2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 21,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/14/",
+    "name": "black-2-white-2"
+  },
+  "name": "black-2"
+}, {
+  "names": [{
+    "name": "ホワイト2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Blanc 2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Weiß 2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Bianca 2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "White 2",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 22,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/14/",
+    "name": "black-2-white-2"
+  },
+  "name": "white-2"
+}, {
+  "names": [{
+    "name": "X",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "X",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "X",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "X",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "X",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 23,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/15/",
+    "name": "x-y"
+  },
+  "name": "x"
+}, {
+  "names": [{
+    "name": "Y",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Y",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Y",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Y",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Y",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 24,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/15/",
+    "name": "x-y"
+  },
+  "name": "y"
+}, {
+  "names": [{
+    "name": "オメガルビー",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Rubis Oméga",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Omega Rubin",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Rubino Omega",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Omega Ruby",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 25,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/16/",
+    "name": "omega-ruby-alpha-sapphire"
+  },
+  "name": "omega-ruby"
+}, {
+  "names": [{
+    "name": "アルファサファイア",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/1/",
+      "name": "ja-Hrkt"
+    }
+  }, {
+    "name": "Saphir Alpha",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/5/",
+      "name": "fr"
+    }
+  }, {
+    "name": "Alpha Saphir",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/6/",
+      "name": "de"
+    }
+  }, {
+    "name": "Zaffiro Alpha",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/8/",
+      "name": "it"
+    }
+  }, {
+    "name": "Alpha Sapphire",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 26,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/16/",
+    "name": "omega-ruby-alpha-sapphire"
+  },
+  "name": "alpha-sapphire"
+}, {
+  "names": [{
+    "name": "Sun",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 27,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/17/",
+    "name": "sun-moon"
+  },
+  "name": "sun"
+}, {
+  "names": [{
+    "name": "Moon",
+    "language": {
+      "url": "https://pokeapi.co/api/v2/language/9/",
+      "name": "en"
+    }
+  }],
+  "id": 28,
+  "version_group": {
+    "url": "https://pokeapi.co/api/v2/version-group/17/",
+    "name": "sun-moon"
+  },
+  "name": "moon"
+}]
