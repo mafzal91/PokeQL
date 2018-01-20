@@ -1,12 +1,6 @@
 var {pokemon, generation} = require('../models')
-console.log(generation.getGenerations);
-module.exports = {
 
-  Query: {
-    Generations: () => {
-      console.log("1");
-    return 'Hello world!';
-  },
+module.exports = {
+    Generations: generation.getGenerations,
     Generation: generation.getGeneration
   }
-}

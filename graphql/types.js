@@ -136,6 +136,6 @@ module.exports = `
   }
 
   schema {
-    query: Query
+    query:Query
   }
 `;

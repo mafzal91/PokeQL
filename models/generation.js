@@ -13,20 +13,24 @@ var GenerationSchema = new Schema({
 });
 
 class Generation {
-  static getGenerations (parent, { query = {}, skip = null, limit = null }, { Models }, info) {
-console.log("test");
-    const projection = getProjection(info);
+  static getGenerations ({skip, limit, query}, Models, fields) {
+// console.log(context);
+// console.log();
+// console.log(temp);
+console.log(arguments);
+
+    const projection = getProjection(fields);
 
     return new Promise((resolve, reject) => {
 
-      if (parent) {
-        // if (parent.users) {
-        //   query._id = { $in: parent.users };
-        // }
-        console.log("GENERATION parent", parent)
-      }
-      console.log(query)
-      Models.Generation.find(query)
+      // if (query) {
+      //   // if (parent.users) {
+      //   //   query._id = { $in: parent.users };
+      //   // }
+      //   console.log("GENERATION parent", query)
+      // }
+
+      Models.generation.find(query)
         .select(projection)
         .skip(skip)
         .limit(limit)
@@ -37,7 +41,7 @@ console.log("test");
   }
 
   static getGeneration (parent, { id }, { Models }, info) {
-
+    console.log("ylol")
     const projection = getProjection(info);
 
     return new Promise((resolve, reject) => {
