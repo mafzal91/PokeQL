@@ -4,10 +4,9 @@ var models = require('../models')
 
 const k = (()=>{
   var populate = [
-    {path:'main_generation', select:'name'},
+    {path:'damage_relations.no_damage_to', select:'name generation'},
   ]
-
-  models.region.find()
+  models.type.findOne()
   .populate(populate)
   .exec((err, results) => {
     console.log(err)

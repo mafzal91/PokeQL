@@ -1,9 +1,10 @@
 var mongo = require('../services/mongodb');
+var { getProjection } = require('../utils');
 
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
 
-var VersionGroup = new Schema({
+var VersionGroupSchema = new Schema({
   name:                   { type: String, required: true },
   pokeapi_id:             { type: Number, required: true },
   generation:             { type: ObjectId, ref: 'Generation', required: true },
@@ -15,19 +16,55 @@ var VersionGroup = new Schema({
   timestamp: true
 });
 
-VersionGroup.pre('save', function(next) {
+class VersionGroup {
+  static getVersionGroups (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
+    return new Promise((resolve, reject) => {
+
+      Models.versionGroup.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getVersionGroup (parent, id, Models, info) {
+    const projection = getProjection(info);
+
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        // if (parent._id) {id = parent._id}
+        // if (parent.stat) {id = parent.stat}
+      }
+
+      Models.versionGroup.findById(id)
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+}
+
+VersionGroupSchema.pre('save', function(next) {
   next();
 });
 
-VersionGroup.virtual('id').get(function () {
+VersionGroupSchema.virtual('id').get(function () {
   return this._id;
 });
 
-VersionGroup.set('toJSON', {
+VersionGroupSchema.set('toJSON', {
   virtuals: true
 });
 
-module.exports = mongo.model('VersionGroup', VersionGroup);
+VersionGroupSchema.loadClass(VersionGroup)
+
+module.exports = mongo.model('VersionGroup', VersionGroupSchema);
 
 // module.exports.fields = fields;
 module.exports.ObjectId = mongo.Types.ObjectId;

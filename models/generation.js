@@ -13,22 +13,9 @@ var GenerationSchema = new Schema({
 });
 
 class Generation {
-  static getGenerations ({skip, limit, query}, Models, fields) {
-// console.log(context);
-// console.log();
-// console.log(temp);
-console.log(arguments);
-
-    const projection = getProjection(fields);
-
+  static getGenerations (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
     return new Promise((resolve, reject) => {
-
-      // if (query) {
-      //   // if (parent.users) {
-      //   //   query._id = { $in: parent.users };
-      //   // }
-      //   console.log("GENERATION parent", query)
-      // }
 
       Models.generation.find(query)
         .select(projection)
@@ -40,15 +27,17 @@ console.log(arguments);
     })
   }
 
-  static getGeneration (parent, { id }, { Models }, info) {
-    console.log("ylol")
+  static getGeneration (parent, { id }, Models, info) {
     const projection = getProjection(info);
 
     return new Promise((resolve, reject) => {
+      if (parent) {
+        if (parent.generation) {
+          id = parent.generation;
+        }
+      }
 
-      console.log('getUser', parent, id);
-
-      Models.Users.findById(id)
+      Models.generation.findById(id)
         .select(projection)
         .exec()
         .then(data => resolve(data))
@@ -76,5 +65,4 @@ GenerationSchema.loadClass(Generation)
 
 module.exports = mongo.model('Generation', GenerationSchema);
 
-// module.exports.fields = fields;
 module.exports.ObjectId = mongo.Types.ObjectId;

@@ -1,10 +1,11 @@
 var mongo = require('../services/mongodb');
+var { getProjection } = require('../utils');
 
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
 
 
-var Stat = new Schema({
+var StatSchema = new Schema({
   pokeapi_id:              { type: Number, required: true },
   name:                    { type: String, required: true },
   is_battle_only:          { type: Boolean, required: true },
@@ -13,22 +14,61 @@ var Stat = new Schema({
   timestamp: true
 });
 
-Stat.pre('save', function(next) {
+class Stat {
+  static getStats (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
+    // console.log(projection)
+    return new Promise((resolve, reject) => {
+
+      Models.stat.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getStat (parent, id, Models, info) {
+    const projection = getProjection(info);
+
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        if (parent._id) {id = parent._id}
+        if (parent.stat) {id = parent.stat}
+      }
+
+      Models.stat.findById(id)
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+}
+
+StatSchema.pre('save', function(next) {
   next();
 });
 
-Stat.virtual('id').get(function () {
+StatSchema.virtual('id').get(function () {
   return this._id;
 });
 
-Stat.set('toJSON', {
+StatSchema.set('toJSON', {
   virtuals: true,
   transform: (doc, ret, options) => {
     delete ret._id;
   },
 });
 
-module.exports = mongo.model('Stat', Stat);
+
+StatSchema.loadClass(Stat)
+
+module.exports = mongo.model('Stat', StatSchema);
 
 // module.exports.fields = fields;
 module.exports.ObjectId = mongo.Types.ObjectId;

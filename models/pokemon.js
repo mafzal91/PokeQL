@@ -1,4 +1,5 @@
 var mongo = require('../services/mongodb');
+var { getProjection } = require('../utils');
 
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
@@ -62,7 +63,7 @@ var Type = new Schema({
   _id: false,
 })
 
-var Pokemon = new Schema({
+var PokemonSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -110,7 +111,64 @@ var Pokemon = new Schema({
   timestamp: true
 });
 
-Pokemon.pre('save', function(next) {
+
+class Pokemon {
+  static getPokemons (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
+    // console.log(projection)
+    return new Promise((resolve, reject) => {
+
+      Models.pokemon.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getPokemon (parent, {id}, Models, info) {
+    const projection = getProjection(info);
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        if (parent._id) {
+          id = parent._id
+        }
+      }
+
+      Models.pokemon.findById({_id:id})
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getStats (parent, {query = {}}, Models, info, field) {
+    const projection = getProjection(info);
+    console.log(parent);console.log(projection);console.log(field);
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        Object.keys(projection).forEach(key => {
+          query._id = {$in: parent[field].map(i => Models.type.ObjectId(i))}
+        })
+      }
+      Models.type.find(query)
+        .select(projection)
+        .exec()
+        .then(data => {resolve(data)})
+        .catch(error => {reject(error)})
+    })
+  }
+}
+
+
+
+
+PokemonSchema.pre('save', function(next) {
   console.log("heyyyo")
   var currentDate = new Date();
   this.updated_at = currentDate;
@@ -120,15 +178,17 @@ Pokemon.pre('save', function(next) {
   next();
 });
 
-Pokemon.virtual('id').get(function() {
+PokemonSchema.virtual('id').get(function() {
   return this._id;
 });
 
-Pokemon.set('toJSON', {
+PokemonSchema.set('toJSON', {
   virtuals: true
 });
 
-module.exports = mongo.model('Pokemon', Pokemon);
+PokemonSchema.loadClass(Pokemon)
+
+module.exports = mongo.model('Pokemon', PokemonSchema);
 
 // module.exports.fields = fields;
 module.exports.ObjectId = mongo.Types.ObjectId;
