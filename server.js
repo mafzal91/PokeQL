@@ -15,7 +15,7 @@ const executableSchema = makeExecutableSchema({
   resolvers
 });
 
-app.use('/graphql', graphqlHTTP(req => {
+app.use('/', graphqlHTTP(req => {
   return {
     // schema: buildSchema(types),
     schema: executableSchema,
