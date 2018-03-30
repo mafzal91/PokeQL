@@ -27,3 +27,14 @@ module.exports.filterArrays = (array1, array2, key1, key2) => {
 module.exports.findInArray = (array, key, value) => {
   return array.find(i => i[key] === value)
 }
+
+module.exports.promiseParallel = (tasks) => {
+  var taskRunner = tasks.map(task => task())
+  Promise.all(taskRunner)
+}
+
+
+module.exports.promiseParallel = async (tasks) => {
+  var taskRunner = tasks.map(task => task())
+  Promise.all(taskRunner)
+}

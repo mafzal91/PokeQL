@@ -6,6 +6,9 @@
   "author": "Mohammad Afzal",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "sudo nodemon server.js"
+  },
   "dependencies": {
     "async": "^2.6.0",
     "axios": "^0.17.1",
