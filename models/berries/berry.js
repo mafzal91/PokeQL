@@ -1,5 +1,4 @@
 var mongo = require('../../services/mongodb');
-
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
 
@@ -26,21 +25,51 @@ var BerrySchema = new Schema({
   timestamp: true
 });
 
+class Berry {
+  static getBerries (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
+
+    return new Promise((resolve, reject) => {
+
+      Models.berry.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getBerry(parent, {id}, Models, info) {
+    const projection = getProjection(info);
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        if (parent._id) {
+          id = parent._id
+        }
+      }
+
+      Models.berry.findById({_id:id})
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+}
 
 
-BerrySchema.pre('save', function(next) {
-  next();
-});
+BerrySchema.pre('save', (next) => next())
 
-BerrySchema.virtual('id').get(function () {
-  return this._id;
-});
+BerrySchema.virtual('id').get(() => this._id)
 
 BerrySchema.set('toJSON', {
   virtuals: true
 });
 
-// BerrySchema.loadClass(Berry)
+BerrySchema.loadClass(Berry)
 
 module.exports = mongo.model('Berry', BerrySchema);
 

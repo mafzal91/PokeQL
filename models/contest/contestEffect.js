@@ -13,19 +13,52 @@ var ContestEffectSchema = new Schema({
   timestamp: true
 });
 
-ContestEffectSchema.pre('save', function(next) {
-  next();
-});
 
-ContestEffectSchema.virtual('id').get(function () {
-  return this._id;
-});
+class ContestEffect {
+  static getContestEffects (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
+
+    return new Promise((resolve, reject) => {
+
+      Models.contestEffect.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getContestEffect(parent, {id}, Models, info) {
+    const projection = getProjection(info);
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        if (parent._id) {
+          id = parent._id
+        }
+      }
+
+      Models.contestEffect.findById({_id:id})
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+}
+
+
+ContestEffectSchema.pre('save', (next) => next())
+
+ContestEffectSchema.virtual('id').get(() => this._id)
 
 ContestEffectSchema.set('toJSON', {
   virtuals: true
 });
 
-// ContestEffectSchema.loadClass(ContestType)
+ContestEffectSchema.loadClass(ContestEffect)
 
 module.exports = mongo.model('ContestEffect', ContestEffectSchema);
 

@@ -3,23 +3,23 @@ var models = require('../models')
 module.exports = {
 
   Query:{
-    // Berry: models.berry.getBerry,
-    // Berries: models.berry.getBerries,
-    //
-    // BerryFirmness: models.berryFirmness.getBerryFirmness,
-    // BerryFirmnesss: models.berryFirmness.getBerryFirmnesss,
-    //
-    // BerryFlavor: models.berryFlavor.getBerryFlavor,
-    // BerryFlavors: models.berryFlavor.getBerryFlavors,
-    //
-    // ContestType: models.contestType.getContestType,
-    // ContestTypes: models.contestType.getContestTypes,
-    //
-    // ContestEffect: models.contestEffect.getContestEffect,
-    // ContestEffects: models.contestEffect.getContestEffects,
-    //
-    // SuperContestEffect: models.superContestEffect.getSuperContestEffect,
-    // SuperContestEffects: models.superContestEffect.getSuperContestEffects,
+    Berry: models.berry.getBerry,
+    Berries: models.berry.getBerries,
+
+    BerryFirmness: models.berryFirmness.getBerryFirmness,
+    BerryFirmnesses: models.berryFirmness.getBerryFirmnesses,
+
+    BerryFlavor: models.berryFlavor.getBerryFlavor,
+    BerryFlavors: models.berryFlavor.getBerryFlavors,
+
+    ContestType: models.contestType.getContestType,
+    ContestTypes: models.contestType.getContestTypes,
+
+    ContestEffect: models.contestEffect.getContestEffect,
+    ContestEffects: models.contestEffect.getContestEffects,
+
+    SuperContestEffect: models.superContestEffect.getSuperContestEffect,
+    SuperContestEffects: models.superContestEffect.getSuperContestEffects,
 
     EncounterMethod: models.encounterMethod.getEncounterMethod,
     EncounterMethods: models.encounterMethod.getEncounterMethods,
@@ -75,8 +75,8 @@ module.exports = {
     Region: models.region.getRegion,
     Regions: models.region.getRegions,
 
-    // Machine: models.machine.getMachine,
-    // Machines: models.machine.getMachines,
+    Machine: models.machine.getMachine,
+    Machines: models.machine.getMachines,
 
     Move: models.move.getMove,
     Moves: models.move.getMoves,

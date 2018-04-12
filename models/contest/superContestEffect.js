@@ -13,15 +13,51 @@ var SuperContestEffectSchema = new Schema({
   timestamp: true
 });
 
-SuperContestEffectSchema.pre('save', (next) => next());
+class SuperContestEffect {
+  static getSuperContestEffects (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
 
-SuperContestEffectSchema.virtual('id').get(() => this._id);
+    return new Promise((resolve, reject) => {
+
+      Models.superContestEffect.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getSuperContestEffect(parent, {id}, Models, info) {
+    const projection = getProjection(info);
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        if (parent._id) {
+          id = parent._id
+        }
+      }
+
+      Models.superContestEffect.findById({_id:id})
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+}
+
+
+SuperContestEffectSchema.pre('save', (next) => next())
+
+SuperContestEffectSchema.virtual('id').get(() => this._id)
 
 SuperContestEffectSchema.set('toJSON', {
   virtuals: true
 });
 
-// SuperContestEffectSchema.loadClass(SuperContestEffect)
+SuperContestEffectSchema.loadClass(SuperContestEffect)
 
 module.exports = mongo.model('SuperContestEffect', SuperContestEffectSchema);
 

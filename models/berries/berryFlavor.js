@@ -20,19 +20,51 @@ var BerryFlavorSchema = new Schema({
 });
 
 
-BerryFlavorSchema.pre('save', function(next) {
-  next();
-});
+class BerryFlavor {
+  static getBerryFlavors (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
 
-BerryFlavorSchema.virtual('id').get(function () {
-  return this._id;
-});
+    return new Promise((resolve, reject) => {
+
+      Models.berryFlavor.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getBerryFlavor(parent, {id}, Models, info) {
+    const projection = getProjection(info);
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        if (parent._id) {
+          id = parent._id
+        }
+      }
+
+      Models.berryFlavor.findById({_id:id})
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+}
+
+
+BerryFlavorSchema.pre('save', (next) => next())
+
+BerryFlavorSchema.virtual('id').get(() => this._id)
 
 BerryFlavorSchema.set('toJSON', {
   virtuals: true
 });
 
-// BerryFlavorSchema.loadClass(BerryFlavor)
+BerryFlavorSchema.loadClass(BerryFlavor)
 
 module.exports = mongo.model('BerryFlavor', BerryFlavorSchema);
 

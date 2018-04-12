@@ -789,7 +789,7 @@ module.exports = `
     Berries(skip: Int, limit: Int): [Berry]
 
     BerryFirmness(id: ID!): BerryFirmness
-    BerryFirmnesss(skip: Int, limit: Int): [BerryFirmness]
+    BerryFirmnesses(skip: Int, limit: Int): [BerryFirmness]
 
     BerryFlavor(id: ID!): BerryFlavor
     BerryFlavors(skip: Int, limit: Int): [BerryFlavor]

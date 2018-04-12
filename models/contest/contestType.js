@@ -20,19 +20,51 @@ var ContestTypeSchema = new Schema({
 });
 
 
-ContestTypeSchema.pre('save', function(next) {
-  next();
-});
+class ContestType {
+  static getContestTypes (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
 
-ContestTypeSchema.virtual('id').get(function () {
-  return this._id;
-});
+    return new Promise((resolve, reject) => {
+
+      Models.contestType.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getContestType(parent, {id}, Models, info) {
+    const projection = getProjection(info);
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        if (parent._id) {
+          id = parent._id
+        }
+      }
+
+      Models.contestType.findById({_id:id})
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+}
+
+
+ContestTypeSchema.pre('save', (next) => next())
+
+ContestTypeSchema.virtual('id').get(() => this._id)
 
 ContestTypeSchema.set('toJSON', {
   virtuals: true
 });
 
-// ContestTypeSchema.loadClass(ContestType)
+ContestTypeSchema.loadClass(ContestType)
 
 module.exports = mongo.model('ContestType', ContestTypeSchema);
 

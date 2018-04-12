@@ -15,19 +15,51 @@ var BerryFirmnessSchema = new Schema({
 });
 
 
-BerryFirmnessSchema.pre('save', function(next) {
-  next();
-});
+class BerryFirmness {
+  static getBerryFirmnesses (parent, { query, skip, limit }, Models, info) {
+    const projection = getProjection(info);
 
-BerryFirmnessSchema.virtual('id').get(function () {
-  return this._id;
-});
+    return new Promise((resolve, reject) => {
+
+      Models.berryFirmness.find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+
+  static getBerryFirmness(parent, {id}, Models, info) {
+    const projection = getProjection(info);
+    return new Promise((resolve, reject) => {
+
+      if (parent) {
+        if (parent._id) {
+          id = parent._id
+        }
+      }
+
+      Models.berryFirmness.findById({_id:id})
+        .select(projection)
+        .exec()
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+  }
+}
+
+
+BerryFirmnessSchema.pre('save', (next) => next())
+
+BerryFirmnessSchema.virtual('id').get(() => this._id)
 
 BerryFirmnessSchema.set('toJSON', {
   virtuals: true
 });
 
-// BerryFirmnessSchema.loadClass(BerryFirmness)
+BerryFirmnessSchema.loadClass(BerryFirmness)
 
 module.exports = mongo.model('BerryFirmness', BerryFirmnessSchema);
 
