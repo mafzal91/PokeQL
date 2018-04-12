@@ -19,8 +19,8 @@ var PokedexSchema = new Schema({
   descriptions:           [Description],
   names:                  [Name],
   pokemon_entries:        [PokemonEntry],
-  region:                 [{ type: ObjectId, ref: 'Region', default: null}],
-  version_group:          [{ type: ObjectId, ref: 'VersionGroup', default: null}],
+  region:                 { type: ObjectId, ref: 'Region', default: null},
+  version_groups:         [{ type: ObjectId, ref: 'VersionGroup', default: null}],
 }, {
   versionKey: false,
   timestamp: true

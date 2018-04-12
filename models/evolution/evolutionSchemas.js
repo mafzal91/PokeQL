@@ -16,7 +16,7 @@ var subSchemaOptions = {
 var EvolutionDetail = new Schema({
   item:                       { type: ObjectId, ref: "Item", default: null },
   trigger:                    { type: ObjectId, ref: "EvolutionTrigger", default: null },
-  gender:                     { type: Number, required: true },
+  gender:                     { type: Number, default: null },
   held_item:                  { type: ObjectId, ref: "Item", default: null },
   known_move:                 { type: ObjectId, ref: "Move", default: null },
   known_move_type:            { type: ObjectId, ref: "Type", default: null },
@@ -43,18 +43,18 @@ ChainLink.add({
 var EvolutionChain = new Schema({
   pokeapi_id:                 { type: Number, required: true },
   baby_trigger_item:          { type: ObjectId, ref: "Item", default: null },
-  chain:                      ChainLink,
+  chain:                      { type: ChainLink, default: null},
 }, schemaOptions);
 
 var EvolutionTrigger = new Schema({
   pokeapi_id:                 { type: Number, required: true },
-  name:                       { type: String, require: true },
-  names:                      { type: [Name], default: [] },
+  name:                       { type: String, required: true },
+  names:                      [Name],
   pokemon_species:            [{ type: ObjectId, ref: "PokemonSpecies", default: null },]
 }, schemaOptions);
 
-EvolutionChain.pre('save',(next)=>next);
-EvolutionTrigger.pre('save',(next)=>next);
+EvolutionChain.pre('save',(next)=>next());
+EvolutionTrigger.pre('save',(next)=>next());
 
 EvolutionChain.virtual('id').get(()=>this._id);
 EvolutionTrigger.virtual('id').get(()=>this._id);

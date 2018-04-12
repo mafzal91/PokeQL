@@ -8,6 +8,8 @@ var options = {
   useMongoClient: true,
 }
 
+mongo.set('debug', config.mongodb.debug)
+
 mongo.connect(`mongodb://${config.mongodb.hosts[0]}:${config.mongodb.port}/${config.mongodb.database}`, options).then(
   () => { console.log("Connected")},
   (err) => { console.log(err) }

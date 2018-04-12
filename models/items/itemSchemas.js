@@ -1,5 +1,5 @@
 var mongo = require('../../services/mongodb');
-var { Description, Name, GenerationGameIndex, Effect, MachineVersionDetail,VerboseEffect, FlavorText1,VersionGroupFlavorText } = require('../commonModels')
+var { Description, Name, GenerationGameIndex, Effect, MachineVersionDetail,VerboseEffect,VersionGroupFlavorText } = require('../commonModels')
 
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
@@ -74,7 +74,7 @@ var ItemFlingEffect = new Schema({
 var ItemPocket = new Schema({
   pokeapi_id:              { type: Number, required: true },
   name:                    { type: String, required: true },
-  categories:              [{type: ObjectId, ref: "Category", default: null}],
+  categories:              [{type: ObjectId, ref: "ItemCategory", default: null}],
   names:                   [Name],
 }, schemaOptions);
 

@@ -2,7 +2,7 @@ var mongo = require('../../services/mongodb');
 var ItemCategorySchema = require('./ItemSchemas').ItemCategory;
 
 class ItemCategory {
-  static getItemCategorys (parent, { query, skip, limit }, Models, info) {
+  static getItemCategories (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
     return new Promise((resolve, reject) => {

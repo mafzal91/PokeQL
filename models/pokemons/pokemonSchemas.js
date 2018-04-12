@@ -1,5 +1,5 @@
 var mongo = require('../../services/mongodb');
-var { Description, Name, GenerationGameIndex, FlavorText1, FlavorText, VerboseEffect, Effect } = require('../commonModels')
+var { Description, Name, GenerationGameIndex, FlavorText1, FlavorText, VersionFlavorText, VerboseEffect, Effect } = require('../commonModels')
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
 var jsonOptions = {
@@ -15,7 +15,7 @@ var subSchemaOptions = {
 
 var AbilityEffectChange = new Schema({
   effect_entries:          [Effect],
-  version_group:           { type: ObjectId, ref: 'Generation', default: null },
+  version_group:           { type: ObjectId, ref: 'VersionGroup', default: null },
 },subSchemaOptions)
 var AbilityPokemon = new Schema({
   is_hidden:               { type: Boolean, default: false },
@@ -34,15 +34,13 @@ var Ability = new Schema({
   pokemon:                 [AbilityPokemon],
 }, schemaOptions);
 
-//import done 3-16-2018
 var Characteristic = new Schema({
   pokeapi_id:           {type: Number, required: true},
   gene_modulo:          {type: Boolean, default: false},
-  possible_values:      [{type: Number, default: false}],
+  possible_values:      [{type: Number, default: null}],
   descriptions:         [Description],
 }, schemaOptions);
 
-//import done 3-16-2018
 var EggGroup = new Schema({
   pokeapi_id:           {type: Number, required: true},
   name:                 {type: String, required: true},
@@ -112,7 +110,6 @@ var PokeathlonStat =  new Schema({
   affecting_natures:      {type: NaturePokeathlonStatAffectSets}
 },schemaOptions);
 
-//import done 3-17-2018
 var PokemonColor =  new Schema({
   pokeapi_id:             {type: Number, required: true},
   name:                   {type: String, required: true},
@@ -142,7 +139,6 @@ var PokemonForm = new Schema({
   form_names:             [Name],
 }, schemaOptions)
 
-//import done 3-17-2018
 var PokemonHabitat =  new Schema({
   pokeapi_id:             {type: Number, required: true},
   name:                   {type: String, required: true},
@@ -150,7 +146,6 @@ var PokemonHabitat =  new Schema({
   pokemon_species:        [{type: ObjectId, ref:"PokemonSpecies", default: null}],
 },schemaOptions);
 
-//import done 3-17-2018
 var AwesomeName = new Schema({
   awesome_name:           {type: String, required: true},
   language:               {type: ObjectId, ref:"Language", default: null},
@@ -174,7 +169,7 @@ var PokemonSpeciesDexEntry = new Schema({
 var PalParkEncounterArea = new Schema({
   base_score:                     {type: Number, required: true},
   rate:                           {type: Number, required: true},
-  area:                           {type: ObjectId, ref:"Pokedex", default: null},
+  area:                           {type: ObjectId, ref:"PalParkArea", default: null},
 },subSchemaOptions)
 var PokemonSpeciesVariety = new Schema({
   is_default:                     {type: Boolean, default: false},
@@ -202,7 +197,7 @@ var PokemonSpecies = new Schema({
   generation:                     {type: ObjectId, ref:"Generation", default: null},
   names:                          [Name],
   pal_park_encounters:            [PalParkEncounterArea],
-  flavor_text_entries:            [FlavorText],
+  flavor_text_entries:            [VersionFlavorText],
   form_descriptions:              [Description],
   genera:                         [Genus],
   varieties:                      [PokemonSpeciesVariety],
@@ -258,20 +253,20 @@ var Type = new Schema({
   moves:                   [{ type: ObjectId, ref: 'Move', default: null}],
 }, schemaOptions);
 
-Ability.pre('save',(next)=>next => next())
-Characteristic.pre('save',(next)=>next);
-EggGroup.pre('save',(next)=>next);
-Gender.pre('save',(next)=>next);
-GrowthRate.pre('save',(next)=>next);
-Nature.pre('save',(next)=>next);
-PokeathlonStat.pre('save',(next)=>next);
-PokemonColor.pre('save',(next)=>next);
-PokemonForm.pre('save',(next)=>next);
-PokemonHabitat.pre('save',(next)=>next);
-PokemonShape.pre('save',(next)=>next);
-PokemonSpecies.pre('save',(next)=>next);
-Stat.pre('save',(next)=>next);
-Type.pre('save',(next)=>next);
+Ability.pre('save',(next)=>next())
+Characteristic.pre('save',(next)=>next());
+EggGroup.pre('save',(next)=>next());
+Gender.pre('save',(next)=>next());
+GrowthRate.pre('save',(next)=>next());
+Nature.pre('save',(next)=>next());
+PokeathlonStat.pre('save',(next)=>next());
+PokemonColor.pre('save',(next)=>next());
+PokemonForm.pre('save',(next)=>next());
+PokemonHabitat.pre('save',(next)=>next());
+PokemonShape.pre('save',(next)=>next());
+PokemonSpecies.pre('save',(next)=>next());
+Stat.pre('save',(next)=>next());
+Type.pre('save',(next)=>next());
 
 Ability.virtual('id').get(()=>this._id);
 Characteristic.virtual('id').get(()=>this._id);

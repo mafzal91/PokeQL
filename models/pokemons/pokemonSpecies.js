@@ -17,7 +17,7 @@ class PokemonSpecies {
     })
   }
 
-  static getPokemonSpecie (parent, {id}, Models, info) {
+  static getPokemonSpecies (parent, {id}, Models, info) {
     const projection = getProjection(info);
     return new Promise((resolve, reject) => {
 

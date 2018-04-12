@@ -13,13 +13,9 @@ var SuperContestEffectSchema = new Schema({
   timestamp: true
 });
 
-SuperContestEffectSchema.pre('save', function(next) {
-  next();
-});
+SuperContestEffectSchema.pre('save', (next) => next());
 
-SuperContestEffectSchema.virtual('id').get(function () {
-  return this._id;
-});
+SuperContestEffectSchema.virtual('id').get(() => this._id);
 
 SuperContestEffectSchema.set('toJSON', {
   virtuals: true

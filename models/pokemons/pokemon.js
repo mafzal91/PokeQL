@@ -6,7 +6,7 @@ var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
 
 var LocationAreaEncounter = new Schema({
-  location_area:           { type: ObjectId, ref: "Stat", default: null},
+  location_area:           { type: ObjectId, ref: "LocationArea", default: null},
   version_details:         [VersionEncounterDetail],
 },{_id: false})
 var PokemonSprites = new Schema({
@@ -34,11 +34,11 @@ var PokemonMove = new Schema({
   version_group_details:   [PokemonMoveVersion],
 },{_id: false})
 var PokemonHeldItemVersion = new Schema({
-  version:                 { type: ObjectId, ref: "Type", default: null},
+  version:                 { type: ObjectId, ref: "Version", default: null},
   rarity:                  { type: Number, default: null },
 },{_id: false})
 var PokemonHeldItem = new Schema({
-  item:                    { type: ObjectId, ref: "Type", default: null},
+  item:                    { type: ObjectId, ref: "Item", default: null},
   version_details:         [PokemonHeldItemVersion],
 },{_id: false})
 var PokemonType = new Schema({
@@ -61,7 +61,7 @@ var PokemonSchema = new Schema({
   abilities:               [PokemonAbility],
   forms:                   [{type: ObjectId, ref: "PokemonForm", default: null}],
   game_indices:            [VersionGameIndex],
-  held_items:              [PokemonHeldItemVersion],
+  held_items:              [PokemonHeldItem],
   location_area_encounters:[LocationAreaEncounter],
   moves:                   [PokemonMove],
   sprites:                 PokemonSprites,

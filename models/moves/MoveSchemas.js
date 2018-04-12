@@ -13,53 +13,53 @@ var schemaOptions = {
 var MoveAilment = new Schema({
   pokeapi_id:               { type: Number, required: true },
   name:                     { type: String, default: "" },
-  names:                    { type: [Name], default: [] },
+  names:                    [Name],
   moves:                    [{ type: ObjectId, ref: "Move", }],
 }, schemaOptions);
 
 var MoveBattleStyle = new Schema({
   pokeapi_id:     { type: Number, required: true },
   name:           { type: String, required: true },
-  names:          { type: [Name], default: [] },
+  names:          [Name],
 },schemaOptions)
 
 var MoveCategory = new Schema({
   pokeapi_id:     { type: Number, required: true },
   name:           { type: String, required: true },
   moves:          [{ type: ObjectId, ref: "Move", }],
-  descriptions:   { type: [Description], default: [] },
+  descriptions:   [Description],
 },schemaOptions)
 
 var MoveDamageClass = new Schema({
   pokeapi_id:     { type: Number, required: true },
   name:           { type: String, required: true },
-  descriptions:   { type: [Description], default: [] },
+  descriptions:   [Description],
   moves:          [{ type: ObjectId, ref: "Move", }],
-  names:          { type: [Name], default: [] },
+  names:          [Name],
 },schemaOptions)
 
 var MoveLearnMethod = new Schema({
   pokeapi_id:     { type: Number, required: true },
   name:           { type: String, required: true },
-  descriptions:   { type: [Description], default: [] },
-  names:          { type: [Name], default: [] },
-  version_groups: { type: ObjectId, ref: "VersionGroup", default: null },
+  descriptions:   [Description],
+  names:          [Name],
+  version_groups: [{ type: ObjectId, ref: "VersionGroup", default: null }],
 },schemaOptions)
 
 var MoveTarget = new Schema({
   pokeapi_id:     { type: Number, required: true },
   name:           { type: String, required: true },
-  descriptions:   { type: [Description], default: [] },
+  descriptions:   [Description],
   moves:          [{ type: ObjectId, ref: "Move", }],
-  names:          { type: [Name], default: [] },
+  names:          [Name],
 },schemaOptions)
 
-MoveAilment.pre('save',(next)=>next);
-MoveBattleStyle.pre('save',(next)=>next);
-MoveCategory.pre('save',(next)=>next);
-MoveDamageClass.pre('save',(next)=>next);
-MoveLearnMethod.pre('save',(next)=>next);
-MoveTarget.pre('save',(next)=>next);
+MoveAilment.pre('save',(next) => next());
+MoveBattleStyle.pre('save',(next) => next());
+MoveCategory.pre('save',(next) => next());
+MoveDamageClass.pre('save',(next) => next());
+MoveLearnMethod.pre('save',(next) => next());
+MoveTarget.pre('save',(next) => next());
 
 MoveAilment.virtual('id').get(()=>this._id);
 MoveBattleStyle.virtual('id').get(()=>this._id);

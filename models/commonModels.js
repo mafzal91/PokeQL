@@ -13,7 +13,7 @@ var Effect = new Schema({
 var Encounter = new Schema({
   min_level:            { type: Number, default: 0 },
   max_level:            { type: Number, default: 0 },
-  condition_values:     [{ type: ObjectId, ref: 'EncounterConditionValue', }],
+  condition_values:     [{ type: ObjectId, ref: 'EncounterConditionValue', default: null}],
   chance:               { type: Number, default: 0 },
   method:               { type: ObjectId, ref: 'EncounterMethod', default: null },
 },{_id: false});
@@ -26,6 +26,11 @@ var FlavorText1 = new Schema({
   language:             { type: ObjectId, ref: "Language", default: null },
   version_group:        { type: ObjectId, ref: "VersionGroup", default: null },
 },{_id: false,})
+var VersionFlavorText = new Schema({
+  flavor_text:          { type: String, default: "" },
+  language:             { type: ObjectId, ref: "Language", default: null },
+  version:              { type: ObjectId, ref: "Version", default: null },
+},{_id: false});
 var GenerationGameIndex = new Schema({
   game_index:           { type: Number, default: 0 },
   generation:           { type: ObjectId, ref: "Generation", default: null },
@@ -65,6 +70,7 @@ module.exports = {
   Encounter,
   FlavorText,
   FlavorText1,
+  VersionFlavorText,
   GenerationGameIndex,
   MachineVersionDetail,
   Name,

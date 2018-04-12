@@ -14,8 +14,8 @@ var subSchemaOptions = {
 }
 
 var Location = new Schema({
-  name:                   { type: String, required: true },
   pokeapi_id:             { type: Number, required: true },
+  name:                   { type: String, required: true },
   region:                 { type: ObjectId, ref: 'Region', default: null },
   names:                  [Name],
   game_indices:           [GenerationGameIndex],
@@ -63,7 +63,7 @@ var Region = new Schema({
   main_generation:        { type: ObjectId, ref: 'Generation', default: null },
   names:                  [Name],
   pokedexes:              [{ type: ObjectId, ref: 'Pokedex', }],
-  version_group:          [{ type: ObjectId, ref: 'VersionGroup', }],
+  version_groups:         [{ type: ObjectId, ref: 'VersionGroup', }],
 }, schemaOptions);
 
 
