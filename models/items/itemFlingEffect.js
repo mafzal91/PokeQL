@@ -1,5 +1,5 @@
 var mongo = require('../../services/mongodb');
-var ItemFlingEffectSchema = require('./ItemSchemas').ItemFlingEffect;
+var ItemFlingEffectSchema = require('./itemSchemas').ItemFlingEffect;
 
 class ItemFlingEffect {
   static getItemFlingEffects (parent, { query, skip, limit }, Models, info) {

@@ -1,5 +1,5 @@
 var mongo = require('../../services/mongodb');
-var ItemPocketSchema = require('./ItemSchemas').ItemPocket;
+var ItemPocketSchema = require('./itemSchemas').ItemPocket;
 
 class ItemPocket {
   static getItemPockets (parent, { query, skip, limit }, Models, info) {

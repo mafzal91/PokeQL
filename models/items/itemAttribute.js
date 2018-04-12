@@ -1,5 +1,5 @@
 var mongo = require('../../services/mongodb');
-var ItemAttributeSchema = require('./ItemSchemas').ItemAttribute;
+var ItemAttributeSchema = require('./itemSchemas').ItemAttribute;
 
 class ItemAttribute {
   static getItemAttributes (parent, { query, skip, limit }, Models, info) {

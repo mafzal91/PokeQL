@@ -1,5 +1,5 @@
 var mongo = require('../../services/mongodb');
-var ItemCategorySchema = require('./ItemSchemas').ItemCategory;
+var ItemCategorySchema = require('./itemSchemas').ItemCategory;
 
 class ItemCategory {
   static getItemCategories (parent, { query, skip, limit }, Models, info) {
