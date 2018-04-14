@@ -57,8 +57,12 @@ var EvolutionTrigger = new Schema({
 EvolutionChain.pre('save',(next)=>next());
 EvolutionTrigger.pre('save',(next)=>next());
 
-EvolutionChain.virtual('id').get(()=>this._id);
-EvolutionTrigger.virtual('id').get(()=>this._id);
+EvolutionChain.virtual('id').get(function() {
+  return this._id
+});
+EvolutionTrigger.virtual('id').get(function() {
+  return this._id
+});
 
 EvolutionChain.set('toJSON', jsonOptions);
 EvolutionTrigger.set('toJSON', jsonOptions);

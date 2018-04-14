@@ -62,12 +62,24 @@ MoveDamageClass.pre('save',(next) => next());
 MoveLearnMethod.pre('save',(next) => next());
 MoveTarget.pre('save',(next) => next());
 
-MoveAilment.virtual('id').get(()=>this._id);
-MoveBattleStyle.virtual('id').get(()=>this._id);
-MoveCategory.virtual('id').get(()=>this._id);
-MoveDamageClass.virtual('id').get(()=>this._id);
-MoveLearnMethod.virtual('id').get(()=>this._id);
-MoveTarget.virtual('id').get(()=>this._id);
+MoveAilment.virtual('id').get(function() {
+  return this._id
+});
+MoveBattleStyle.virtual('id').get(function() {
+  return this._id
+});
+MoveCategory.virtual('id').get(function() {
+  return this._id
+});
+MoveDamageClass.virtual('id').get(function() {
+  return this._id
+});
+MoveLearnMethod.virtual('id').get(function() {
+  return this._id
+});
+MoveTarget.virtual('id').get(function() {
+  return this._id
+});
 
 MoveAilment.set('toJSON', jsonOptions);
 MoveBattleStyle.set('toJSON', jsonOptions);

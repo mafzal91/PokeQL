@@ -40,9 +40,15 @@ EncounterMethod.pre('save',next => next());
 EncounterCondition.pre('save',next => next());
 EncounterConditionValue.pre('save',next => next());
 
-EncounterMethod.virtual('id').get(()=>this._id);
-EncounterCondition.virtual('id').get(()=>this._id);
-EncounterConditionValue.virtual('id').get(()=>this._id);
+EncounterMethod.virtual('id').get(function() {
+  return this._id
+});
+EncounterCondition.virtual('id').get(function() {
+  return this._id
+});
+EncounterConditionValue.virtual('id').get(function() {
+  return this._id
+});
 
 EncounterMethod.set('toJSON', jsonOptions);
 EncounterCondition.set('toJSON', jsonOptions);

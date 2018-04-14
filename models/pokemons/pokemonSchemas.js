@@ -268,20 +268,48 @@ PokemonSpecies.pre('save',(next)=>next());
 Stat.pre('save',(next)=>next());
 Type.pre('save',(next)=>next());
 
-Ability.virtual('id').get(()=>this._id);
-Characteristic.virtual('id').get(()=>this._id);
-EggGroup.virtual('id').get(()=>this._id);
-Gender.virtual('id').get(()=>this._id);
-GrowthRate.virtual('id').get(()=>this._id);
-Nature.virtual('id').get(()=>this._id);
-PokeathlonStat.virtual('id').get(()=>this._id);
-PokemonColor.virtual('id').get(()=>this._id);
-PokemonForm.virtual('id').get(()=>this._id);
-PokemonHabitat.virtual('id').get(()=>this._id);
-PokemonShape.virtual('id').get(()=>this._id);
-PokemonSpecies.virtual('id').get(()=>this._id);
-Stat.virtual('id').get(()=>this._id);
-Type.virtual('id').get(()=>this._id);
+Ability.virtual('id').get(function() {
+  return this._id
+});
+Characteristic.virtual('id').get(function() {
+  return this._id
+});
+EggGroup.virtual('id').get(function() {
+  return this._id
+});
+Gender.virtual('id').get(function() {
+  return this._id
+});
+GrowthRate.virtual('id').get(function() {
+  return this._id
+});
+Nature.virtual('id').get(function() {
+  return this._id
+});
+PokeathlonStat.virtual('id').get(function() {
+  return this._id
+});
+PokemonColor.virtual('id').get(function() {
+  return this._id
+});
+PokemonForm.virtual('id').get(function() {
+  return this._id
+});
+PokemonHabitat.virtual('id').get(function() {
+  return this._id
+});
+PokemonShape.virtual('id').get(function() {
+  return this._id
+});
+PokemonSpecies.virtual('id').get(function() {
+  return this._id
+});
+Stat.virtual('id').get(function() {
+  return this._id
+});
+Type.virtual('id').get(function() {
+  return this._id
+});
 
 Ability.set('toJSON', jsonOptions);
 Characteristic.set('toJSON', jsonOptions);
