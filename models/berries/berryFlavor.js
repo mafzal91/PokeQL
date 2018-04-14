@@ -42,7 +42,7 @@ class BerryFlavor {
     return new Promise((resolve, reject) => {
 
       if (parent) {
-        if (parent._id) {
+        if (parent.id) {
           id = parent._id
         }
       }
