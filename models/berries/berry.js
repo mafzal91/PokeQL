@@ -65,8 +65,7 @@ class Berry {
 BerrySchema.pre('save', (next) => next())
 
 BerrySchema.virtual('id').get(function() {
-  console.log(this)
-  return this.pokeapi_id;
+  return this.id;
 });
 
 BerrySchema.set('toJSON', {
