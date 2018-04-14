@@ -148,6 +148,8 @@ module.exports = {
     Languages: models.language.getLanguages,
   },
 
+  ...require('./resolvers/berry'),
+
   Type: {
     generation: models.generation.getGeneration
   },
@@ -160,5 +162,4 @@ module.exports = {
     no_damage_to:(parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'no_damage_to'),
     double_damage_to:(parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'double_damage_to'),
   },
-
 }

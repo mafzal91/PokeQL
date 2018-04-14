@@ -77,7 +77,7 @@ var PokemonSchema = new Schema({
 class Pokemon {
   static getPokemons (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-    // console.log(projection)
+    console.log(projection)
     return new Promise((resolve, reject) => {
 
       Models.pokemon.find(query)

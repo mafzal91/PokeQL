@@ -1,8 +1,8 @@
 var mongo = require('../../services/mongodb');
 var { Name } = require('../commonModels');
-// var x = require('../commonModels');
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
+var { getProjection } = require('../../utils');
 
 var BerryFirmnessSchema = new Schema({
   pokeapi_id:               { type: Number, required: true },

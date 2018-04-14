@@ -1,10 +1,10 @@
-var commonModels = require('./commonModel_types')
+var commonModels = require('./typeDef/commonModel_types')
 
 module.exports = `
   scalar Date
 
   type Berry {
-    id: ID!
+    id: ID
     pokeapi_id: Int!
     name: String!
     growth_time: Int!

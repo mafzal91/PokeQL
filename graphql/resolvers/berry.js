@@ -2,39 +2,28 @@ const models = require('../../models')
 
 module.exports = {
   Berry: {
-    firmness: models.type.getItem,
-    flavors: [BerryFlavorPotency]
-    item: models.type.getItem,
+    firmness: models.berryFirmness.getBerryFirmness,
+    item: models.item.getItem,
     natural_gift_type: models.type.getType,
-  }
-
-
-
+  },
   BerryFlavorPotency: {
-    flavor: models.berryFlavor.getFlavor
-  }
+    flavor: models.berryFlavor.getBerryFlavor
+  },
 
 
 
   BerryFirmness: {
-    berries: [Berry]
-    names: [Name]
-  }
+    berries: models.berry.getBerries,
+    // names: [Name]
+  },
 
 
 
   BerryFlavor: {
-    berries: FlavorBerry
-    contest_type: models.contestType.getContestType
-    names: [Name]
-  }
-
-
-
+    contest_type: models.contestType.getContestType,
+    // names: [Name],
+  },
   FlavorBerry: {
-    berry: models.berryFlavor.getBerry
-  }
-
-
-
+    berry: models.berry.getBerry,
+  },
 }

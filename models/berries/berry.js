@@ -1,6 +1,7 @@
 var mongo = require('../../services/mongodb');
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
+var { getProjection } = require('../../utils');
 
 var BerryFlavor = new Schema({
   potency:                  { type: Number, required: true },
@@ -28,7 +29,7 @@ var BerrySchema = new Schema({
 class Berry {
   static getBerries (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-
+    console.log(projection)
     return new Promise((resolve, reject) => {
 
       Models.berry.find(query)
@@ -63,7 +64,10 @@ class Berry {
 
 BerrySchema.pre('save', (next) => next())
 
-BerrySchema.virtual('id').get(() => this._id)
+BerrySchema.virtual('id').get(function() {
+  console.log(this)
+  return this.pokeapi_id;
+});
 
 BerrySchema.set('toJSON', {
   virtuals: true
