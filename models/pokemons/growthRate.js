@@ -1,4 +1,6 @@
 var mongo = require('../../services/mongodb');
+var { getProjection } = require('../../utils');
+
 var GrowthRateSchema = require('./pokemonSchemas').GrowthRate;
 
 class GrowthRate {

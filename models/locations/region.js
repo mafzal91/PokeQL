@@ -1,6 +1,6 @@
 var mongo = require('../../services/mongodb');
-var RegionSchema = require('./locationSchemas').Region;
 var { getProjection } = require('../../utils');
+var RegionSchema = require('./locationSchemas').Region;
 
 class Region {
   static getRegions (parent, { query, skip, limit }, Models, info) {

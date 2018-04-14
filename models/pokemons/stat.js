@@ -1,6 +1,6 @@
 var mongo = require('../../services/mongodb');
-var StatSchema = require('./pokemonSchemas').Stat
 var { getProjection } = require('../../utils');
+var StatSchema = require('./pokemonSchemas').Stat
 
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;

@@ -1,6 +1,6 @@
 var mongo = require('../../services/mongodb');
-var TypeSchema = require('./pokemonSchemas').Type
 var { getProjection } = require('../../utils');
+var TypeSchema = require('./pokemonSchemas').Type
 
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;

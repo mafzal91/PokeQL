@@ -1,4 +1,6 @@
 var mongo = require('../../services/mongodb');
+var { getProjection } = require('../../utils');
+
 var GenderSchema = require('./pokemonSchemas').Gender;
 
 class Gender {

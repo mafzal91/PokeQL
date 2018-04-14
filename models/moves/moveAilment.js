@@ -1,4 +1,5 @@
 var mongo = require('../../services/mongodb');
+var { getProjection } = require('../../utils');
 var MoveAilmentSchema = require('./MoveSchemas').MoveAilment;
 
 class MoveAilment {

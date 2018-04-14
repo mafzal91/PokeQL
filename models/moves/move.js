@@ -1,4 +1,5 @@
 var mongo = require('../../services/mongodb');
+var { getProjection } = require('../../utils');
 var { VerboseEffect, Effect, FlavorText1, Name, MachineVersionDetail } = require('../commonModels');
 var { AbilityEffectChange } = require('../pokemons/pokemonSchemas').subSchema;
 var Schema = mongo.Schema;

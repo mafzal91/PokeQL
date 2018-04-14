@@ -1,6 +1,6 @@
 var mongo = require('../../services/mongodb');
-var {Description, Name} = require('../commonModels')
 var { getProjection } = require('../../utils');
+var {Description, Name} = require('../commonModels')
 
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;

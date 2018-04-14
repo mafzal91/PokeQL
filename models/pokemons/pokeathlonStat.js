@@ -1,4 +1,6 @@
 var mongo = require('../../services/mongodb');
+var { getProjection } = require('../../utils');
+
 var PokeathlonStatSchema = require('./pokemonSchemas').PokeathlonStat;
 
 class PokeathlonStat {

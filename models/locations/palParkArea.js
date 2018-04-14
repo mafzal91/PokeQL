@@ -1,6 +1,6 @@
 var mongo = require('../../services/mongodb');
-var PalParkAreaSchema = require('./locationSchemas').PalParkArea;
 var { getProjection } = require('../../utils');
+var PalParkAreaSchema = require('./locationSchemas').PalParkArea;
 
 class PalParkArea {
   static getPalParkAreas (parent, { query, skip, limit }, Models, info) {

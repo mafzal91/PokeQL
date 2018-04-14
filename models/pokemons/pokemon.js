@@ -1,6 +1,6 @@
 var mongo = require('../../services/mongodb');
-var { VersionGameIndex, VersionEncounterDetail } = require('../commonModels')
 var { getProjection } = require('../../utils');
+var { VersionGameIndex, VersionEncounterDetail } = require('../commonModels')
 
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;

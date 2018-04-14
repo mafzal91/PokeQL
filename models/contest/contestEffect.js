@@ -1,7 +1,9 @@
 var mongo = require('../../services/mongodb');
+var { getProjection } = require('../../utils');
 var {Effect, FlavorText} = require('../commonModels')
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
+
 var ContestEffectSchema = new Schema({
   pokeapi_id:               { type: Number, default: 0 },
   appeal:                   { type: Number, default: null },

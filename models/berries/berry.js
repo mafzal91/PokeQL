@@ -1,7 +1,7 @@
 var mongo = require('../../services/mongodb');
+var { getProjection } = require('../../utils');
 var Schema = mongo.Schema;
 var ObjectId = Schema.ObjectId;
-var { getProjection } = require('../../utils');
 
 var BerryFlavor = new Schema({
   potency:                  { type: Number, required: true },
