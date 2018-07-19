@@ -6,34 +6,28 @@ class EvolutionChain {
   static getEvolutionChains (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
-
-      Models.evolutionChain.find(query)
+    return Models.evolutionChain.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getEvolutionChain (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.baby_trigger_for) { id = parent.baby_trigger_for }
+    }
 
-      Models.evolutionChain.findById({_id:id})
+    return Models.evolutionChain.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

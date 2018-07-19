@@ -78,52 +78,47 @@ class Pokemon {
   static getPokemons (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
     console.log(projection)
-    return new Promise((resolve, reject) => {
 
-      Models.pokemon.find(query)
+    return Models.pokemon.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getPokemon (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
-
+    console.log(parent)
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) { id = parent._id }
+        if (parent.pokemon) { id = parent.pokemon }
       }
 
-      Models.pokemon.findById({_id:id})
+    return Models.pokemon.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getStats (parent, {query = {}}, Models, info, field) {
     const projection = getProjection(info);
     console.log(parent);console.log(projection);console.log(field);
-    return new Promise((resolve, reject) => {
+
 
       if (parent) {
         Object.keys(projection).forEach(key => {
           query._id = {$in: parent[field].map(i => Models.type.ObjectId(i))}
         })
       }
-      Models.type.find(query)
+
+		return Models.type.find(query)
         .select(projection)
         .exec()
-        .then(data => {resolve(data)})
-        .catch(error => {reject(error)})
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

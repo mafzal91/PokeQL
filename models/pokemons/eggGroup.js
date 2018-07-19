@@ -5,22 +5,18 @@ var EggGroupSchema = require('./pokemonSchemas').EggGroup;
 class EggGroup {
   static getEggGroups (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-
-    return new Promise((resolve, reject) => {
-
-      Models.eggGroup.find(query)
+		return Models.eggGroup.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getEggGroup (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
+
 
       if (parent) {
         if (parent._id) {
@@ -28,12 +24,11 @@ class EggGroup {
         }
       }
 
-      Models.eggGroup.findById({_id:id})
+    return Models.eggGroup.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

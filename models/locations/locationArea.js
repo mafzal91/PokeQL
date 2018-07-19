@@ -6,34 +6,30 @@ class LocationArea {
   static getLocationAreas (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
-
-      Models.locationArea.find(query)
+    if(parent){
+      if(parent.areas) { query = { _id: { $in: parent.areas } } }
+    }
+    return Models.locationArea.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => (data))
+        .catch(error => (error))
   }
 
   static getLocationArea (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) { id = parent._id }
       }
 
-      Models.locationArea.findById({_id:id})
+    return Models.locationArea.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => (data))
+        .catch(error => (error))
   }
 }
 

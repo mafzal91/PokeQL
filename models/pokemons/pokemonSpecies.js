@@ -6,34 +6,34 @@ class PokemonSpecies {
   static getPokemonSpeciess (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
+    if (parent) {
+      if (parent.pokemon_species) { query = { _id: {$in: parent.pokemon_species} } }
+    }
 
-      Models.pokemonSpecies.find(query)
+    return Models.pokemonSpecies.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
+        .sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getPokemonSpecies (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
+    // console.log("SPECIES", parent)
+    if (parent) {
+      if (parent._id) { id = parent._id; }
+      if (parent.species) { id = parent.species; }
+      if (parent.pokemon_species) { id = parent.pokemon_species; }
+    }
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
-
-      Models.pokemonSpecies.findById({_id:id})
+    return Models.pokemonSpecies.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

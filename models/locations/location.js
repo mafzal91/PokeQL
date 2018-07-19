@@ -6,34 +6,32 @@ class Location {
   static getLocations (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
+    if(parent){
+      if(parent.locations) { query = { _id: { $in: parent.locations } } }
+    }
 
-      Models.location.find(query)
+    return Models.location.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getLocation (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.location) { id = parent.location }
+    }
 
-      Models.location.findById({_id:id})
-        .select(projection)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.location.findById(id)
+      .select(projection)
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 }
 

@@ -6,34 +6,28 @@ class EncounterCondition {
   static getEncounterConditions (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
-
-      Models.encounterCondition.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.encounterCondition.find(query)
+      .select(projection)
+      .skip(skip)
+      .limit(limit).sort({pokeapi_id: 1})
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 
   static getEncounterCondition (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.condition) { id = parent.condition }
+    }
 
-      Models.encounterCondition.findById({_id:id})
-        .select(projection)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.encounterCondition.findById(id)
+      .select(projection)
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 }
 

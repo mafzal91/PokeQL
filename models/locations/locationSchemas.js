@@ -40,7 +40,7 @@ var LocationArea = new Schema({
   name:                   {type: String, required: true},
   game_index:             {type: Number, default: null},
   encounter_method_rates: [EncounterMethodRate],
-  location:               {type: ObjectId, ref:"Region", default: null},
+  location:               {type: ObjectId, ref:"Location", default: null},
   names:                  [Name],
   pokemon_encounters:     [PokemonEncounter],
 }, schemaOptions)

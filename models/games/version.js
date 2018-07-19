@@ -18,34 +18,29 @@ var VersionSchema = new Schema({
 class Version {
   static getVersions (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
-      Models.version.find(query)
+    return Models.version.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getVersion (parent, id, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
+    if (parent) {
+      // if (parent._id) {id = parent._id}
+      if (parent.version) {id = parent.version}
+    }
 
-      if (parent) {
-        // if (parent._id) {id = parent._id}
-        // if (parent.stat) {id = parent.stat}
-      }
-
-      Models.version.findById(id)
+    return Models.version.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

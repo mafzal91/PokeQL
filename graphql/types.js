@@ -36,7 +36,7 @@ module.exports = `
     id: ID!
     pokeapi_id: Int!
     name: String!
-    berries: FlavorBerry
+    berries: [FlavorBerry]
     contest_type: ContestType
     names: [Name]
   }
@@ -67,7 +67,7 @@ module.exports = `
     id: ID!
     pokeapi_id: Int!
     appeal: Int
-    flavor_text_entries: FlavorText
+    flavor_text_entries: [FlavorText]
     moves: [Move]
   }
 
@@ -279,7 +279,7 @@ module.exports = `
     name: String!
     game_index: Int
     encounter_method_rates: [EncounterMethodRate]
-    location: Region
+    location: Location
     names: [Name]
     pokemon_encounters: [PokemonEncounter]
   }

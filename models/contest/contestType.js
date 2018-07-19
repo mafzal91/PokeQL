@@ -29,7 +29,7 @@ class ContestType {
       Models.contestType.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
         .then(data => resolve(data))
         .catch(error => reject(error))
@@ -46,7 +46,7 @@ class ContestType {
         }
       }
 
-      Models.contestType.findById({_id:id})
+      Models.contestType.findById(id)
         .select(projection)
         .exec()
         .then(data => resolve(data))
@@ -58,7 +58,7 @@ class ContestType {
 
 ContestTypeSchema.pre('save', (next) => next())
 
-ContestTypeSchema.virtual('id').get(() => this._id)
+ContestTypeSchema.virtual('id').get(function(){ return this._id })
 
 ContestTypeSchema.set('toJSON', {
   virtuals: true

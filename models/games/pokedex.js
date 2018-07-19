@@ -30,32 +30,30 @@ class Pokedex {
   static getPokedexes (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
     // console.log(projection)
-    return new Promise((resolve, reject) => {
 
-      Models.pokedex.find(query)
+    if(parent){
+      if(parent.pokedexes) { query = { _id: { $in: parent.pokedexes } } }
+    }
+
+    return Models.pokedex.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getPokedex (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
-
       if (parent) {
-        if (parent.id) { id = parent.id }
-        if (parent.regions) { id = {$in: parent.regions} }
+        if (parent._id) { id = parent.id }
       }
-      Models.pokedex.find({_id:id})
+    return Models.pokedex.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

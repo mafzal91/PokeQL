@@ -11,7 +11,7 @@ class ItemAttribute {
       Models.itemAttribute.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
         .then(data => resolve(data))
         .catch(error => reject(error))
@@ -28,7 +28,7 @@ class ItemAttribute {
         }
       }
 
-      Models.itemAttribute.findById({_id:id})
+      Models.itemAttribute.findById(id)
         .select(projection)
         .exec()
         .then(data => resolve(data))

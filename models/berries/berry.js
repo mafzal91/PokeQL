@@ -30,34 +30,32 @@ class Berry {
   static getBerries (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
     console.log(projection)
-    return new Promise((resolve, reject) => {
 
-      Models.berry.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.berry.find(query)
+      .select(projection)
+      .skip(skip)
+      .limit(limit).sort({pokeapi_id: 1})
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 
   static getBerry(parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
-
+      console.log("Berry parent", parent)
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) { id = parent._id }
+        if (parent.berry) { id = parent.berry }
       }
 
-      Models.berry.findById({_id:id})
+      return Models.berry.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => {
+          console.log(data)
+          return data
+        })
+        .catch(error => error)
   }
 }
 

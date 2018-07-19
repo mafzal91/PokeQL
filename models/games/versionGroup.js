@@ -21,34 +21,33 @@ var VersionGroupSchema = new Schema({
 class VersionGroup {
   static getVersionGroups (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
-      Models.versionGroup.find(query)
+    if(parent){
+      if(parent.version_groups) { query = { _id: { $in: parent.version_groups } } }
+    }
+
+    return Models.versionGroup.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
-  static getVersionGroup (parent, id, Models, info) {
+  static getVersionGroup (parent, {id}, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
+    if (parent) {
+      if (parent._id) {id = parent._id}
+      if (parent.version_group) {id = parent.version_group}
+    }
 
-      if (parent) {
-        // if (parent._id) {id = parent._id}
-        // if (parent.stat) {id = parent.stat}
-      }
-
-      Models.versionGroup.findById(id)
+    return Models.versionGroup.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

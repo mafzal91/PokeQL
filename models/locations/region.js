@@ -6,34 +6,30 @@ class Region {
   static getRegions (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
     // console.log(projection)
-    return new Promise((resolve, reject) => {
-
-      Models.region.find(query)
+    return Models.region.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
-  static getRegion (parent, id, Models, info) {
+  static getRegion (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
-console.log(parent, projection)
-      if (parent) {
-        if (parent._id) {id = {_id: parent._id}}
-        if (parent.regions) { id = {_id: {$in: parent.regions} } }
-        if (parent.region) { id = {_id: parent.region } }
-      }
+console.log("!!!", parent)
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.region) { id = parent.region }
+      if (parent.main_region) { id = parent.main_region }
+      if (parent.location) { id = parent.location }
+    }
 
-      Models.region.find(id)
+    return Models.region.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

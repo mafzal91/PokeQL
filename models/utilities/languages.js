@@ -20,34 +20,32 @@ class Language {
   static getLanguages (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
     // console.log(projection)
-    return new Promise((resolve, reject) => {
-
-      Models.language.find(query)
+    return Models.language.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getLanguage (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
-
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+    console.log(parent)
+    if (parent) {
+      if (parent._id) {
+        id = parent._id
       }
+      if (parent.language) {
+        id = parent.language
+      }
+    }
 
-      Models.language.findById({_id:id})
-        .select(projection)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.language.findById(id)
+      .select(projection)
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 }
 

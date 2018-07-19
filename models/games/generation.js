@@ -23,34 +23,29 @@ var GenerationSchema = new Schema({
 class Generation {
   static getGenerations (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
-      Models.generation.find(query)
+    return Models.generation.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getGeneration (parent, { id }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
       if (parent) {
-        if (parent.generation) {
-          id = parent.generation;
-        }
+        if (parent.generation) { id = parent.generation }
+        if (parent.main_generation) { id = parent.main_generation }
       }
 
-      Models.generation.findById(id)
+    return Models.generation.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

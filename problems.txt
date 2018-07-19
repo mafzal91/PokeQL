@@ -1,0 +1,3 @@
+check evolution_details to fix item and held_item being the same
+check evolution_details to fix known_move_type and party_type being the same
+check evolution_details to fix trade_species and party_species being the same

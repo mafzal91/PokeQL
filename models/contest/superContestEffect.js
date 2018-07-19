@@ -23,7 +23,7 @@ class SuperContestEffect {
       Models.superContestEffect.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
         .then(data => resolve(data))
         .catch(error => reject(error))
@@ -40,7 +40,7 @@ class SuperContestEffect {
         }
       }
 
-      Models.superContestEffect.findById({_id:id})
+      Models.superContestEffect.findById(id)
         .select(projection)
         .exec()
         .then(data => resolve(data))
@@ -52,7 +52,7 @@ class SuperContestEffect {
 
 SuperContestEffectSchema.pre('save', (next) => next())
 
-SuperContestEffectSchema.virtual('id').get(() => this._id)
+SuperContestEffectSchema.virtual('id').get(function(){ return this._id })
 
 SuperContestEffectSchema.set('toJSON', {
   virtuals: true

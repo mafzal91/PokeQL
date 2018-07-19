@@ -146,9 +146,31 @@ module.exports = {
 
     Language: models.language.getLanguage,
     Languages: models.language.getLanguages,
+
   },
 
   ...require('./resolvers/berry'),
+
+  ...require('./resolvers/contest'),
+
+  ...require('./resolvers/encounter'),
+
+  ...require('./resolvers/evolution'),
+
+  ...require('./resolvers/game'),
+
+  ...require('./resolvers/item'),
+
+  ...require('./resolvers/location'),
+
+  ...require('./resolvers/machine'),
+
+  ...require('./resolvers/move'),
+
+
+  ...require('./resolvers/commonModels'),
+
+
 
   Type: {
     generation: models.generation.getGeneration

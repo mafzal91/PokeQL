@@ -85,11 +85,11 @@ ItemCategory.pre('save', next => next())
 ItemFlingEffect.pre('save', next => next())
 ItemPocket.pre('save', next => next())
 
-Item.virtual('id').get(() => this._id);
-ItemAttribute.virtual('id').get(() => this._id);
-ItemCategory.virtual('id').get(() => this._id);
-ItemFlingEffect.virtual('id').get(() => this._id);
-ItemPocket.virtual('id').get(() => this._id);
+Item.virtual('id').get(function(){ return this._id });
+ItemAttribute.virtual('id').get(function(){ return this._id });
+ItemCategory.virtual('id').get(function(){ return this._id });
+ItemFlingEffect.virtual('id').get(function(){ return this._id });
+ItemPocket.virtual('id').get(function(){ return this._id });
 
 Item.set('toJSON', subSchemaOptions);
 ItemAttribute.set('toJSON', subSchemaOptions);

@@ -25,7 +25,7 @@ class ContestEffect {
       Models.contestEffect.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
         .then(data => resolve(data))
         .catch(error => reject(error))
@@ -42,7 +42,7 @@ class ContestEffect {
         }
       }
 
-      Models.contestEffect.findById({_id:id})
+      Models.contestEffect.findById(id)
         .select(projection)
         .exec()
         .then(data => resolve(data))
@@ -54,7 +54,7 @@ class ContestEffect {
 
 ContestEffectSchema.pre('save', (next) => next())
 
-ContestEffectSchema.virtual('id').get(() => this._id)
+ContestEffectSchema.virtual('id').get(function(){ return this._id })
 
 ContestEffectSchema.set('toJSON', {
   virtuals: true

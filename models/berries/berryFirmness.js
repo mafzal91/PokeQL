@@ -19,41 +19,40 @@ class BerryFirmness {
   static getBerryFirmnesses (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
-
-      Models.berryFirmness.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.berryFirmness.find(query)
+      .select(projection)
+      .skip(skip)
+      .limit(limit).sort({pokeapi_id: 1})
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 
   static getBerryFirmness(parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
-
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+    if (parent) {
+      if (parent._id) {
+        id = parent._id
       }
+      if(parent.firmness) {
+        id = parent.firmness
+      }
+    }
 
-      Models.berryFirmness.findById({_id:id})
-        .select(projection)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.berryFirmness.findById(id)
+      .select(projection)
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 }
 
 
 BerryFirmnessSchema.pre('save', (next) => next())
 
-BerryFirmnessSchema.virtual('id').get(() => this._id)
+BerryFirmnessSchema.virtual('id').get(function() {
+  return this._id;
+});
 
 BerryFirmnessSchema.set('toJSON', {
   virtuals: true

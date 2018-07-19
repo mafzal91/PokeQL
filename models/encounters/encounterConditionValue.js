@@ -7,21 +7,25 @@ class EncounterConditionValue {
   static getEncounterConditionValues (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
-
-      Models.encounterConditionValue.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    console.log("COndition value", parent.condition_values)
+    if(parent){
+      if(parent.condition_values) query = { _id: { $in: parent.condition_values } }
+    }
+    if(query){
+      return Models.encounterConditionValue.find(query)
+          .select(projection)
+          .skip(skip)
+          .limit(limit).sort({pokeapi_id: 1})
+          .exec()
+          .then(data => data)
+          .catch(error => error)
+    } else {
+      return null
+    }
   }
 
   static getEncounterConditionValue (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
       if (parent) {
         if (parent._id) {
@@ -29,12 +33,11 @@ class EncounterConditionValue {
         }
       }
 
-      Models.encounterConditionValue.findById({_id:id})
+    return Models.encounterConditionValue.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

@@ -5,22 +5,18 @@ var PokemonFormSchema = require('./pokemonSchemas').PokemonForm;
 class PokemonForm {
   static getPokemonForms (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-
-    return new Promise((resolve, reject) => {
-
-      Models.pokemonForm.find(query)
+		return Models.pokemonForm.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getPokemonForm (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
+
 
       if (parent) {
         if (parent._id) {
@@ -28,12 +24,11 @@ class PokemonForm {
         }
       }
 
-      Models.pokemonForm.findById({_id:id})
+		return Models.pokemonForm.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

@@ -5,22 +5,18 @@ var PokemonHabitatSchema = require('./pokemonSchemas').PokemonHabitat;
 class PokemonHabitat {
   static getPokemonHabitats (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-
-    return new Promise((resolve, reject) => {
-
-      Models.pokemonHabitat.find(query)
+		return Models.pokemonHabitat.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getPokemonHabitat (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
+
 
       if (parent) {
         if (parent._id) {
@@ -28,12 +24,11 @@ class PokemonHabitat {
         }
       }
 
-      Models.pokemonHabitat.findById({_id:id})
+		return Models.pokemonHabitat.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

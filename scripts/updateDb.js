@@ -139,21 +139,20 @@ mongo.connect(url, (err, db) => {
         })
       },
       "super-contest-effect": (y, next) => {
-        async.parallel({
-          moves: (cb) => findMany(models["move"], mapFind(y.moves, "name", 'name'),cb),
-          flavor_text_entries: (cb) => findMany(models["language"], mapFind(y.flavor_text_entries, "name", 'language.name'),cb),
-        }, (err, {moves, flavor_text_entries}) => {
-          if(err) console.log(err)
-          models["superContestEffect"].findOne({pokeapi_id: y.id}).then(res => {
-            res.appeal = y.appeal
-            res.jam = y.jam
-            res.flavor_text_entries = y.flavor_text_entries.map(i => ({
-              language: flavor_text_entries.find(k => k.name === i.language.name)._id,
-              flavor_text: i.flavor_text,
-            }))
-            res.moves = y.moves.map(i => i._id)
-            res.save(next)
-          }).catch(next)
+        objectPromiseMixed({
+          appeal: y.appeal,
+          jam: y.jam,
+          flavor_text_entries: Promise.all(y.flavor_text_entries.map(i =>
+            objectPromiseMixed({
+              language: findPromises['language']({name: i.language.name}),
+              flavor_text: i.flavor_text
+            })
+          )),
+          moves: findManyPromises['move'](mapFind(y.moves, "name", 'name')).then(res => res.map(i => i._id)),
+        }).then(res => {
+          findPromises['superContestEffect']({pokeapi_id: y.id}).then(entity => {
+            entity.set(res).save(next)
+          })
         })
       },
       "encounter-method": (y, next) => {
@@ -192,22 +191,19 @@ mongo.connect(url, (err, db) => {
           }).catch(next)
         })
       },
-      "encounter-condition-value": (y, next) => {
-        async.parallel({
-          condition: (cb) => findOne(models["encounterCondition"], {name: y.condition.name},cb),
-          names: (cb) => findMany(models["language"], mapFind(y.names, "name", 'language.name'),cb),
-        }, (err, {names, condition}) => {
-          if(err) console.log(err)
-          models["encounterConditionValue"].findOne({pokeapi_id: y.id}).then(res => {
-            res.name = y.name
-            res.names = y.names.map(i => ({
-              language: names.find(k => k.name === i.language.name)._id,
-              name: i.name
-            }))
-            res.condition = y.condition._id
-            res.save(next)
-          }).catch(next)
+      "encounter-condition-value": (y) => {
+        return objectPromiseMixed({
+          name: y.name,
+          names: populateNames(y.names),
+          condition: findPromises['encounterCondition']({name: y.condition.name}),
         })
+        .then(res => {
+          return findPromises['encounterConditionValue']({pokeapi_id: y.id}).then(entity => {
+            return entity.set(res).save()
+          })
+        })
+        .then(res => res)
+        .catch(err => err)
       },
       "evolution-chain": (y, next) => {
         const mapChain = async (chain) => {
@@ -354,8 +350,10 @@ mongo.connect(url, (err, db) => {
           })
         }).catch(next)
       },
-      "item": (y, next) => {
-        objectPromiseMixed({
+      "item": (y) => {
+        if(y.baby_trigger_for == null) return
+        else {
+        return objectPromiseMixed({
           name: y.name,
           cost: y.cost,
           fling_power: y.fling_power,
@@ -400,7 +398,7 @@ mongo.connect(url, (err, db) => {
               )),
             })
           )),
-          baby_trigger_for: y.baby_trigger_for ? findPromises['evolutionChain']({pokeapi_id: getApiId(y.baby_trigger_for.url)}):null,
+          baby_trigger_for: y.baby_trigger_for ? findPromises['evolutionChain']({pokeapi_id: getApiId(y.baby_trigger_for.url)}).then(i => i._id):null,
           machines: Promise.all(y.machines.map(i =>
             objectPromise({
               machine: findPromises['machine']({pokeapi_id: getApiId(i.machine.url)}),
@@ -408,10 +406,11 @@ mongo.connect(url, (err, db) => {
             })
           ))
         }).then(res => {
-          findPromises['item']({pokeapi_id: y.id}).then(entity => {
-            entity.set(res).save(next)
-          }).catch(next)
-        })
+          return findPromises['item']({pokeapi_id: y.id}).then(entity => {
+            return entity.set(res).save()
+          })
+        }).then(res => res).catch(err => err)
+        }
       },
       "item-attribute": (y, next) => {
         objectPromiseMixed({
@@ -730,8 +729,9 @@ mongo.connect(url, (err, db) => {
           });
         }).catch(next)
       },
-      "location-area": (y, next) => {
-        objectPromiseMixed({
+      "location-area": (y) => {
+        // console.log(y)
+        return objectPromiseMixed({
           name: y.name,
           game_index: y.game_index,
           encounter_method_rates: Promise.all(y.encounter_method_rates.map(i =>
@@ -745,7 +745,7 @@ mongo.connect(url, (err, db) => {
               )),
             })
           )),
-          location: findPromises['location']({name: y.location.name}),
+          location: findPromises['location']({pokeapi_id: getApiId(y.location.url)}).then(res => {console.log("region",res); return res._id}),
           names: populateNames(y.names),
           pokemon_encounters: Promise.all(y.pokemon_encounters.map(i =>
             objectPromiseMixed({
@@ -768,10 +768,11 @@ mongo.connect(url, (err, db) => {
             })
           ))
         }).then(res => {
-          findPromises['locationArea']({pokeapi_id: y.id}).then(entity => {
-            entity.set(res).save(next)
+          console.log("Response", res)
+          return findPromises['locationArea']({pokeapi_id: y.id}).then(entity => {
+            return entity.set(res).save()
           });
-        }).catch(next)
+        }).then(res => res).catch(error => {console.log(y); process.exit()})
       },
       "pal-park-area": (y, next) => {
         objectPromiseMixed({
@@ -1301,7 +1302,7 @@ mongo.connect(url, (err, db) => {
     )()
 
     const getApiId = (url) => {
-      console.log(url)
+      // console.log(url)
       return url.split('/')[6]
     }
 
@@ -1364,12 +1365,12 @@ mongo.connect(url, (err, db) => {
       //   ], seriesCallback)
       // },
 
-      // (seriesCallback)=>{
-      //   async.waterfall([
-      //     (waterfallCallback) => db.collection('super-contest-effect').find({}).toArray(waterfallCallback),
-      //     (items, waterfallCallback) => async.each(items, populateType['super-contest-effect'], waterfallCallback),
-      //   ], seriesCallback)
-      // },
+      (seriesCallback)=>{
+        async.waterfall([
+          (waterfallCallback) => db.collection('super-contest-effect').find({}).toArray(waterfallCallback),
+          (items, waterfallCallback) => async.each(items, populateType['super-contest-effect'], waterfallCallback),
+        ], seriesCallback)
+      },
 
       // (seriesCallback)=>{
       //   async.waterfall([
@@ -1386,10 +1387,9 @@ mongo.connect(url, (err, db) => {
       // },
 
       // (seriesCallback)=>{
-      //   async.waterfall([
-      //     (waterfallCallback) => db.collection('encounter-condition-value').find({}).toArray(waterfallCallback),
-      //     (items, waterfallCallback) => async.each(items, populateType['encounter-condition-value'], waterfallCallback),
-      //   ], seriesCallback)
+      //   db.collection('encounter-condition-value').find({}).toArray().then(items => {
+      //     return Promise.all(items.map(populateType['encounter-condition-value']))
+      //   }).then(seriesCallback).catch(seriesCallback)
       // },
 
       // (seriesCallback)=>{
@@ -1435,10 +1435,9 @@ mongo.connect(url, (err, db) => {
       // },
 
       // (seriesCallback)=>{
-      //   async.waterfall([
-      //     (waterfallCallback) => db.collection('item').find().toArray(waterfallCallback),
-      //     (items, waterfallCallback) => async.eachSeries(items, populateType['item'], waterfallCallback),
-      //   ], seriesCallback)
+      //   db.collection('item').find({}).toArray().then(items => {
+      //     return Promise.all(items.map(populateType['item']))
+      //   }).then(seriesCallback).catch(seriesCallback)
       // },
 
       // (seriesCallback)=>{
@@ -1533,10 +1532,15 @@ mongo.connect(url, (err, db) => {
       // },
 
       // (seriesCallback)=>{
-      //   async.waterfall([
-      //     (waterfallCallback) => db.collection('location-area').find().toArray(waterfallCallback),
-      //     (items, waterfallCallback) => async.eachSeries(items, populateType['location-area'], waterfallCallback),
-      //   ], seriesCallback)
+      //   db.collection('location-area').find().toArray().then(items => {
+      //     async.eachSeries(items, (i,next) =>
+      //       populateType['location-area'](i).then(() => next())
+      //     , seriesCallback)
+      //   }).catch(err => console.log(err))
+      //   // db.collection('location-area').find().toArray().then(items => {
+      //   //   return items.map(populateType['location-area']).reduce((prev, task, index) => prev.then(task), Promise.resolve())
+      //   //   // return Promise.all(items.map(populateType['location-area']))
+      //   // }).then(seriesCallback).catch(seriesCallback)
       // },
 
       // (seriesCallback)=>{
@@ -1667,7 +1671,7 @@ mongo.connect(url, (err, db) => {
 
     ], (err, data) => {
       // console.log(err)
-      if(err) console.log("Before end", err)
+      if(err){ console.log("Before end", err)}
       // console.log(data)
       db.close();
       process.exit()

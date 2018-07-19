@@ -5,22 +5,18 @@ var PokemonShapeSchema = require('./pokemonSchemas').PokemonShape;
 class PokemonShape {
   static getPokemonShapes (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-
-    return new Promise((resolve, reject) => {
-
-      Models.pokemonShape.find(query)
+		return Models.pokemonShape.find(query)
         .select(projection)
         .skip(skip)
-        .limit(limit)
+        .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getPokemonShape (parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
+
 
       if (parent) {
         if (parent._id) {
@@ -28,12 +24,11 @@ class PokemonShape {
         }
       }
 
-      Models.pokemonShape.findById({_id:id})
+		return Models.pokemonShape.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

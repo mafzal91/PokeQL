@@ -9,33 +9,31 @@ class Type {
   static getTypes (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
     // console.log(projection)
-    return new Promise((resolve, reject) => {
-
-      Models.type.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.type.find(query)
+      .select(projection)
+      .skip(skip)
+      .limit(limit).sort({pokeapi_id: 1})
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 
-  static getType (parent, id, Models, info) {
+  static getType (parent, {id}, Models, info) {
     const projection = getProjection(info);
+    console.log("TYPE", parent)
+    if (parent) {
+      if (parent._id) {id = parent._id}
+      if (parent.natural_gift_type) {id = parent.natural_gift_type}
+      if (parent.known_move_type) {id = parent.known_move_type}
+    }
+    // console.log("AFTER", id)
+    // if(!id){ console.log("NULL!!!", parent); return null }
 
-    return new Promise((resolve, reject) => {
-
-      if (parent) {
-        if (parent._id) {id = parent._id}
-      }
-
-      Models.type.findById(id)
-        .select(projection)
-        .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+    return Models.type.findById(id)
+      .select(projection)
+      .exec()
+      .then(data => data)
+      .catch(error => error)
   }
 
 }
