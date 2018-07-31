@@ -579,7 +579,7 @@ module.exports = `
     sprites: PokemonFormSprites
     version_group: VersionGroup
     names: [Name]
-    form_names: [Name]
+    form_names: String
   }
 
 

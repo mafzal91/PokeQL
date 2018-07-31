@@ -20,9 +20,8 @@ class GrowthRate {
 
 
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) {id = parent._id }
+        if (parent.growth_rate) {id = parent.growth_rate }
       }
 
 		return Models.growthRate.findById(id)

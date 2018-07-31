@@ -513,7 +513,7 @@ mongo.connect(url, (err, db) => {
             }),
           }):y.contest_combos,
           contest_type: y.contest_type ? findPromises['contestType']({name: y.contest_type.name},):y.contest_type,
-          contest_effect: y.contest_effect ? findPromises['contestType']({name: y.contest_effect.name},):y.contest_effect,
+          contest_effect: y.contest_effect ? findPromises['contestEffect']({name: y.contest_effect.name},):y.contest_effect,
           damage_class: y.damage_class ? findPromises['moveDamageClass']({name: y.damage_class.name},):y.damage_class,
           effect_entries: Promise.all(y.effect_entries.map(i =>
             objectPromiseMixed({
@@ -542,7 +542,7 @@ mongo.connect(url, (err, db) => {
           generation: findPromises['generation']({name: y.generation.name}),
           machines: Promise.all(y.machines.map(i =>
             objectPromiseMixed({
-              machine: findPromises['machine']({id: getApiId(i.machine.url)}),
+              machine: findPromises['machine']({pokeapi_id: getApiId(i.machine.url)}),
               version_group: findPromises['versionGroup']({name: i.version_group.name}),
             })
           )),
@@ -566,8 +566,8 @@ mongo.connect(url, (err, db) => {
               name: i.name,
             })
           )),
-          past_values: Promise.all(y.past_values.map(i =>
-            objectPromiseMixed({
+          past_values: Promise.all(y.past_values.map(i => {
+            return objectPromiseMixed({
               accuracy: i.accuracy,
               effect_chance: i.effect_chance,
               power: i.power,
@@ -581,7 +581,7 @@ mongo.connect(url, (err, db) => {
               type: i.type ? findPromises['type']({name: i.type.name}):null,
               version_group: findPromises['versionGroup']({name: i.version_group.name}),
             })
-          )),
+          })),
           stat_changes: Promise.all(y.stat_changes.map(i =>
             objectPromiseMixed({
               change: i.change,
@@ -1365,12 +1365,12 @@ mongo.connect(url, (err, db) => {
       //   ], seriesCallback)
       // },
 
-      (seriesCallback)=>{
-        async.waterfall([
-          (waterfallCallback) => db.collection('super-contest-effect').find({}).toArray(waterfallCallback),
-          (items, waterfallCallback) => async.each(items, populateType['super-contest-effect'], waterfallCallback),
-        ], seriesCallback)
-      },
+      // (seriesCallback)=>{
+      //   async.waterfall([
+      //     (waterfallCallback) => db.collection('super-contest-effect').find({}).toArray(waterfallCallback),
+      //     (items, waterfallCallback) => async.each(items, populateType['super-contest-effect'], waterfallCallback),
+      //   ], seriesCallback)
+      // },
 
       // (seriesCallback)=>{
       //   async.waterfall([
@@ -1475,12 +1475,12 @@ mongo.connect(url, (err, db) => {
       //   ], seriesCallback)
       // },
 
-      // (seriesCallback)=>{
-      //   async.waterfall([
-      //     (waterfallCallback) => db.collection('move').find().toArray(waterfallCallback),
-      //     (items, waterfallCallback) => async.eachSeries(items, populateType['move'], waterfallCallback),
-      //   ], seriesCallback)
-      // },
+      (seriesCallback)=>{
+        async.waterfall([
+          (waterfallCallback) => db.collection('move').find().toArray(waterfallCallback),
+          (items, waterfallCallback) => async.eachSeries(items, populateType['move'], waterfallCallback),
+        ], seriesCallback)
+      },
 
       // (seriesCallback)=>{
       //   async.waterfall([

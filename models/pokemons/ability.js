@@ -19,7 +19,7 @@ class Ability{
   static getAbility (parent, id, Models, info) {
     const projection = getProjection(info);
     console.log(parent, projection)
-
+console.log("############")
     if (parent) {
       if (parent._id) { id = parent._id }
       if (parent.ability) { id = parent.ability }

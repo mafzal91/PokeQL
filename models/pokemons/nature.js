@@ -20,9 +20,8 @@ class Nature {
 
 
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) { id = parent._id }
+        if (parent.nature) { id = parent.nature }
       }
 
 		return Models.nature.findById(id)

@@ -20,9 +20,8 @@ class MoveDamageClass {
     const projection = getProjection(info);
 
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) { id = parent._id }
+        if(parent.damage_class) { id = parent.damage_class }
       }
 
     return Models.moveDamageClass.findById({_id: id})

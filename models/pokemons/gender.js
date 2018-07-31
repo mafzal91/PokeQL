@@ -6,6 +6,16 @@ var GenderSchema = require('./pokemonSchemas').Gender;
 class Gender {
   static getGenders (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
+
+    if(parent){
+      if(parent.genders){
+        query = { _id: { $in: parent.genders } }
+      }
+      if(parent.required_for_evolution){
+        query = { _id: { $in: parent.required_for_evolution } }
+      }
+    }
+
 		return Models.gender.find(query)
         .select(projection)
         .skip(skip)

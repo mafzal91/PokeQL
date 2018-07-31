@@ -19,12 +19,11 @@ class PokeathlonStat {
     const projection = getProjection(info);
 
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
-		return Models.pokeathlonStat.findById(id)
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.pokeathlon_stat) { id = parent.pokeathlon_stat }
+    }
+		return Models.pokeathlonStat.findById({_id: id})
         .select(projection)
         .exec()
         .then(data => data)

@@ -27,6 +27,7 @@ class PokemonSpecies {
       if (parent._id) { id = parent._id; }
       if (parent.species) { id = parent.species; }
       if (parent.pokemon_species) { id = parent.pokemon_species; }
+      if (parent.evolves_from_species) { id = parent.evolves_from_species }
     }
 
     return Models.pokemonSpecies.findById(id)

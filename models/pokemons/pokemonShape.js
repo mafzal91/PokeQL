@@ -5,6 +5,7 @@ var PokemonShapeSchema = require('./pokemonSchemas').PokemonShape;
 class PokemonShape {
   static getPokemonShapes (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
+    
 		return Models.pokemonShape.find(query)
         .select(projection)
         .skip(skip)
@@ -18,11 +19,10 @@ class PokemonShape {
     const projection = getProjection(info);
 
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.shape) { id = parent.shape }
+    }
 
 		return Models.pokemonShape.findById(id)
         .select(projection)

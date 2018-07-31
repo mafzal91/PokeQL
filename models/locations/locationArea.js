@@ -9,6 +9,7 @@ class LocationArea {
     if(parent){
       if(parent.areas) { query = { _id: { $in: parent.areas } } }
     }
+
     return Models.locationArea.find(query)
         .select(projection)
         .skip(skip)
@@ -20,10 +21,11 @@ class LocationArea {
 
   static getLocationArea (parent, {id}, Models, info) {
     const projection = getProjection(info);
-
-      if (parent) {
-        if (parent._id) { id = parent._id }
-      }
+console.log(parent)
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.location_area) { id = parent.location_area }
+    }
 
     return Models.locationArea.findById(id)
         .select(projection)

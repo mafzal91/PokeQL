@@ -19,9 +19,8 @@ class PokemonColor {
 
 
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) {id = parent._id }
+        if (parent.color) {id = parent.color }
       }
 
 		return Models.pokemonColor.findById(id)

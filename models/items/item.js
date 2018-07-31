@@ -7,6 +7,13 @@ class Item {
   static getItems (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
+    if (parent) {
+      if(parent._id) { id = parent._id }
+      if(parent.item) { id = parent.item }
+      if(parent.baby_trigger_item) { id = parent.baby_trigger_item }
+      if(parent.held_item) { id = parent.held_item }
+    }
+
     return Models.item.find(query)
       .select(projection)
       .skip(skip)

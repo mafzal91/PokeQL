@@ -48,8 +48,9 @@ class Pokedex {
     const projection = getProjection(info);
       if (parent) {
         if (parent._id) { id = parent.id }
+        if (parent.pokedex) { id = parent.pokedex }
       }
-    return Models.pokedex.findById(id)
+    return Models.pokedex.findById({_id: id})
         .select(projection)
         .exec()
         .then(data => data)

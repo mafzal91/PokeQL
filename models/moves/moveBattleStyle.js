@@ -7,7 +7,7 @@ class MoveBattleStyle {
     const projection = getProjection(info);
 
 
-    return Models.moveAliment.find(query)
+    return Models.moveBattleStyle.find(query)
       .select(projection)
       .skip(skip)
       .limit(limit).sort({pokeapi_id: 1})
@@ -19,13 +19,12 @@ class MoveBattleStyle {
   static getMoveBattleStyle (parent, {id}, Models, info) {
     const projection = getProjection(info);
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.move_battle_style) { id = parent.move_battle_style }
+    }
 
-    return Models.moveAliment.findById({_id: id})
+    return Models.moveBattleStyle.findById({_id: id})
       .select(projection)
       .exec()
       .then(data => data)

@@ -42,6 +42,8 @@ class BerryFlavor {
       if(parent.id) { id = parent._id }
       if(parent.flavor) { id = parent.flavor }
       if(parent.berry_flavor) { id = parent.berry_flavor }
+      if(parent.hates_flavor) { id = parent.hates_flavor }
+      if(parent.likes_flavor) { id = parent.likes_flavor }
     }
 
     return Models.berryFlavor.findById(id)

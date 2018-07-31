@@ -20,7 +20,7 @@ module.exports = {
     version_group: models.versionGroup.getVersionGroup,
   },
   MoveStatChange: {
-    stat: models.stat,
+    stat: models.stat.getStat,
   },
   Move: {
     contest_type: models.contestType.getContestType,
@@ -31,4 +31,24 @@ module.exports = {
     target: models.moveTarget.getMoveTarget,
     type: models.type.getType,
   },
+
+  MoveAilment: {
+    moves: models.move.getMoves,
+  },
+
+  MoveCategory: {
+    moves: models.move.getMoves,
+  },
+
+  MoveDamageClass: {
+    moves: models.move.getMoves,
+  },
+
+  MoveLearnMethod: {
+    version_groups: models.versionGroup.getVersionGroups,
+  },
+
+  MoveTarget: {
+    moves: models.move.getMoves,
+  }
 }

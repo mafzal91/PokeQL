@@ -1,3 +1,8 @@
 check evolution_details to fix item and held_item being the same
 check evolution_details to fix known_move_type and party_type being the same
 check evolution_details to fix trade_species and party_species being the same
+
+Update AbilityEffectChange for Moves resolver
+
+check nature to fix increased_stat/decrease_stat being the same,
+check nature to fix hates_flavor/likes_flavor being the same

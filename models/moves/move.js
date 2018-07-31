@@ -78,7 +78,7 @@ var MoveSchema = new Schema({
 class Move {
   static getMoves (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
-
+    console.log(parent.moves)
     if(parent){
       if(parent.moves) { query = { _id: { $in: parent.moves } } }
     }

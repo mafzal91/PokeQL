@@ -24,34 +24,33 @@ class ContestType {
   static getContestTypes (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
 
-      Models.contestType.find(query)
+    return Models.contestType.find(query)
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getContestType(parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
       if (parent) {
         if (parent._id) {
           id = parent._id
         }
+        if (parent.contest_type) {
+          id = parent.contest_type
+        }
       }
 
-      Models.contestType.findById(id)
+    return Models.contestType.findById({_id: id})
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

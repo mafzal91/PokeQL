@@ -24,6 +24,8 @@ class Stat {
       if (parent) {
         if (parent._id) {id = parent._id}
         if (parent.stat) {id = parent.stat}
+        if (parent.decreased_stat) {id = parent.decreased_stat}
+        if (parent.increased_stat) {id = parent.increased_stat}
       }
 
 		return Models.stat.findById(id)

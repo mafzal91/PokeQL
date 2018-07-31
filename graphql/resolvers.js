@@ -167,6 +167,8 @@ module.exports = {
 
   ...require('./resolvers/move'),
 
+  ...require('./resolvers/pokemon'),
+
 
   ...require('./resolvers/commonModels'),
 

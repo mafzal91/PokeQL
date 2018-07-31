@@ -20,9 +20,8 @@ class MoveTarget {
     const projection = getProjection(info);
 
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) { id = parent._id }
+        if (parent.target) { id = parent.target }
       }
 
     return Models.moveTarget.findById({_id: id})

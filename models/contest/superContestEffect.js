@@ -18,34 +18,31 @@ class SuperContestEffect {
   static getSuperContestEffects (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
 
-    return new Promise((resolve, reject) => {
 
-      Models.superContestEffect.find(query)
+    return Models.superContestEffect.find(query)
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 
   static getSuperContestEffect(parent, {id}, Models, info) {
     const projection = getProjection(info);
-    return new Promise((resolve, reject) => {
 
-      if (parent) {
+    if (parent) {
         if (parent._id) {
           id = parent._id
         }
+        if(parent.super_contest_effect){ id = parent.super_contest_effect}
       }
 
-      Models.superContestEffect.findById(id)
+    return Models.superContestEffect.findById(id)
         .select(projection)
         .exec()
-        .then(data => resolve(data))
-        .catch(error => reject(error))
-    })
+        .then(data => data)
+        .catch(error => error)
   }
 }
 

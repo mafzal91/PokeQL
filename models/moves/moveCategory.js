@@ -7,7 +7,7 @@ class MoveCategory {
     const projection = getProjection(info);
 
 
-    return Models.moveBattleStyle.find(query)
+    return Models.moveCategory.find(query)
       .select(projection)
       .skip(skip)
       .limit(limit).sort({pokeapi_id: 1})
@@ -24,7 +24,7 @@ class MoveCategory {
         if (parent.category) { id = parent.category }
       }
 
-    return Models.moveBattleStyle.findById({_id: id})
+    return Models.moveCategory.findById({_id: id})
       .select(projection)
       .exec()
       .then(data => data)

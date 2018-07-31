@@ -25,6 +25,7 @@ class Type {
       if (parent._id) {id = parent._id}
       if (parent.natural_gift_type) {id = parent.natural_gift_type}
       if (parent.known_move_type) {id = parent.known_move_type}
+      if (parent.type) {id = parent.type}
     }
     // console.log("AFTER", id)
     // if(!id){ console.log("NULL!!!", parent); return null }

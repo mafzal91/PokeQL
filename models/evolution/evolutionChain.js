@@ -21,6 +21,7 @@ class EvolutionChain {
     if (parent) {
       if (parent._id) { id = parent._id }
       if (parent.baby_trigger_for) { id = parent.baby_trigger_for }
+      if (parent.evolution_chain) { id = parent.evolution_chain }
     }
 
     return Models.evolutionChain.findById(id)

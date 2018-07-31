@@ -5,6 +5,11 @@ var EggGroupSchema = require('./pokemonSchemas').EggGroup;
 class EggGroup {
   static getEggGroups (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
+
+    if (parent) {
+      if (parent.egg_groups) { query = { _id: { $in: parent.egg_groups } } }
+    }
+
 		return Models.eggGroup.find(query)
         .select(projection)
         .skip(skip)
@@ -18,11 +23,10 @@ class EggGroup {
     const projection = getProjection(info);
 
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
+    if (parent) {
+      if (parent._id) { id = parent._id }
+      if (parent.egg_group) { id = parent.egg_group }
+    }
 
     return Models.eggGroup.findById(id)
         .select(projection)

@@ -23,6 +23,9 @@ class MoveLearnMethod {
         if (parent._id) {
           id = parent._id
         }
+        if (parent.move_learn_method) {
+          id = parent.move_learn_method
+        }
       }
 
     return Models.moveLearnMethod.findById({_id: id})

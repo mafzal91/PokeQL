@@ -17,12 +17,10 @@ class PokemonHabitat {
   static getPokemonHabitat (parent, {id}, Models, info) {
     const projection = getProjection(info);
 
-
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
-      }
+    if (parent) {
+      if (parent._id) {  id = parent._id }
+      if (parent.habitat) {  id = parent.habitat }
+    }
 
 		return Models.pokemonHabitat.findById(id)
         .select(projection)
