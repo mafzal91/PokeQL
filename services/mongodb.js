@@ -6,6 +6,7 @@ var options = {
   user: config.mongodb.user,
   pass: config.mongodb.password,
   useMongoClient: true,
+  auth: { authSource: "admin" }
 }
 
 mongo.set('debug', config.mongodb.debug)
