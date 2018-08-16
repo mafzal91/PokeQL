@@ -12,7 +12,6 @@ class EncounterMethod {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -28,7 +27,6 @@ class EncounterMethod {
 
     return Models.encounterMethod.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

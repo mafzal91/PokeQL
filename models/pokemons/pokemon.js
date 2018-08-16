@@ -83,7 +83,6 @@ class Pokemon {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -98,7 +97,6 @@ class Pokemon {
 
     return Models.pokemon.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -116,7 +114,6 @@ class Pokemon {
 
 		return Models.type.find(query)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

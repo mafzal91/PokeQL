@@ -10,7 +10,6 @@ class PokemonShape {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -26,7 +25,6 @@ class PokemonShape {
 
 		return Models.pokemonShape.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

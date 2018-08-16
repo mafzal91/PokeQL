@@ -87,7 +87,6 @@ class Move {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -103,7 +102,6 @@ class Move {
 
     return Models.move.findById({_id: id})
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

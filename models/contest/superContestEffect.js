@@ -23,7 +23,6 @@ class SuperContestEffect {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -40,7 +39,6 @@ class SuperContestEffect {
 
     return Models.superContestEffect.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

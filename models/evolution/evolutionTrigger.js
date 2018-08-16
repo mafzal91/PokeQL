@@ -10,7 +10,6 @@ class EvolutionTrigger {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -25,7 +24,6 @@ class EvolutionTrigger {
 
     return Models.evolutionTrigger.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

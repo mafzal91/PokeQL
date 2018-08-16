@@ -30,7 +30,6 @@ class VersionGroup {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -45,7 +44,6 @@ class VersionGroup {
 
     return Models.versionGroup.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

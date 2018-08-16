@@ -6,3 +6,5 @@ Update AbilityEffectChange for Moves resolver
 
 check nature to fix increased_stat/decrease_stat being the same,
 check nature to fix hates_flavor/likes_flavor being the same
+
+check Stat to fix NatureStatAffectSets increase/decrease being the same,

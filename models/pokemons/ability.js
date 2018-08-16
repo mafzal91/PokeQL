@@ -11,7 +11,6 @@ class Ability{
       .select(projection)
       .skip(skip)
       .limit(limit).sort({pokeapi_id: 1})
-      .exec()
       .then(data => data)
       .catch(error => error)
   }
@@ -27,7 +26,6 @@ console.log("############")
 
     return Models.ability.findById(id)
       .select(projection)
-      .exec()
       .then(data => data)
       .catch(error => error)
   }

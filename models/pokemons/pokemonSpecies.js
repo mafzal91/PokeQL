@@ -15,7 +15,6 @@ class PokemonSpecies {
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
         .sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -32,7 +31,6 @@ class PokemonSpecies {
 
     return Models.pokemonSpecies.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

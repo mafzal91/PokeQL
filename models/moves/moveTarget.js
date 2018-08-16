@@ -11,7 +11,6 @@ class MoveTarget {
       .select(projection)
       .skip(skip)
       .limit(limit).sort({pokeapi_id: 1})
-      .exec()
       .then(data => data)
       .catch(error => error)
   }
@@ -26,7 +25,6 @@ class MoveTarget {
 
     return Models.moveTarget.findById({_id: id})
       .select(projection)
-      .exec()
       .then(data => data)
       .catch(error => error)
   }

@@ -16,7 +16,6 @@ class EncounterConditionValue {
           .select(projection)
           .skip(skip)
           .limit(limit).sort({pokeapi_id: 1})
-          .exec()
           .then(data => data)
           .catch(error => error)
     } else {
@@ -35,7 +34,6 @@ class EncounterConditionValue {
 
     return Models.encounterConditionValue.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

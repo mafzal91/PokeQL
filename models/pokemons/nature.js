@@ -10,7 +10,6 @@ class Nature {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -26,7 +25,6 @@ class Nature {
 
 		return Models.nature.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

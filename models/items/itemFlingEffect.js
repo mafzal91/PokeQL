@@ -13,7 +13,6 @@ class ItemFlingEffect {
         .skip(skip)
         .limit(limit)
         .sort(sort)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -28,7 +27,6 @@ class ItemFlingEffect {
 
     return Models.itemFlingEffect.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

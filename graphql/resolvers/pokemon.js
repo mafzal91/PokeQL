@@ -131,28 +131,33 @@ module.exports = {
     generation: models.generation.getGeneration,
   },
 
+
   MoveStatAffect: {
     move: models.move.getMove,
   },
-
-
+  NatureStatAffectSets: {
+    increase: models.nature.getNatures,
+    decrease: models.nature.getNatures,
+  },
   Stat: {
     characteristics: models.characteristic.getCharacteristics,
     move_damage_class: models.moveDamageClass.getMoveDamageClass,
   },
 
+
   TypePokemon: {
     pokemon: models.pokemon.getPokemon,
   },
 
-  DamageRelations: {
-    half_damage_from: models.type.getType,
-    no_damage_from: models.type.getType,
-    half_damage_to: models.type.getType,
-    double_damage_from: models.type.getType,
-    no_damage_to: models.type.getType,
-    double_damage_to: models.type.getType,
-  },
+  // DamageRelations: {
+  //   half_damage_from: models.type.getTypes,
+  //   no_damage_from: models.type.getTypes,
+  //   half_damage_to: models.type.getTypes,
+  //   double_damage_from: models.type.getTypes,
+  //   no_damage_to: models.type.getTypes,
+  //   double_damage_to: models.type.getTypes,
+  // },
+  DamageRelations: () => {console.log("yolo", arguments)},
 
   Type: {
     generation: models.generation.getGeneration,

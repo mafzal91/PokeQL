@@ -35,7 +35,6 @@ class Berry {
       .select(projection)
       .skip(skip)
       .limit(limit).sort({pokeapi_id: 1})
-      .exec()
       .then(data => data)
       .catch(error => error)
   }
@@ -50,7 +49,6 @@ class Berry {
 
       return Models.berry.findById(id)
         .select(projection)
-        .exec()
         .then(data => {
           console.log(data)
           return data

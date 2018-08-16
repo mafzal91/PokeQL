@@ -11,7 +11,6 @@ class ItemCategory {
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -26,7 +25,6 @@ class ItemCategory {
 
     return Models.itemCategory.findById(id)
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }

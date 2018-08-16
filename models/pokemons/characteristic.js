@@ -5,11 +5,17 @@ var CharacteristicSchema = require('./pokemonSchemas').Characteristic;
 class Characteristic {
   static getCharacteristics (parent, { query, skip, limit }, Models, info) {
     const projection = getProjection(info);
+console.log(parent)
+    if (parent) {
+      if (parent.characteristics) {
+        query = { _id: { $in: parent.characteristics } }
+      }
+    }
+
 		return Models.characteristic.find(query)
         .select(projection)
         .skip(skip)
         .limit(limit).sort({pokeapi_id: 1})
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
@@ -19,13 +25,11 @@ class Characteristic {
 
 
       if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+        if (parent._id) { id = parent._id }
+        if (parent.characteristic) { id = parent.characteristic }
       }
-      return Models.characteristic.findById(id)
+      return Models.characteristic.findById({_id: id})
         .select(projection)
-        .exec()
         .then(data => data)
         .catch(error => error)
   }
