@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "sudo nodemon server.js"
+    "start": "sudo nodemon server.js",
+    "prod": "node server.js"
   },
   "dependencies": {
     "async": "^2.6.0",

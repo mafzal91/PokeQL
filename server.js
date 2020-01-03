@@ -10,11 +10,20 @@ var types = require('./graphql/types')
 var resolvers = require('./graphql/resolvers')
 // console.log(models)
 
+console.log(config)
+
 const executableSchema = makeExecutableSchema({
   typeDefs: types,
   resolvers
 });
 
+app.use('*', (req, res, next) => {
+  console.log(`HOST ${req.headers.host} [${req.method}] ${req.originalUrl}`);
+  next()
+});
+app.use('/heyo', (req, res) => {
+  res.json({ hello: "world"})
+});
 app.use('/', graphqlHTTP(req => {
   return {
     // schema: buildSchema(types),

@@ -4,7 +4,7 @@
     "script"    : "./server.js",
     "node_args" : "--harmony",
     "env": {
-      "NODE_ENV": "production",
+      "NODE_ENV": "production"
     }
-  },
+  }
 ]
