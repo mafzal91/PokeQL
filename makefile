@@ -9,11 +9,14 @@ LATEST  := ${NAME}:latest
 
 local: 
 	@echo ${LATEST} ${IMG} $(GIT_TAG)
-	@docker build --build-arg env=local -t ${IMG}-local .
+	@docker build --no-cache --build-arg env=local -t ${IMG}-local .
 	@docker tag ${LATEST} ${REMOTE}/${IMG}-local
+run-prod: 
+	@echo ${LATEST} ${IMG} $(GIT_TAG)
+	@docker run -it -p 3001:3001 ${IMG}-prod ${CMD}
 prod: 
 	@echo $(GIT_TAG)
-	@docker build --build-arg env=production -t ${IMG}-prod .
+	@docker build --no-cache --build-arg env=production -t ${IMG}-prod .
 	@docker tag ${LATEST} ${REMOTE}/${IMG}-prod
 push:
 	@echo ${REMOTE}/${IMG}-${ENV}
