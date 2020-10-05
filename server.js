@@ -11,7 +11,7 @@ var resolvers = require('./graphql/resolvers')
 // console.log(models)
 
 console.log(config)
-
+console.log(config)
 const executableSchema = makeExecutableSchema({
   typeDefs: types,
   resolvers
