@@ -2,20 +2,28 @@
   "name": "pokedex",
   "version": "1.0.0",
   "description": "Pokemon graphql server",
-  "main": "server.js",
+  "main": "index.js",
   "author": "Mohammad Afzal",
   "license": "MIT",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "start": "sudo nodemon server.js",
-    "prod": "node server.js",
-    "test": "node temp.js"
+    "start": "nodemon index.js",
+    "prod": "node index.js",
+    "test": "node temp.js",
+    "prepare": "husky install",
+    "lint": "eslint --ignore-path .gitignore",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|mjs|json)\""
   },
   "dependencies": {
     "async": "^2.6.0",
     "axios": "^0.21.1",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
+    "dotenv": "^10.0.0",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
     "graphql": "^0.12.3",
@@ -26,6 +34,12 @@
     "mongoose": "^5.13.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.1",
+    "nodemon": "^2.0.12",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2"
   }
 }

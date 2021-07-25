@@ -1,76 +1,114 @@
-var mongo = require('../../services/mongodb');
-var { getProjection } = require('../../utils');
-var {Description, Name} = require('../commonModels')
+import mongo from "../../services/mongodb.js";
+import {getProjection} from "../../utils/index.js";
+import {Description, Name} from "../commonModels.js";
 
-var Schema = mongo.Schema;
-var ObjectId = Schema.ObjectId;
+const Schema = mongo.Schema;
+const ObjectId = Schema.ObjectId;
 
-var PokemonEntry = new Schema({
-  entry_number:          { type: Number, required: true },
-  pokemon_species:       { type: ObjectId, ref: 'PokemonSpecies', default: null },
-},{
-  _id: false
-})
+const PokemonEntry = new Schema(
+  {
+    entry_number: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species: {
+      default: null,
+      ref: "PokemonSpecies",
+      type: ObjectId,
+    },
+  },
+  {
+    _id: false,
+  },
+);
 
-var PokedexSchema = new Schema({
-  pokeapi_id:             { type: Number, required: true },
-  name:                   { type: String, required: true },
-  is_main_series:         { type: Boolean, default: false },
-  descriptions:           [Description],
-  names:                  [Name],
-  pokemon_entries:        [PokemonEntry],
-  region:                 { type: ObjectId, ref: 'Region', default: null},
-  version_groups:         [{ type: ObjectId, ref: 'VersionGroup', default: null}],
-}, {
-  versionKey: false,
-  timestamp: true
-});
+const PokedexSchema = new Schema(
+  {
+    descriptions: [Description],
+    is_main_series: {
+      default: false,
+      type: Boolean,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon_entries: [PokemonEntry],
+    region: {
+      default: null,
+      ref: "Region",
+      type: ObjectId,
+    },
+    version_groups: [
+      {
+        default: null,
+        ref: "VersionGroup",
+        type: ObjectId,
+      },
+    ],
+  },
+  {
+    versionKey: false,
+    timestamp: true,
+  },
+);
 
 class Pokedex {
-  static getPokedexes (parent, { query, skip, limit }, Models, info) {
+  static getPokedexes(parent, {query, skip, limit}, Models, info) {
     const projection = getProjection(info);
     // console.log(projection)
 
-    if(parent){
-      if(parent.pokedexes) { query = { _id: { $in: parent.pokedexes } } }
+    if (parent) {
+      if (parent.pokedexes) {
+        query = {_id: {$in: parent.pokedexes}};
+      }
     }
 
-    return Models.pokedex.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit).sort({pokeapi_id: 1})
-        .then(data => data)
-        .catch(error => error)
+    return Models.pokedex
+      .find(query)
+      .select(projection)
+      .skip(skip)
+      .limit(limit)
+      .sort({pokeapi_id: 1})
+      .then((data) => data)
+      .catch((error) => error);
   }
 
-  static getPokedex (parent, {id}, Models, info) {
+  static getPokedex(parent, {id}, Models, info) {
     const projection = getProjection(info);
-      if (parent) {
-        if (parent._id) { id = parent.id }
-        if (parent.pokedex) { id = parent.pokedex }
+    if (parent) {
+      if (parent._id) {
+        id = parent.id;
       }
-    return Models.pokedex.findById({_id: id})
-        .select(projection)
-        .then(data => data)
-        .catch(error => error)
+      if (parent.pokedex) {
+        id = parent.pokedex;
+      }
+    }
+    return Models.pokedex
+      .findById({_id: id})
+      .select(projection)
+      .then((data) => data)
+      .catch((error) => error);
   }
 }
 
-PokedexSchema.pre('save', function(next) {
+PokedexSchema.pre("save", function (next) {
   next();
 });
 
-PokedexSchema.virtual('id').get(function () {
+PokedexSchema.virtual("id").get(function () {
   return this._id;
 });
 
-PokedexSchema.set('toJSON', {
-  virtuals: true
+PokedexSchema.set("toJSON", {
+  virtuals: true,
 });
 
-PokedexSchema.loadClass(Pokedex)
+PokedexSchema.loadClass(Pokedex);
 
-module.exports = mongo.model('Pokedex', PokedexSchema);
-
-// module.exports.fields = fields;
-module.exports.ObjectId = mongo.Types.ObjectId;
+export default mongo.model("Pokedex", PokedexSchema);

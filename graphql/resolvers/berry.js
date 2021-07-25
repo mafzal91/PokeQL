@@ -1,28 +1,22 @@
-const models = require('../../models')
+import * as models from "../../models";
 
-module.exports = {
+export default {
   Berry: {
     firmness: models.berryFirmness.getBerryFirmness,
     // firmness: () => console.log("oyolol"),
     item: models.item.getItem,
     natural_gift_type: models.type.getType,
   },
-  BerryFlavorPotency: {
-    flavor: models.berryFlavor.getBerryFlavor
-  },
-
-
-
   BerryFirmness: {
     berries: models.berry.getBerries,
   },
-
-
-
   BerryFlavor: {
     contest_type: models.contestType.getContestType,
+  },
+  BerryFlavorPotency: {
+    flavor: models.berryFlavor.getBerryFlavor,
   },
   FlavorBerry: {
     berry: models.berry.getBerry,
   },
-}
+};

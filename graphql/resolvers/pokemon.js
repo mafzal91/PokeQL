@@ -1,6 +1,6 @@
-const models = require('../../models')
+import * as models from "../../models";
 
-module.exports = {
+export default {
   LocationAreaEncounter: {
     location_area: models.locationArea.getLocationArea,
   },
@@ -85,7 +85,6 @@ module.exports = {
     nature: models.nature.getNature,
   },
 
-
   PokemonColor: {
     pokemon_species: models.pokemonSpecies.getPokemonSpeciess,
   },
@@ -131,7 +130,6 @@ module.exports = {
     generation: models.generation.getGeneration,
   },
 
-
   MoveStatAffect: {
     move: models.move.getMove,
   },
@@ -143,7 +141,6 @@ module.exports = {
     characteristics: models.characteristic.getCharacteristics,
     move_damage_class: models.moveDamageClass.getMoveDamageClass,
   },
-
 
   TypePokemon: {
     pokemon: models.pokemon.getPokemon,
@@ -157,14 +154,13 @@ module.exports = {
   //   no_damage_to: models.type.getTypes,
   //   double_damage_to: models.type.getTypes,
   // },
-  DamageRelations: () => {console.log("yolo", arguments)},
+  DamageRelations: () => {
+    console.log("yolo", arguments);
+  },
 
   Type: {
     generation: models.generation.getGeneration,
     move_damage_class: models.moveDamageClass.getMoveDamageClass,
     moves: models.move.getMoves,
   },
-
-
-
-}
+};

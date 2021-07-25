@@ -1,0 +1,23 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": ["eslint:recommended", "eslint-config-prettier"],
+  "rules": {
+    "strict": ["error", "never"],
+    "sort-keys": ["error", "asc", {"natural": true}],
+    "no-use-before-define": ["error"]
+  },
+  "globals":{
+    "fetch": "readonly",
+    "document": "readonly"
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  }
+}

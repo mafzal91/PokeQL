@@ -1,127 +1,289 @@
-var mongo = require('../../services/mongodb');
-var { getProjection } = require('../../utils');
-var { VerboseEffect, Effect, FlavorText1, Name, MachineVersionDetail } = require('../commonModels');
-var { AbilityEffectChange } = require('../pokemons/pokemonSchemas').subSchema;
-var Schema = mongo.Schema;
-var ObjectId = Schema.ObjectId;
+import mongo from "../../services/mongodb.js";
+import {getProjection} from "../../utils/index.js";
+import {
+  VerboseEffect,
+  FlavorText1,
+  Name,
+  MachineVersionDetail,
+} from "../commonModels.js";
+import {AbilityEffectChange} from "../pokemons/pokemonSchemas.js";
+const Schema = mongo.Schema;
+const ObjectId = Schema.ObjectId;
 
-var ContestCombo = new Schema({
-  normal: {
-    use_before:             [{type: ObjectId, ref: "Move", }],
-    use_after:              [{type: ObjectId, ref: "Move", }],
+const ContestCombo = new Schema(
+  {
+    normal: {
+      use_after: [
+        {
+          ref: "Move",
+          type: ObjectId,
+        },
+      ],
+      use_before: [
+        {
+          ref: "Move",
+          type: ObjectId,
+        },
+      ],
+    },
+    super: {
+      use_after: [
+        {
+          ref: "Move",
+          type: ObjectId,
+        },
+      ],
+      use_before: [
+        {
+          ref: "Move",
+          type: ObjectId,
+        },
+      ],
+    },
   },
-  super: {
-    use_before:             [{type: ObjectId, ref: "Move", }],
-    use_after:              [{type: ObjectId, ref: "Move", }],
+  {_id: false},
+);
+
+const MoveMeta = new Schema(
+  {
+    ailment: {
+      default: null,
+      ref: "MoveAilment",
+      type: ObjectId,
+    },
+    ailment_chance: {
+      default: 0,
+      type: Number,
+    },
+    category: {
+      default: null,
+      ref: "MoveCategory",
+      type: ObjectId,
+    },
+    crit_rate: {
+      default: 0,
+      type: Number,
+    },
+    drain: {
+      default: 0,
+      type: Number,
+    },
+    flinch_chance: {
+      default: 0,
+      type: Number,
+    },
+    healing: {
+      default: 0,
+      type: Number,
+    },
+    max_hits: {
+      default: 0,
+      type: Number,
+    },
+    max_turns: {
+      default: 0,
+      type: Number,
+    },
+    min_hits: {
+      default: 0,
+      type: Number,
+    },
+    min_turns: {
+      default: 0,
+      type: Number,
+    },
+    stat_chance: {
+      default: 0,
+      type: Number,
+    },
   },
-},{_id: false})
+  {_id: false},
+);
 
-var MoveMeta = new Schema({
-  ailment:                  { type: ObjectId, ref: "MoveAilment", default: null },
-  category:                 { type: ObjectId, ref: "MoveCategory", default: null },
-  min_hits:                 { type: Number, default: 0 },
-  max_hits:                 { type: Number, default: 0 },
-  min_turns:                { type: Number, default: 0 },
-  max_turns:                { type: Number, default: 0 },
-  drain:                    { type: Number, default: 0 },
-  healing:                  { type: Number, default: 0 },
-  crit_rate:                { type: Number, default: 0 },
-  ailment_chance:           { type: Number, default: 0 },
-  flinch_chance:            { type: Number, default: 0 },
-  stat_chance:              { type: Number, default: 0 },
-},{_id: false})
+const MovePastValue = new Schema(
+  {
+    accuracy: {
+      default: 0,
+      type: Number,
+    },
+    effect_chance: {
+      default: 0,
+      type: Number,
+    },
+    effect_entries: [VerboseEffect],
+    power: {
+      default: 0,
+      type: Number,
+    },
+    pp: {
+      default: 0,
+      type: Number,
+    },
+    type: {
+      default: null,
+      ref: "Type",
+      type: ObjectId,
+    },
+    version_group: {
+      default: null,
+      ref: "VersionGroup",
+      type: ObjectId,
+    },
+  },
+  {_id: false},
+);
 
-var MovePastValue = new Schema({
-  accuracy:                 { type: Number, default: 0 },
-  effect_chance:            { type: Number, default: 0 },
-  power:                    { type: Number, default: 0 },
-  pp:                       { type: Number, default: 0 },
-  effect_entries:           [VerboseEffect],
-  type:                     { type: ObjectId, ref: "Type", default: null },
-  version_group:            { type: ObjectId, ref: "VersionGroup", default: null },
-},{_id: false})
+const MoveStatChange = new Schema(
+  {
+    change: {
+      default: 0,
+      type: Number,
+    },
+    stat: {
+      default: null,
+      ref: "Stat",
+      type: ObjectId,
+    },
+  },
+  {_id: false},
+);
 
-var MoveStatChange = new Schema({
-  change:                   { type: Number, default: 0 },
-  stat:                     { type: ObjectId, ref: "Stat", default: null },
-},{_id: false})
-
-var MoveSchema = new Schema({
-  pokeapi_id:               { type: Number, required: true },
-  name:                     { type: String, required: true },
-  accuracy:                 { type: Number, default: 0 },
-  effect_chance:            { type: Number, default: 0 },
-  pp:                       { type: Number, default: 0 },
-  priority:                 { type: Number, default: 0 },
-  power:                    { type: Number, default: 0 },
-  contest_combos:           ContestCombo,
-  contest_type:             { type: ObjectId, ref: "ContestType", default: null },
-  contest_effect:           { type: ObjectId, ref: "ContestEffect", default: null },
-  damage_class:             { type: ObjectId, ref: "MoveDamageClass", default: null },
-  effect_entries:           [VerboseEffect],
-  effect_changes:           [AbilityEffectChange],
-  flavor_text_entries:      [FlavorText1],
-  generation:               { type: ObjectId, ref: "Generation", default: null},
-  machines:                 [MachineVersionDetail],
-  meta:                     MoveMeta,
-  names:                    [Name],
-  past_values:              [MovePastValue],
-  stat_changes:             [MoveStatChange],
-  super_contest_effect:     { type: ObjectId, ref: "SuperContestEffect", default: null },
-  target:                   { type: ObjectId, ref: "MoveTarget", default: null },
-  type:                     { type: ObjectId, ref: "Type", default: null },
-}, {
-  versionKey: false,
-  timestamp: true
-});
+const MoveSchema = new Schema(
+  {
+    accuracy: {
+      default: 0,
+      type: Number,
+    },
+    contest_combos: ContestCombo,
+    contest_effect: {
+      default: null,
+      ref: "ContestEffect",
+      type: ObjectId,
+    },
+    contest_type: {
+      default: null,
+      ref: "ContestType",
+      type: ObjectId,
+    },
+    damage_class: {
+      default: null,
+      ref: "MoveDamageClass",
+      type: ObjectId,
+    },
+    effect_chance: {
+      default: 0,
+      type: Number,
+    },
+    effect_changes: [AbilityEffectChange],
+    effect_entries: [VerboseEffect],
+    flavor_text_entries: [FlavorText1],
+    generation: {
+      default: null,
+      ref: "Generation",
+      type: ObjectId,
+    },
+    machines: [MachineVersionDetail],
+    meta: MoveMeta,
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    past_values: [MovePastValue],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    power: {
+      default: 0,
+      type: Number,
+    },
+    pp: {
+      default: 0,
+      type: Number,
+    },
+    priority: {
+      default: 0,
+      type: Number,
+    },
+    stat_changes: [MoveStatChange],
+    super_contest_effect: {
+      default: null,
+      ref: "SuperContestEffect",
+      type: ObjectId,
+    },
+    target: {
+      default: null,
+      ref: "MoveTarget",
+      type: ObjectId,
+    },
+    type: {
+      default: null,
+      ref: "Type",
+      type: ObjectId,
+    },
+  },
+  {
+    timestamp: true,
+    versionKey: false,
+  },
+);
 
 class Move {
-  static getMoves (parent, { query, skip, limit }, Models, info) {
+  static getMoves(parent, {query, skip, limit}, Models, info) {
     const projection = getProjection(info);
-    console.log(parent.moves)
-    if(parent){
-      if(parent.moves) { query = { _id: { $in: parent.moves } } }
+    console.log(parent.moves);
+    if (parent) {
+      if (parent.moves) {
+        query = {_id: {$in: parent.moves}};
+      }
     }
 
-    return Models.move.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit).sort({pokeapi_id: 1})
-        .then(data => data)
-        .catch(error => error)
+    return Models.move
+      .find(query)
+      .select(projection)
+      .skip(skip)
+      .limit(limit)
+      .sort({pokeapi_id: 1})
+      .then((data) => data)
+      .catch((error) => error);
   }
 
-  static getMove (parent, {id}, Models, info) {
+  static getMove(parent, {id}, Models, info) {
     const projection = getProjection(info);
 
-      if (parent) {
-        if (parent._id) { id = parent._id }
-        if (parent.move) { id = parent.move }
-        if (parent.known_move) { id = parent.known_move }
+    if (parent) {
+      if (parent._id) {
+        id = parent._id;
       }
+      if (parent.move) {
+        id = parent.move;
+      }
+      if (parent.known_move) {
+        id = parent.known_move;
+      }
+    }
 
-    return Models.move.findById({_id: id})
-        .select(projection)
-        .then(data => data)
-        .catch(error => error)
+    return Models.move
+      .findById({_id: id})
+      .select(projection)
+      .then((data) => data)
+      .catch((error) => error);
   }
 }
 
-MoveSchema.pre('save', function(next) {
+MoveSchema.pre("save", function (next) {
   next();
 });
 
-MoveSchema.virtual('id').get(function () {
+MoveSchema.virtual("id").get(function () {
   return this._id;
 });
 
-MoveSchema.set('toJSON', {
-  virtuals: true
+MoveSchema.set("toJSON", {
+  virtuals: true,
 });
 
-MoveSchema.loadClass(Move)
+MoveSchema.loadClass(Move);
 
-module.exports = mongo.model('Move', MoveSchema);
-
-// module.exports.fields = fields;
-module.exports.ObjectId = mongo.Types.ObjectId;
+export default mongo.model("Move", MoveSchema);

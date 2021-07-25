@@ -1,6 +1,6 @@
-const models = require('../../models')
+import * as models from "../../models";
 
-module.exports = {
+export default {
   Generation: {
     abilities: models.ability.getAbilities,
     main_region: models.region.getRegion,
@@ -30,4 +30,4 @@ module.exports = {
     regions: models.region.getRegions,
     versions: models.version.getVersions,
   },
-}
+};

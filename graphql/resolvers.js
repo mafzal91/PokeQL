@@ -1,178 +1,129 @@
-var models = require('../models')
+import * as models from "../models";
 
-module.exports = {
+import berry from "./resolvers/berry";
+import contest from "./resolvers/contest";
+import encounter from "./resolvers/encounter";
+import evolution from "./resolvers/evolution";
+import game from "./resolvers/game";
+import item from "./resolvers/item";
+import location from "./resolvers/location";
+import machine from "./resolvers/machine";
+import move from "./resolvers/move";
+import pokemon from "./resolvers/pokemon";
+import commonModels from "./resolvers/commonModels";
 
-  Query:{
-    Berry: models.berry.getBerry,
+export default {
+  Query: {
+    Abilities: models.ability.getAbilities,
+    Ability: models.ability.getAbility,
     Berries: models.berry.getBerries,
-
+    Berry: models.berry.getBerry,
     BerryFirmness: models.berryFirmness.getBerryFirmness,
     BerryFirmnesses: models.berryFirmness.getBerryFirmnesses,
-
     BerryFlavor: models.berryFlavor.getBerryFlavor,
     BerryFlavors: models.berryFlavor.getBerryFlavors,
-
-    ContestType: models.contestType.getContestType,
-    ContestTypes: models.contestType.getContestTypes,
-
-    ContestEffect: models.contestEffect.getContestEffect,
-    ContestEffects: models.contestEffect.getContestEffects,
-
-    SuperContestEffect: models.superContestEffect.getSuperContestEffect,
-    SuperContestEffects: models.superContestEffect.getSuperContestEffects,
-
-    EncounterMethod: models.encounterMethod.getEncounterMethod,
-    EncounterMethods: models.encounterMethod.getEncounterMethods,
-
-    EncounterCondition: models.encounterCondition.getEncounterCondition,
-    EncounterConditions: models.encounterCondition.getEncounterConditions,
-
-    EncounterConditionValue: models.encounterConditionValue.getEncounterConditionValue,
-    EncounterConditionValues: models.encounterConditionValue.getEncounterConditionValues,
-
-    EvolutionChain: models.evolutionChain.getEvolutionChain,
-    EvolutionChains: models.evolutionChain.getEvolutionChains,
-
-    EvolutionTrigger: models.evolutionTrigger.getEvolutionTrigger,
-    EvolutionTriggers: models.evolutionTrigger.getEvolutionTriggers,
-
-    Generation: models.generation.getGeneration,
-    Generations: models.generation.getGenerations,
-
-    Pokedex: models.pokedex.getPokedex,
-    Pokedexes: models.pokedex.getPokedexes,
-
-    Version: models.version.getVersion,
-    Versions: models.version.getVersions,
-
-    VersionGroup: models.versionGroup.getVersionGroup,
-    VersionGroups: models.versionGroup.getVersionGroups,
-
-    Item: models.item.getItem,
-    Items: models.item.getItems,
-
-    ItemAttribute: models.itemAttribute.getItemAttribute,
-    ItemAttributes: models.itemAttribute.getItemAttributes,
-
-    ItemCategory: models.itemCategory.getItemCategory,
-    ItemCategories: models.itemCategory.getItemCategories,
-
-    ItemFlingEffect: models.itemFlingEffect.getItemFlingEffect,
-    ItemFlingEffects: models.itemFlingEffect.getItemFlingEffects,
-
-    ItemPocket: models.itemPocket.getItemPocket,
-    ItemPockets: models.itemPocket.getItemPockets,
-
-    Location: models.location.getLocation,
-    Locations: models.location.getLocations,
-
-    LocationArea: models.locationArea.getLocationArea,
-    LocationAreas: models.locationArea.getLocationAreas,
-
-    PalParkArea: models.palParkArea.getPalParkArea,
-    PalParkAreas: models.palParkArea.getPalParkAreas,
-
-    Region: models.region.getRegion,
-    Regions: models.region.getRegions,
-
-    Machine: models.machine.getMachine,
-    Machines: models.machine.getMachines,
-
-    Move: models.move.getMove,
-    Moves: models.move.getMoves,
-
-    MoveAilment: models.moveAilment.getMoveAilment,
-    MoveAilments: models.moveAilment.getMoveAilments,
-
-    MoveBattleStyle: models.moveBattleStyle.getMoveBattleStyle,
-    MoveBattleStyles: models.moveBattleStyle.getMoveBattleStyles,
-
-    MoveCategory: models.moveCategory.getMoveCategory,
-    MoveCategories: models.moveCategory.getMoveCategories,
-
-    MoveDamageClass: models.moveDamageClass.getMoveDamageClass,
-    MoveDamageClasses: models.moveDamageClass.getMoveDamageClasses,
-
-    MoveLearnMethod: models.moveLearnMethod.getMoveLearnMethod,
-    MoveLearnMethods: models.moveLearnMethod.getMoveLearnMethods,
-
-    MoveTarget: models.moveTarget.getMoveTarget,
-    MoveTargets: models.moveTarget.getMoveTargets,
-
-    Ability: models.ability.getAbility,
-    Abilities: models.ability.getAbilities,
-
     Characteristic: models.characteristic.getCharacteristic,
     Characteristics: models.characteristic.getCharacteristics,
-
+    ContestEffect: models.contestEffect.getContestEffect,
+    ContestEffects: models.contestEffect.getContestEffects,
+    ContestType: models.contestType.getContestType,
+    ContestTypes: models.contestType.getContestTypes,
     EggGroup: models.eggGroup.getEggGroup,
     EggGroups: models.eggGroup.getEggGroups,
-
+    EncounterCondition: models.encounterCondition.getEncounterCondition,
+    EncounterConditionValue:
+      models.encounterConditionValue.getEncounterConditionValue,
+    EncounterConditionValues:
+      models.encounterConditionValue.getEncounterConditionValues,
+    EncounterConditions: models.encounterCondition.getEncounterConditions,
+    EncounterMethod: models.encounterMethod.getEncounterMethod,
+    EncounterMethods: models.encounterMethod.getEncounterMethods,
+    EvolutionChain: models.evolutionChain.getEvolutionChain,
+    EvolutionChains: models.evolutionChain.getEvolutionChains,
+    EvolutionTrigger: models.evolutionTrigger.getEvolutionTrigger,
+    EvolutionTriggers: models.evolutionTrigger.getEvolutionTriggers,
     Gender: models.gender.getGender,
     Genders: models.gender.getGenders,
-
+    Generation: models.generation.getGeneration,
+    Generations: models.generation.getGenerations,
     GrowthRate: models.growthRate.getGrowthRate,
     GrowthRates: models.growthRate.getGrowthRates,
-
-    Nature: models.nature.getNature,
-    Natures: models.nature.getNatures,
-
-    PokeathlonStat: models.pokeathlonStat.getPokeathlonStat,
-    PokeathlonStats: models.pokeathlonStat.getPokeathlonStats,
-
-    Pokemon: models.pokemon.getPokemon,
-    Pokemons: models.pokemon.getPokemons,
-
-    PokemonColor: models.pokemonColor.getPokemonColor,
-    PokemonColors: models.pokemonColor.getPokemonColors,
-
-    PokemonForm: models.pokemonForm.getPokemonForm,
-    PokemonForms: models.pokemonForm.getPokemonForms,
-
-    PokemonHabitat: models.pokemonHabitat.getPokemonHabitat,
-    PokemonHabitats: models.pokemonHabitat.getPokemonHabitats,
-
-    PokemonShape: models.pokemonShape.getPokemonShape,
-    PokemonShapes: models.pokemonShape.getPokemonShapes,
-
-    PokemonSpecies: models.pokemonSpecies.getPokemonSpecies,
-    PokemonSpeciess: models.pokemonSpecies.getPokemonSpeciess,
-
-    Stat: models.stat.getStat,
-    Stats: models.stat.getStats,
-
-    Type: models.type.getType,
-    Types: models.type.getTypes,
-
+    Item: models.item.getItem,
+    ItemAttribute: models.itemAttribute.getItemAttribute,
+    ItemAttributes: models.itemAttribute.getItemAttributes,
+    ItemCategories: models.itemCategory.getItemCategories,
+    ItemCategory: models.itemCategory.getItemCategory,
+    ItemFlingEffect: models.itemFlingEffect.getItemFlingEffect,
+    ItemFlingEffects: models.itemFlingEffect.getItemFlingEffects,
+    ItemPocket: models.itemPocket.getItemPocket,
+    ItemPockets: models.itemPocket.getItemPockets,
+    Items: models.item.getItems,
     Language: models.language.getLanguage,
     Languages: models.language.getLanguages,
-
+    Location: models.location.getLocation,
+    LocationArea: models.locationArea.getLocationArea,
+    LocationAreas: models.locationArea.getLocationAreas,
+    Locations: models.location.getLocations,
+    Machine: models.machine.getMachine,
+    Machines: models.machine.getMachines,
+    Move: models.move.getMove,
+    MoveAilment: models.moveAilment.getMoveAilment,
+    MoveAilments: models.moveAilment.getMoveAilments,
+    MoveBattleStyle: models.moveBattleStyle.getMoveBattleStyle,
+    MoveBattleStyles: models.moveBattleStyle.getMoveBattleStyles,
+    MoveCategories: models.moveCategory.getMoveCategories,
+    MoveCategory: models.moveCategory.getMoveCategory,
+    MoveDamageClass: models.moveDamageClass.getMoveDamageClass,
+    MoveDamageClasses: models.moveDamageClass.getMoveDamageClasses,
+    MoveLearnMethod: models.moveLearnMethod.getMoveLearnMethod,
+    MoveLearnMethods: models.moveLearnMethod.getMoveLearnMethods,
+    MoveTarget: models.moveTarget.getMoveTarget,
+    MoveTargets: models.moveTarget.getMoveTargets,
+    Moves: models.move.getMoves,
+    Nature: models.nature.getNature,
+    Natures: models.nature.getNatures,
+    PalParkArea: models.palParkArea.getPalParkArea,
+    PalParkAreas: models.palParkArea.getPalParkAreas,
+    PokeathlonStat: models.pokeathlonStat.getPokeathlonStat,
+    PokeathlonStats: models.pokeathlonStat.getPokeathlonStats,
+    Pokedex: models.pokedex.getPokedex,
+    Pokedexes: models.pokedex.getPokedexes,
+    Pokemon: models.pokemon.getPokemon,
+    PokemonColor: models.pokemonColor.getPokemonColor,
+    PokemonColors: models.pokemonColor.getPokemonColors,
+    PokemonForm: models.pokemonForm.getPokemonForm,
+    PokemonForms: models.pokemonForm.getPokemonForms,
+    PokemonHabitat: models.pokemonHabitat.getPokemonHabitat,
+    PokemonHabitats: models.pokemonHabitat.getPokemonHabitats,
+    PokemonShape: models.pokemonShape.getPokemonShape,
+    PokemonShapes: models.pokemonShape.getPokemonShapes,
+    PokemonSpecies: models.pokemonSpecies.getPokemonSpecies,
+    PokemonSpeciess: models.pokemonSpecies.getPokemonSpeciess,
+    Pokemons: models.pokemon.getPokemons,
+    Region: models.region.getRegion,
+    Regions: models.region.getRegions,
+    Stat: models.stat.getStat,
+    Stats: models.stat.getStats,
+    SuperContestEffect: models.superContestEffect.getSuperContestEffect,
+    SuperContestEffects: models.superContestEffect.getSuperContestEffects,
+    Type: models.type.getType,
+    Types: models.type.getTypes,
+    Version: models.version.getVersion,
+    VersionGroup: models.versionGroup.getVersionGroup,
+    VersionGroups: models.versionGroup.getVersionGroups,
+    Versions: models.version.getVersions,
   },
-
-  ...require('./resolvers/berry'),
-
-  ...require('./resolvers/contest'),
-
-  ...require('./resolvers/encounter'),
-
-  ...require('./resolvers/evolution'),
-
-  ...require('./resolvers/game'),
-
-  ...require('./resolvers/item'),
-
-  ...require('./resolvers/location'),
-
-  ...require('./resolvers/machine'),
-
-  ...require('./resolvers/move'),
-
-  ...require('./resolvers/pokemon'),
-
-
-  ...require('./resolvers/commonModels'),
-
-
+  ...berry,
+  ...commonModels,
+  ...contest,
+  ...encounter,
+  ...evolution,
+  ...game,
+  ...item,
+  ...location,
+  ...machine,
+  ...move,
+  ...pokemon,
 
   // Type: {
   //   generation: models.generation.getGeneration
@@ -186,4 +137,4 @@ module.exports = {
   //   no_damage_to:(parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'no_damage_to'),
   //   double_damage_to:(parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'double_damage_to'),
   // },
-}
+};

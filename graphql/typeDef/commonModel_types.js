@@ -1,4 +1,4 @@
-module.exports = `
+export default `
   type Description {
     description: String!
     language: Language!
@@ -59,4 +59,4 @@ module.exports = `
     language: Language!
     version_group: VersionGroup!
   }
-`
+`;

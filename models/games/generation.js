@@ -1,49 +1,99 @@
-var mongo = require('../../services/mongodb');
-var { getProjection } = require('../../utils');
-var {Name} = require('../commonModels')
+import mongo from "../../services/mongodb.js";
+import {getProjection} from "../../utils/index.js";
+import {Name} from "../commonModels.js";
 
-var Schema = mongo.Schema;
-var ObjectId = Schema.ObjectId;
+const Schema = mongo.Schema;
+const ObjectId = Schema.ObjectId;
 
-var GenerationSchema = new Schema({
-  pokeapi_id:         { type: Number, required: true },
-  name:               { type: String, required: true },
-  abilities:          [{ type: ObjectId, ref: 'Ability', default: null}],
-  names:              [Name],
-  main_region:        { type: ObjectId, ref: 'Region', default: null},
-  moves:              [{ type: ObjectId, ref: 'Move', default: null}],
-  pokemon_species:    [{ type: ObjectId, ref: 'PokemonSpecies', default: null}],
-  types:              [{ type: ObjectId, ref: 'Types', default: null}],
-  version_groups:     [{ type: ObjectId, ref: 'VersionGroups', default: null}],
-}, {
-  versionKey: false,
-  timestamp: true
-});
+const GenerationSchema = new Schema(
+  {
+    abilities: [
+      {
+        default: null,
+        ref: "Ability",
+        type: ObjectId,
+      },
+    ],
+    main_region: {
+      default: null,
+      ref: "Region",
+      type: ObjectId,
+    },
+    moves: [
+      {
+        default: null,
+        ref: "Move",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species: [
+      {
+        default: null,
+        ref: "PokemonSpecies",
+        type: ObjectId,
+      },
+    ],
+    types: [
+      {
+        default: null,
+        ref: "Types",
+        type: ObjectId,
+      },
+    ],
+    version_groups: [
+      {
+        default: null,
+        ref: "VersionGroups",
+        type: ObjectId,
+      },
+    ],
+  },
+  {
+    timestamp: true,
+    versionKey: false,
+  },
+);
 
 class Generation {
-  static getGenerations (parent, { query, skip, limit }, Models, info) {
+  static getGenerations(parent, {query, skip, limit}, Models, info) {
     const projection = getProjection(info);
 
-    return Models.generation.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit).sort({pokeapi_id: 1})
-        .then(data => data)
-        .catch(error => error)
+    return Models.generation
+      .find(query)
+      .select(projection)
+      .skip(skip)
+      .limit(limit)
+      .sort({pokeapi_id: 1})
+      .then((data) => data)
+      .catch((error) => error);
   }
 
-  static getGeneration (parent, { id }, Models, info) {
+  static getGeneration(parent, {id}, Models, info) {
     const projection = getProjection(info);
 
-      if (parent) {
-        if (parent.generation) { id = parent.generation }
-        if (parent.main_generation) { id = parent.main_generation }
+    if (parent) {
+      if (parent.generation) {
+        id = parent.generation;
       }
+      if (parent.main_generation) {
+        id = parent.main_generation;
+      }
+    }
 
-    return Models.generation.findById(id)
-        .select(projection)
-        .then(data => data)
-        .catch(error => error)
+    return Models.generation
+      .findById(id)
+      .select(projection)
+      .then((data) => data)
+      .catch((error) => error);
   }
 }
 
@@ -55,15 +105,13 @@ class Generation {
 //   return this._id;
 // });
 
-GenerationSchema.set('toJSON', {
+GenerationSchema.set("toJSON", {
   virtuals: true,
   transform: (doc, ret, options) => {
     delete ret._id;
   },
 });
 
-GenerationSchema.loadClass(Generation)
+GenerationSchema.loadClass(Generation);
 
-module.exports = mongo.model('Generation', GenerationSchema);
-
-module.exports.ObjectId = mongo.Types.ObjectId;
+export default mongo.model("Generation", GenerationSchema);

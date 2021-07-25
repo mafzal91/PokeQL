@@ -1,39 +1,41 @@
-var config = require('./config')
-var express = require('express');
-var graphqlHTTP = require('express-graphql');
-var { buildSchema } = require('graphql');
-var { makeExecutableSchema } = require('graphql-tools');
-var app = express();
-
-var models = require('./models')
-var types = require('./graphql/types')
-var resolvers = require('./graphql/resolvers')
+import express from "express";
+import graphqlHTTP from "express-graphql";
+// import {buildSchema} from "graphql";
+import {makeExecutableSchema} from "graphql-tools";
+import config from "./configs/index.js";
+import * as models from "./models/index.js";
+import types from "./graphql/types.js";
+import resolvers from "./graphql/resolvers.js";
 // console.log(models)
 
-console.log(config)
-console.log(config)
+const app = express();
 const executableSchema = makeExecutableSchema({
+  resolvers,
   typeDefs: types,
-  resolvers
 });
 
-app.use('*', (req, res, next) => {
+app.use("*", (req, res, next) => {
   console.log(`HOST ${req.headers.host} [${req.method}] ${req.originalUrl}`);
-  next()
+  next();
 });
-app.use('/heyo', (req, res) => {
-  res.json({ hello: "world"})
+app.use("/heyo", (req, res) => {
+  res.json({hello: "world"});
 });
-app.use('/', graphqlHTTP(req => {
-  return {
-    // schema: buildSchema(types),
-    schema: executableSchema,
-    rootValue: resolvers,
-    graphiql: true,
-    context: models,
+app.use(
+  "/",
+  graphqlHTTP(() => {
+    return {
+      // schema: buildSchema(types),
+      context: models,
+      graphiql: true,
+      rootValue: resolvers,
+      schema: executableSchema,
+    };
+  }),
+);
 
-  }
-}));
-
-app.listen(config.port);
-console.log(`Running a GraphQL API server at localhost:${config.port}/graphql`);
+app.listen(config.port, () => {
+  console.log(
+    `Running a GraphQL API server at localhost:${config.port}/graphql`,
+  );
+});

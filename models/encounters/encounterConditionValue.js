@@ -1,46 +1,56 @@
-var mongo = require('../../services/mongodb');
-var { getProjection } = require('../../utils');
+import mongo from "../../services/mongodb.js";
+import {getProjection} from "../../utils/index.js";
 
-var EncounterConditionValueSchema = require('./encounterSchemas').EncounterConditionValue;
+import {EncounterConditionValue as EncounterConditionValueSchema} from "./encounterSchemas.js";
 
 class EncounterConditionValue {
-  static getEncounterConditionValues (parent, { query, skip, limit }, Models, info) {
+  static getEncounterConditionValues(
+    parent,
+    {query, skip, limit},
+    Models,
+    info,
+  ) {
     const projection = getProjection(info);
 
-    console.log("COndition value", parent.condition_values)
-    if(parent){
-      if(parent.condition_values) query = { _id: { $in: parent.condition_values } }
+    console.log("COndition value", parent.condition_values);
+    if (parent) {
+      if (parent.condition_values)
+        query = {_id: {$in: parent.condition_values}};
     }
-    if(query){
-      return Models.encounterConditionValue.find(query)
-          .select(projection)
-          .skip(skip)
-          .limit(limit).sort({pokeapi_id: 1})
-          .then(data => data)
-          .catch(error => error)
+    if (query) {
+      return Models.encounterConditionValue
+        .find(query)
+        .select(projection)
+        .skip(skip)
+        .limit(limit)
+        .sort({pokeapi_id: 1})
+        .then((data) => data)
+        .catch((error) => error);
     } else {
-      return null
+      return null;
     }
   }
 
-  static getEncounterConditionValue (parent, {id}, Models, info) {
+  static getEncounterConditionValue(parent, {id}, Models, info) {
     const projection = getProjection(info);
 
-      if (parent) {
-        if (parent._id) {
-          id = parent._id
-        }
+    if (parent) {
+      if (parent._id) {
+        id = parent._id;
       }
+    }
 
-    return Models.encounterConditionValue.findById(id)
-        .select(projection)
-        .then(data => data)
-        .catch(error => error)
+    return Models.encounterConditionValue
+      .findById(id)
+      .select(projection)
+      .then((data) => data)
+      .catch((error) => error);
   }
 }
 
-EncounterConditionValueSchema.loadClass(EncounterConditionValue)
+EncounterConditionValueSchema.loadClass(EncounterConditionValue);
 
-module.exports = mongo.model('EncounterConditionValue', EncounterConditionValueSchema);
-
-module.exports.ObjectId = mongo.Types.ObjectId;
+export default mongo.model(
+  "EncounterConditionValue",
+  EncounterConditionValueSchema,
+);
