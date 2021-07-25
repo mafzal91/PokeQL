@@ -1,9 +1,0 @@
-[
-  {
-    "name": "Pokemon Graphql",
-    "script": "./index.js",
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
-]
