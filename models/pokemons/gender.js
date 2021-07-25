@@ -1,7 +1,7 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 
-const GenderSchema = require("./pokemonSchemas").Gender;
+import {Gender as GenderSchema} from "./pokemonSchemas.js";
 
 class Gender {
   static getGenders(parent, {query, skip, limit}, Models, info) {

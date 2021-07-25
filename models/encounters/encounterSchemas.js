@@ -1,7 +1,7 @@
 import mongo from "../../services/mongodb.js";
 import {Name} from "../commonModels.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 const jsonOptions = {
   virtuals: true,
 };

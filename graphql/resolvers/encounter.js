@@ -1,13 +1,11 @@
-import * as models from "../../models";
+import * as models from "../../models/index.js";
 
 export default {
-  EncounterMethod: {},
-
   EncounterCondition: {
     values: models.encounterConditionValue.getEncounterConditionValues,
   },
-
   EncounterConditionValue: {
     condition: models.encounterCondition.getEncounterCondition,
   },
+  EncounterMethod: {},
 };

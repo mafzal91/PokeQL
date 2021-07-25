@@ -1,16 +1,16 @@
-import * as models from "../models";
+import * as models from "../models/index.js";
 
-import berry from "./resolvers/berry";
-import contest from "./resolvers/contest";
-import encounter from "./resolvers/encounter";
-import evolution from "./resolvers/evolution";
-import game from "./resolvers/game";
-import item from "./resolvers/item";
-import location from "./resolvers/location";
-import machine from "./resolvers/machine";
-import move from "./resolvers/move";
-import pokemon from "./resolvers/pokemon";
-import commonModels from "./resolvers/commonModels";
+import berry from "./resolvers/berry.js";
+import contest from "./resolvers/contest.js";
+import encounter from "./resolvers/encounter.js";
+import evolution from "./resolvers/evolution.js";
+import game from "./resolvers/game.js";
+import item from "./resolvers/item.js";
+import location from "./resolvers/location.js";
+import machine from "./resolvers/machine.js";
+import move from "./resolvers/move.js";
+import pokemon from "./resolvers/pokemon.js";
+import commonModels from "./resolvers/commonModels.js";
 
 export default {
   Query: {

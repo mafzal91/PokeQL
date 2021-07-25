@@ -1,7 +1,7 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const BerryFlavor = new Schema(
   {
@@ -73,8 +73,8 @@ const BerrySchema = new Schema(
     },
   },
   {
-    versionKey: false,
     timestamp: true,
+    versionKey: false,
   },
 );
 

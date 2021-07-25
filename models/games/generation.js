@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {Name} from "../commonModels.js";
 
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const GenerationSchema = new Schema(
   {
@@ -106,10 +106,10 @@ class Generation {
 // });
 
 GenerationSchema.set("toJSON", {
-  virtuals: true,
-  transform: (doc, ret, options) => {
+  transform: (doc, ret) => {
     delete ret._id;
   },
+  virtuals: true,
 });
 
 GenerationSchema.loadClass(Generation);

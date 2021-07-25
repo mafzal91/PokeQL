@@ -1,18 +1,33 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const MachineSchema = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    item: {type: ObjectId, ref: "Item", default: null},
-    move: {type: ObjectId, ref: "Move", default: null},
-    version_group: {type: ObjectId, ref: "VersionGroup", default: null},
+    item: {
+      default: null,
+      ref: "Item",
+      type: ObjectId,
+    },
+    move: {
+      default: null,
+      ref: "Move",
+      type: ObjectId,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    version_group: {
+      default: null,
+      ref: "VersionGroup",
+      type: ObjectId,
+    },
   },
   {
-    versionKey: false,
     timestamp: true,
+    versionKey: false,
   },
 );
 
@@ -32,7 +47,6 @@ class Machine {
 
   static getMachine(parent, {id}, Models, info) {
     const projection = getProjection(info);
-    console.log(parent);
     if (parent) {
       if (parent._id) {
         id = parent._id;

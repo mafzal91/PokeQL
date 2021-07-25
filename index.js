@@ -10,12 +10,12 @@ if (!env) {
   process.env.NODE_ENV = "development";
 }
 
-dotenv.config({path: path.resolve(__dirname, ".env")});
+dotenv.config({path: path.resolve(import.meta.url, ".env")});
 
 const envFile = ["local", "test"].includes(env) ? "" : `.${env}`;
 if (!envFile) {
   const envConfig = dotenv.parse(
-    readFileSync(path.resolve(__dirname, `.env${envFile}`)),
+    readFileSync(path.resolve(import.meta.url, `.env${envFile}`)),
   );
   for (const k in envConfig) {
     process.env[k] = envConfig[k];

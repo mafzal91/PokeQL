@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const EvolutionChainSchema = require("./evolutionSchemas").EvolutionChain;
+import {EvolutionChain as EvolutionChainSchema} from "./evolutionSchemas.js";
 
 class EvolutionChain {
   static getEvolutionChains(parent, {query, skip, limit}, Models, info) {

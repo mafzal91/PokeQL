@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const ItemPocketSchema = require("./itemSchemas").ItemPocket;
+import {ItemPocket as ItemPocketSchema} from "./itemSchemas.js";
 
 class ItemPocket {
   static getItemPockets(parent, {query, skip, limit}, Models, info) {

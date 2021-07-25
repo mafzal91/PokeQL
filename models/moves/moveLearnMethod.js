@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const MoveLearnMethodSchema = require("./MoveSchemas").MoveLearnMethod;
+import {MoveLearnMethod as MoveLearnMethodSchema} from "./MoveSchemas.js";
 
 class MoveLearnMethod {
   static getMoveLearnMethods(parent, {query, skip, limit}, Models, info) {

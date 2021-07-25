@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {Description, Name} from "../commonModels.js";
 
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const PokemonEntry = new Schema(
   {
@@ -53,8 +53,8 @@ const PokedexSchema = new Schema(
     ],
   },
   {
-    versionKey: false,
     timestamp: true,
+    versionKey: false,
   },
 );
 

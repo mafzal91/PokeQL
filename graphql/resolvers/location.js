@@ -1,29 +1,26 @@
-import * as models from "../../models";
+import * as models from "../../models/index.js";
 
 export default {
-  Location: {
-    region: models.region.getRegion,
-    areas: models.locationArea.getLocationAreas,
-  },
-
-  EncounterVersionDetails: {
-    version: models.version.getVersion,
-  },
   EncounterMethodRate: {
     encounter_method: models.encounterMethod.getEncounterMethod,
   },
-  PokemonEncounter: {
-    pokemon: models.pokemon.getPokemon,
+  EncounterVersionDetails: {
+    version: models.version.getVersion,
+  },
+  Location: {
+    areas: models.locationArea.getLocationAreas,
+    region: models.region.getRegion,
   },
   LocationArea: {
     location: models.location.getLocation,
   },
-
+  PalParkArea: {},
   PalParkEncounterSpecies: {
     pokemon_species: models.pokemonSpecies.getPokemonSpecies,
   },
-  PalParkArea: {},
-
+  PokemonEncounter: {
+    pokemon: models.pokemon.getPokemon,
+  },
   Region: {
     locations: models.location.getLocations,
     main_generation: models.generation.getGeneration,

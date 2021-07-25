@@ -1,27 +1,47 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const ContestName = new Schema(
   {
-    name: {type: String, default: ""},
-    color: {type: String, default: ""},
-    language: {type: ObjectId, ref: "Language", default: null},
+    color: {
+      default: "",
+      type: String,
+    },
+    language: {
+      default: null,
+      ref: "Language",
+      type: ObjectId,
+    },
+    name: {
+      default: "",
+      type: String,
+    },
   },
   {_id: false},
 );
 
 const ContestTypeSchema = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    berry_flavor: {type: ObjectId, ref: "BerryFlavor", default: null},
+    berry_flavor: {
+      default: null,
+      ref: "BerryFlavor",
+      type: ObjectId,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
     names: [ContestName],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   {
-    versionKey: false,
     timestamp: true,
+    versionKey: false,
   },
 );
 

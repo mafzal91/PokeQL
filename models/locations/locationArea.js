@@ -1,5 +1,5 @@
 import mongo from "../../services/mongodb.js";
-const LocationAreaSchema = require("./locationSchemas").LocationArea;
+import {LocationArea as LocationAreaSchema} from "./locationSchemas.js";
 import {getProjection} from "../../utils/index.js";
 
 class LocationArea {

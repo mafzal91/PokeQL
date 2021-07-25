@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const ItemCategorySchema = require("./itemSchemas").ItemCategory;
+import {ItemCategory as ItemCategorySchema} from "./itemSchemas.js";
 
 class ItemCategory {
   static getItemCategories(parent, {query, skip, limit}, Models, info) {

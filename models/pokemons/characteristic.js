@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const CharacteristicSchema = require("./pokemonSchemas").Characteristic;
+import {Characteristic as CharacteristicSchema} from "./pokemonSchemas.js";
 
 class Characteristic {
   static getCharacteristics(parent, {query, skip, limit}, Models, info) {

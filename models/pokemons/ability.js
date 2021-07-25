@@ -1,5 +1,5 @@
 import mongo from "../../services/mongodb.js";
-const AbilitySchema = require("./pokemonSchemas").Ability;
+import {Ability as AbilitySchema} from "./pokemonSchemas.js";
 import {getProjection} from "../../utils/index.js";
 
 class Ability {
@@ -47,10 +47,10 @@ AbilitySchema.virtual("id").get(function () {
 });
 
 AbilitySchema.set("toJSON", {
-  virtuals: true,
-  transform: (doc, ret, options) => {
+  transform: (doc, ret) => {
     delete ret._id;
   },
+  virtuals: true,
 });
 
 AbilitySchema.loadClass(Ability);

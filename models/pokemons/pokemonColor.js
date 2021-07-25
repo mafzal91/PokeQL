@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const PokemonColorSchema = require("./pokemonSchemas").PokemonColor;
+import {PokemonColor as PokemonColorSchema} from "./pokemonSchemas.js";
 
 class PokemonColor {
   static getPokemonColors(parent, {query, skip, limit}, Models, info) {

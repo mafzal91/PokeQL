@@ -2,7 +2,6 @@ import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 import {Effect, FlavorText} from "../commonModels.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
 
 const ContestEffectSchema = new Schema(
   {

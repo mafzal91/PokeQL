@@ -1,7 +1,7 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 
-const GrowthRateSchema = require("./pokemonSchemas").GrowthRate;
+import {GrowthRate as GrowthRateSchema} from "./pokemonSchemas.js";
 
 class GrowthRate {
   static getGrowthRates(parent, {query, skip, limit}, Models, info) {

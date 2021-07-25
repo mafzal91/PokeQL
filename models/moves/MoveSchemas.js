@@ -1,74 +1,135 @@
 import mongo from "../../services/mongodb.js";
-import {getProjection} from "../../utils/index.js";
 import {Name, Description} from "../commonModels.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 const jsonOptions = {
   virtuals: true,
 };
 const schemaOptions = {
-  versionKey: false,
   timestamp: true,
+  versionKey: false,
 };
 
 const MoveAilment = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, default: ""},
+    moves: [
+      {
+        ref: "Move",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      default: "",
+      type: String,
+    },
     names: [Name],
-    moves: [{type: ObjectId, ref: "Move"}],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
 
 const MoveBattleStyle = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
 
 const MoveCategory = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    moves: [{type: ObjectId, ref: "Move"}],
     descriptions: [Description],
+    moves: [
+      {
+        ref: "Move",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
 
 const MoveDamageClass = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
     descriptions: [Description],
-    moves: [{type: ObjectId, ref: "Move"}],
+    moves: [
+      {
+        ref: "Move",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
 
 const MoveLearnMethod = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
     descriptions: [Description],
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
-    version_groups: [{type: ObjectId, ref: "VersionGroup", default: null}],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    version_groups: [
+      {
+        default: null,
+        ref: "VersionGroup",
+        type: ObjectId,
+      },
+    ],
   },
   schemaOptions,
 );
 
 const MoveTarget = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
     descriptions: [Description],
-    moves: [{type: ObjectId, ref: "Move"}],
+    moves: [
+      {
+        ref: "Move",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
@@ -106,7 +167,7 @@ MoveDamageClass.set("toJSON", jsonOptions);
 MoveLearnMethod.set("toJSON", jsonOptions);
 MoveTarget.set("toJSON", jsonOptions);
 
-export default {
+export {
   MoveAilment,
   MoveBattleStyle,
   MoveCategory,

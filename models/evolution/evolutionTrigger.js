@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const EvolutionTriggerSchema = require("./evolutionSchemas").EvolutionTrigger;
+import {EvolutionTrigger as EvolutionTriggerSchema} from "./evolutionSchemas.js";
 
 class EvolutionTrigger {
   static getEvolutionTriggers(parent, {query, skip, limit}, Models, info) {

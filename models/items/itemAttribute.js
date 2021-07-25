@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const ItemAttributeSchema = require("./itemSchemas").ItemAttribute;
+import {ItemAttribute as ItemAttributeSchema} from "./itemSchemas.js";
 
 class ItemAttribute {
   static getItemAttributes(parent, {query, skip, limit}, Models, info) {

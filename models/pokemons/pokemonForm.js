@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const PokemonFormSchema = require("./pokemonSchemas").PokemonForm;
+import {PokemonForm as PokemonFormSchema} from "./pokemonSchemas.js";
 
 class PokemonForm {
   static getPokemonForms(parent, {query, skip, limit}, Models, info) {

@@ -1,7 +1,7 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 
-const NatureSchema = require("./pokemonSchemas").Nature;
+import {Nature as NatureSchema} from "./pokemonSchemas.js";
 
 class Nature {
   static getNatures(parent, {query, skip, limit}, Models, info) {

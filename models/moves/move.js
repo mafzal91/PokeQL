@@ -8,7 +8,7 @@ import {
 } from "../commonModels.js";
 import {AbilityEffectChange} from "../pokemons/pokemonSchemas.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const ContestCombo = new Schema(
   {

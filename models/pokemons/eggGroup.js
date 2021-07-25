@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const EggGroupSchema = require("./pokemonSchemas").EggGroup;
+import {EggGroup as EggGroupSchema} from "./pokemonSchemas.js";
 
 class EggGroup {
   static getEggGroups(parent, {query, skip, limit}, Models, info) {

@@ -1,26 +1,28 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 
-const ItemSchema = require("./itemSchemas").Item;
+import {Item as ItemSchema} from "./itemSchemas.js";
 
 class Item {
   static getItems(parent, {query, skip, limit}, Models, info) {
     const projection = getProjection(info);
 
-    if (parent) {
-      if (parent._id) {
-        id = parent._id;
-      }
-      if (parent.item) {
-        id = parent.item;
-      }
-      if (parent.baby_trigger_item) {
-        id = parent.baby_trigger_item;
-      }
-      if (parent.held_item) {
-        id = parent.held_item;
-      }
-    }
+    /** WIP */
+    // let id;
+    // if (parent) {
+    //   if (parent._id) {
+    //     id = parent._id;
+    //   }
+    //   if (parent.item) {
+    //     id = parent.item;
+    //   }
+    //   if (parent.baby_trigger_item) {
+    //     id = parent.baby_trigger_item;
+    //   }
+    //   if (parent.held_item) {
+    //     id = parent.held_item;
+    //   }
+    // }
 
     return Models.item
       .find(query)

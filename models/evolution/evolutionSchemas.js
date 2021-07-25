@@ -1,8 +1,7 @@
 import mongo from "../../services/mongodb.js";
-import {getProjection} from "../../utils/index.js";
 import {Name} from "../commonModels.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 const jsonOptions = {
   virtuals: true,
 };
@@ -168,7 +167,4 @@ EvolutionTrigger.virtual("id").get(function () {
 EvolutionChain.set("toJSON", jsonOptions);
 EvolutionTrigger.set("toJSON", jsonOptions);
 
-export default {
-  EvolutionChain,
-  EvolutionTrigger,
-};
+export {EvolutionChain, EvolutionTrigger};

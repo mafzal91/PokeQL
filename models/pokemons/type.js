@@ -1,15 +1,10 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const TypeSchema = require("./pokemonSchemas").Type;
-
-const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+import {Type as TypeSchema} from "./pokemonSchemas.js";
 
 class Type {
   static getTypes(parent, {query, skip, limit}, Models, info) {
     const projection = getProjection(info);
-
-    console.log(projection);
 
     if (parent) {
       let _id = [];
@@ -34,7 +29,6 @@ class Type {
 
       if (_id.length) query = {_id: {$in: _id}};
     }
-    console.log(query);
 
     // Models.types.aggregate([{
     //   $match: {
@@ -55,7 +49,6 @@ class Type {
   static getType(parent, {id}, Models, info) {
     const projection = getProjection(info);
     // console.log(Models)
-    const queries = [];
     if (parent) {
       if (parent._id) {
         id = parent._id;
@@ -90,10 +83,10 @@ TypeSchema.virtual("id").get(function () {
 });
 
 TypeSchema.set("toJSON", {
-  virtuals: true,
-  transform: (doc, ret, options) => {
+  transform: (doc, ret) => {
     delete ret._id;
   },
+  virtuals: true,
 });
 
 TypeSchema.loadClass(Type);

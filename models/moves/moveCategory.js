@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const MoveCategorySchema = require("./MoveSchemas").MoveCategory;
+import {MoveCategory as MoveCategorySchema} from "./MoveSchemas.js";
 
 class MoveCategory {
   static getMoveCategories(parent, {query, skip, limit}, Models, info) {

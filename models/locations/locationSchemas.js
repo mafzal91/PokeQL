@@ -1,18 +1,14 @@
 import mongo from "../../services/mongodb.js";
-import {getProjection} from "../../utils/index.js";
 import {
   Name,
   VersionEncounterDetail,
   GenerationGameIndex,
 } from "../commonModels.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
-const jsonOptions = {
-  virtuals: true,
-};
+const {ObjectId} = Schema;
 const schemaOptions = {
-  versionKey: false,
   timestamp: true,
+  versionKey: false,
 };
 const subSchemaOptions = {
   _id: false,
@@ -20,45 +16,89 @@ const subSchemaOptions = {
 
 const Location = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    region: {type: ObjectId, ref: "Region", default: null},
-    names: [Name],
+    areas: [
+      {
+        default: null,
+        ref: "LocationArea",
+        type: ObjectId,
+      },
+    ],
     game_indices: [GenerationGameIndex],
-    areas: [{type: ObjectId, ref: "LocationArea", default: null}],
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    region: {
+      default: null,
+      ref: "Region",
+      type: ObjectId,
+    },
   },
   schemaOptions,
 );
 
 const EncounterVersionDetails = new Schema(
   {
-    rate: {type: Number, required: true},
-    version: {type: ObjectId, ref: "Version", default: null},
+    rate: {
+      required: true,
+      type: Number,
+    },
+    version: {
+      default: null,
+      ref: "Version",
+      type: ObjectId,
+    },
   },
   subSchemaOptions,
 );
 const EncounterMethodRate = new Schema(
   {
-    encounter_method: {type: ObjectId, ref: "EncounterMethod", default: null},
+    encounter_method: {
+      default: null,
+      ref: "EncounterMethod",
+      type: ObjectId,
+    },
     version_details: [EncounterVersionDetails],
   },
   subSchemaOptions,
 );
 const PokemonEncounter = new Schema(
   {
-    pokemon: {type: ObjectId, ref: "Pokemon", default: null},
+    pokemon: {
+      default: null,
+      ref: "Pokemon",
+      type: ObjectId,
+    },
     version_details: [VersionEncounterDetail],
   },
   subSchemaOptions,
 );
 const LocationArea = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    game_index: {type: Number, default: null},
     encounter_method_rates: [EncounterMethodRate],
-    location: {type: ObjectId, ref: "Location", default: null},
+    game_index: {
+      default: null,
+      type: Number,
+    },
+    location: {
+      default: null,
+      ref: "Location",
+      type: ObjectId,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
     pokemon_encounters: [PokemonEncounter],
   },
   schemaOptions,
@@ -66,17 +106,33 @@ const LocationArea = new Schema(
 
 const PalParkEncounterSpecies = new Schema(
   {
-    base_score: {type: Number, required: true},
-    rate: {type: Number, required: true},
-    pokemon_species: {type: ObjectId, ref: "PokemonSpecies", default: null},
+    base_score: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species: {
+      default: null,
+      ref: "PokemonSpecies",
+      type: ObjectId,
+    },
+    rate: {
+      required: true,
+      type: Number,
+    },
   },
   subSchemaOptions,
 );
 const PalParkArea = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
     pokemon_encounters: [PalParkEncounterSpecies],
   },
   schemaOptions,
@@ -84,20 +140,40 @@ const PalParkArea = new Schema(
 
 const Region = new Schema(
   {
-    name: {type: String, required: true},
-    pokeapi_id: {type: Number, required: true},
-    locations: [{type: ObjectId, ref: "Location"}],
-    main_generation: {type: ObjectId, ref: "Generation", default: null},
+    locations: [
+      {
+        ref: "Location",
+        type: ObjectId,
+      },
+    ],
+    main_generation: {
+      default: null,
+      ref: "Generation",
+      type: ObjectId,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
-    pokedexes: [{type: ObjectId, ref: "Pokedex"}],
-    version_groups: [{type: ObjectId, ref: "VersionGroup"}],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokedexes: [
+      {
+        ref: "Pokedex",
+        type: ObjectId,
+      },
+    ],
+    version_groups: [
+      {
+        ref: "VersionGroup",
+        type: ObjectId,
+      },
+    ],
   },
   schemaOptions,
 );
 
-export default {
-  Location,
-  LocationArea,
-  PalParkArea,
-  Region,
-};
+export {Location, LocationArea, PalParkArea, Region};

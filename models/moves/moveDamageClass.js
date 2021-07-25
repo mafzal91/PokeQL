@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const MoveDamageClassSchema = require("./MoveSchemas").MoveDamageClass;
+import {MoveDamageClass as MoveDamageClassSchema} from "./MoveSchemas.js";
 
 class MoveDamageClass {
   static getMoveDamageClasses(parent, {query, skip, limit}, Models, info) {

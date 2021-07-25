@@ -1,7 +1,7 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 
-const PokeathlonStatSchema = require("./pokemonSchemas").PokeathlonStat;
+import {PokeathlonStat as PokeathlonStatSchema} from "./pokemonSchemas.js";
 
 class PokeathlonStat {
   static getPokeathlonStats(parent, {query, skip, limit}, Models, info) {

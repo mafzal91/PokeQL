@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const MoveBattleStyleSchema = require("./MoveSchemas").MoveBattleStyle;
+import {MoveBattleStyle as MoveBattleStyleSchema} from "./MoveSchemas.js";
 
 class MoveBattleStyle {
   static getMoveBattleStyles(parent, {query, skip, limit}, Models, info) {

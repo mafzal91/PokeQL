@@ -2,7 +2,6 @@ import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 import {Name} from "../commonModels.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
 
 const LanguageSchema = new Schema(
   {

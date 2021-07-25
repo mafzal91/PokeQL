@@ -10,14 +10,11 @@ import {
 } from "../commonModels.js";
 
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
-const jsonOptions = {
-  virtuals: true,
-  transform: (doc, ret, options) => delete ret._id,
-};
+const {ObjectId} = Schema;
+
 const schemaOptions = {
-  versionKey: false,
   timestamp: true,
+  versionKey: false,
 };
 const subSchemaOptions = {
   _id: false,
@@ -25,83 +22,182 @@ const subSchemaOptions = {
 
 const ItemHolderPokemonVersionDetail = new Schema(
   {
-    rarity: {type: String, default: null},
-    version: {type: ObjectId, ref: "Version", default: null},
+    rarity: {
+      default: null,
+      type: String,
+    },
+    version: {
+      default: null,
+      ref: "Version",
+      type: ObjectId,
+    },
   },
   subSchemaOptions,
 );
 const ItemHolderPokemon = new Schema(
   {
-    pokemon: {type: ObjectId, ref: "Pokemon", default: null},
-    version_details: {type: [ItemHolderPokemonVersionDetail], default: []},
+    pokemon: {
+      default: null,
+      ref: "Pokemon",
+      type: ObjectId,
+    },
+    version_details: {
+      default: [],
+      type: [ItemHolderPokemonVersionDetail],
+    },
   },
   subSchemaOptions,
 );
 const ItemSprites = new Schema(
   {
-    default: {type: String, default: null},
+    default: {
+      default: null,
+      type: String,
+    },
   },
   subSchemaOptions,
 );
 const Item = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    cost: {type: Number, default: null},
-    fling_power: {type: Number, default: null},
-    fling_effect: {type: ObjectId, ref: "ItemFlingEffect", default: null},
-    attributes: [{type: ObjectId, ref: "ItemAttribute", default: null}],
-    category: {type: ObjectId, ref: "ItemCategory", default: null},
+    attributes: [
+      {
+        default: null,
+        ref: "ItemAttribute",
+        type: ObjectId,
+      },
+    ],
+    baby_trigger_for: {
+      default: null,
+      ref: "EvolutionChain",
+      type: ObjectId,
+    },
+    category: {
+      default: null,
+      ref: "ItemCategory",
+      type: ObjectId,
+    },
+    cost: {
+      default: null,
+      type: Number,
+    },
     effect_entries: [VerboseEffect],
     flavor_text_entries: [VersionGroupFlavorText],
+    fling_effect: {
+      default: null,
+      ref: "ItemFlingEffect",
+      type: ObjectId,
+    },
+    fling_power: {
+      default: null,
+      type: Number,
+    },
     game_indices: [GenerationGameIndex],
-    names: [Name],
-    sprites: ItemSprites,
     held_by_pokemon: [ItemHolderPokemon],
-    baby_trigger_for: {type: ObjectId, ref: "EvolutionChain", default: null},
     machines: [MachineVersionDetail],
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    sprites: ItemSprites,
   },
   schemaOptions,
 );
 
 const ItemAttribute = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    items: [{type: ObjectId, ref: "Item", default: null}],
-    names: [Name],
     descriptions: [Description],
+    items: [
+      {
+        default: null,
+        ref: "Item",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
 
 const ItemCategory = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    items: [{type: ObjectId, ref: "Item", default: null}],
+    items: [
+      {
+        default: null,
+        ref: "Item",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
-    pocket: {type: ObjectId, ref: "ItemPocket", default: null},
+    pocket: {
+      default: null,
+      ref: "ItemPocket",
+      type: ObjectId,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
 
 const ItemFlingEffect = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
     effect_entries: [Effect],
-    items: [{type: ObjectId, ref: "Item", default: null}],
+    items: [
+      {
+        default: null,
+        ref: "Item",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
 
 const ItemPocket = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    categories: [{type: ObjectId, ref: "ItemCategory", default: null}],
+    categories: [
+      {
+        default: null,
+        ref: "ItemCategory",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
     names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
   },
   schemaOptions,
 );
@@ -134,10 +230,4 @@ ItemCategory.set("toJSON", subSchemaOptions);
 ItemFlingEffect.set("toJSON", subSchemaOptions);
 ItemPocket.set("toJSON", subSchemaOptions);
 
-export default {
-  Item,
-  ItemAttribute,
-  ItemCategory,
-  ItemFlingEffect,
-  ItemPocket,
-};
+export {Item, ItemAttribute, ItemCategory, ItemFlingEffect, ItemPocket};

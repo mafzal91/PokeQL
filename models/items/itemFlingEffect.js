@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const ItemFlingEffectSchema = require("./itemSchemas").ItemFlingEffect;
+import {ItemFlingEffect as ItemFlingEffectSchema} from "./itemSchemas.js";
 
 class ItemFlingEffect {
   static getItemFlingEffects(parent, {query, skip, limit}, Models, info) {

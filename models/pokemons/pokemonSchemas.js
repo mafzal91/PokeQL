@@ -9,7 +9,7 @@ import {
   Effect,
 } from "../commonModels.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 const jsonOptions = {
   virtuals: true,
 };
@@ -861,9 +861,9 @@ PokemonSpecies.set("toJSON", jsonOptions);
 Stat.set("toJSON", jsonOptions);
 Type.set("toJSON", jsonOptions);
 
-export {AbilityEffectChange};
-export default {
+export {
   Ability,
+  AbilityEffectChange,
   Characteristic,
   EggGroup,
   Gender,

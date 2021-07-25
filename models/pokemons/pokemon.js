@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {VersionGameIndex, VersionEncounterDetail} from "../commonModels.js";
 
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const LocationAreaEncounter = new Schema(
   {
@@ -256,7 +256,7 @@ class Pokemon {
     console.log(field);
 
     if (parent) {
-      Object.keys(projection).forEach((key) => {
+      Object.keys(projection).forEach(() => {
         query._id = {$in: parent[field].map((i) => Models.type.ObjectId(i))};
       });
     }
@@ -270,7 +270,6 @@ class Pokemon {
 }
 
 PokemonSchema.pre("save", function (next) {
-  console.log("heyyyo");
   const currentDate = new Date();
   this.updated_at = currentDate;
   // if created_at doesn't exist, add to that field

@@ -2,24 +2,59 @@ import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const VersionGroupSchema = new Schema(
   {
-    pokeapi_id: {type: Number, required: true},
-    name: {type: String, required: true},
-    order: {type: Number, required: true},
-    generation: {type: ObjectId, ref: "Generation", required: true},
+    generation: {
+      ref: "Generation",
+      required: true,
+      type: ObjectId,
+    },
     move_learn_methods: [
-      {type: ObjectId, ref: "MoveLearnMethod", default: null},
+      {
+        default: null,
+        ref: "MoveLearnMethod",
+        type: ObjectId,
+      },
     ],
-    pokedexes: [{type: ObjectId, ref: "Pokedex", default: null}],
-    regions: [{type: ObjectId, ref: "Region", default: null}],
-    versions: [{type: ObjectId, ref: "Version", default: null}],
+    name: {
+      required: true,
+      type: String,
+    },
+    order: {
+      required: true,
+      type: Number,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokedexes: [
+      {
+        default: null,
+        ref: "Pokedex",
+        type: ObjectId,
+      },
+    ],
+    regions: [
+      {
+        default: null,
+        ref: "Region",
+        type: ObjectId,
+      },
+    ],
+    versions: [
+      {
+        default: null,
+        ref: "Version",
+        type: ObjectId,
+      },
+    ],
   },
   {
-    versionKey: false,
     timestamp: true,
+    versionKey: false,
   },
 );
 

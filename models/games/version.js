@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {Name} from "../commonModels.js";
 
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const VersionSchema = new Schema(
   {

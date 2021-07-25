@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const PokemonHabitatSchema = require("./pokemonSchemas").PokemonHabitat;
+import {PokemonHabitat as PokemonHabitatSchema} from "./pokemonSchemas.js";
 
 class PokemonHabitat {
   static getPokemonHabitats(parent, {query, skip, limit}, Models, info) {

@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const PalParkAreaSchema = require("./locationSchemas").PalParkArea;
+import {PalParkArea as PalParkAreaSchema} from "./locationSchemas.js";
 
 class PalParkArea {
   static getPalParkAreas(parent, {query, skip, limit}, Models, info) {

@@ -2,7 +2,7 @@ import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
 import {FlavorText} from "../commonModels.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 const SuperContestEffectSchema = new Schema(
   {

@@ -1,35 +1,30 @@
-import * as models from "../../models";
+import * as models from "../../models/index.js";
 
 export default {
-  ItemHolderPokemonVersionDetail: {
-    version: models.version.getVersion,
-  },
-  ItemHolderPokemon: {
-    pokemon: models.pokemon.getPokemon,
-    // version_details: [ItemHolderPokemonVersionDetail],
-  },
-  ItemSprites: {},
   Item: {
-    fling_effect: models.itemFlingEffect.getItemFlingEffect,
     attributes: models.itemAttribute.getItemAttributes,
-    category: models.itemCategory.getItemCategory,
     baby_trigger_for: models.evolutionChain.getEvolutionChain,
+    category: models.itemCategory.getItemCategory,
+    fling_effect: models.itemFlingEffect.getItemFlingEffect,
   },
-
   ItemAttribute: {
     items: models.item.getItems,
   },
-
   ItemCategory: {
     items: models.item.getItems,
     pocket: models.itemPocket.getItemPocket,
   },
-
   ItemFlingEffect: {
     items: models.item.getItems,
   },
-
+  ItemHolderPokemon: {
+    pokemon: models.pokemon.getPokemon, // version_details: [ItemHolderPokemonVersionDetail],
+  },
+  ItemHolderPokemonVersionDetail: {
+    version: models.version.getVersion,
+  },
   ItemPocket: {
     categories: models.itemCategory.getItemCategories,
   },
+  ItemSprites: {},
 };

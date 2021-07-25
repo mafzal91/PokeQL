@@ -10,7 +10,8 @@
   "rules": {
     "strict": ["error", "never"],
     "sort-keys": ["error", "asc", {"natural": true}],
-    "no-use-before-define": ["error"]
+    "no-use-before-define": ["error"],
+    "no-unused-vars": ["warn"]
   },
   "globals":{
     "fetch": "readonly",

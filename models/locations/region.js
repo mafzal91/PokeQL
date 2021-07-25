@@ -1,6 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const RegionSchema = require("./locationSchemas").Region;
+import {Region as RegionSchema} from "./locationSchemas.js";
 
 class Region {
   static getRegions(parent, {query, skip, limit}, Models, info) {

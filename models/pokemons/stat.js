@@ -1,9 +1,6 @@
 import mongo from "../../services/mongodb.js";
 import {getProjection} from "../../utils/index.js";
-const StatSchema = require("./pokemonSchemas").Stat;
-
-const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+import {Stat as StatSchema} from "./pokemonSchemas.js";
 
 class Stat {
   static getStats(parent, {query, skip, limit}, Models, info) {
@@ -58,10 +55,10 @@ StatSchema.virtual("id").get(function () {
 });
 
 StatSchema.set("toJSON", {
-  virtuals: true,
-  transform: (doc, ret, options) => {
+  transform: (doc, ret) => {
     delete ret._id;
   },
+  virtuals: true,
 });
 
 StatSchema.loadClass(Stat);

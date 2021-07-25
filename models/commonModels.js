@@ -1,6 +1,6 @@
 import mongo from "../services/mongodb.js";
 const Schema = mongo.Schema;
-const ObjectId = Schema.ObjectId;
+const {ObjectId} = Schema;
 
 export const Description = new Schema(
   {
