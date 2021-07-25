@@ -1,6 +1,6 @@
-const models = require('../../models')
+import * as models from "../../models";
 
-module.exports = {
+export default {
   ContestCombo: {
     normal: {
       use_before: models.move.getMoves,
@@ -50,5 +50,5 @@ module.exports = {
 
   MoveTarget: {
     moves: models.move.getMoves,
-  }
-}
+  },
+};

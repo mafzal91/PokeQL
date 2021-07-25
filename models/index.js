@@ -1,60 +1,58 @@
-module.exports.berry = require('./berries/berry')
-module.exports.berryFirmness = require('./berries/berryFirmness')
-module.exports.berryFlavor = require('./berries/berryFlavor')
+export {default as berry} from "./berries/berry.js";
+export {default as berryFirmness} from "./berries/berryFirmness.js";
+export {default as berryFlavor} from "./berries/berryFlavor.js";
 
+export {default as contestType} from "./contest/contestType.js";
+export {default as contestEffect} from "./contest/contestEffect.js";
+export {default as superContestEffect} from "./contest/superContestEffect.js";
 
-module.exports.contestType = require('./contest/contestType')
-module.exports.contestEffect = require('./contest/contestEffect')
-module.exports.superContestEffect = require('./contest/superContestEffect')
+export {default as encounterMethod} from "./encounters/encounterMethod.js";
+export {default as encounterCondition} from "./encounters/encounterCondition.js";
+export {default as encounterConditionValue} from "./encounters/encounterConditionValue.js";
 
-module.exports.encounterMethod = require('./encounters/encounterMethod')
-module.exports.encounterCondition = require('./encounters/encounterCondition')
-module.exports.encounterConditionValue = require('./encounters/encounterConditionValue')
+export {default as evolutionChain} from "./evolution/evolutionChain.js";
+export {default as evolutionTrigger} from "./evolution/evolutionTrigger.js";
 
-module.exports.evolutionChain = require('./evolution/evolutionChain')
-module.exports.evolutionTrigger = require('./evolution/evolutionTrigger')
+export {default as generation} from "./games/generation.js";
+export {default as pokedex} from "./games/pokedex.js";
+export {default as version} from "./games/version.js";
+export {default as versionGroup} from "./games/versionGroup.js";
 
-module.exports.generation = require('./games/generation')
-module.exports.pokedex = require('./games/pokedex')
-module.exports.version = require('./games/version')
-module.exports.versionGroup = require('./games/versionGroup')
+export {default as item} from "./items/item.js";
+export {default as itemAttribute} from "./items/itemAttribute.js";
+export {default as itemCategory} from "./items/itemCategory.js";
+export {default as itemFlingEffect} from "./items/itemFlingEffect.js";
+export {default as itemPocket} from "./items/itemPocket.js";
 
-module.exports.item = require('./items/item')
-module.exports.itemAttribute = require('./items/itemAttribute')
-module.exports.itemCategory = require('./items/itemCategory')
-module.exports.itemFlingEffect = require('./items/itemFlingEffect')
-module.exports.itemPocket = require('./items/itemPocket')
+export {default as location} from "./locations/location.js";
+export {default as locationArea} from "./locations/locationArea.js";
+export {default as palParkArea} from "./locations/palParkArea.js";
+export {default as region} from "./locations/region.js";
 
-module.exports.location = require('./locations/location')
-module.exports.locationArea = require('./locations/locationArea')
-module.exports.palParkArea = require('./locations/palParkArea')
-module.exports.region = require('./locations/region')
+export {default as machine} from "./machines/machine.js";
 
-module.exports.machine = require('./machines/machine')
+export {default as move} from "./moves/move.js";
+export {default as moveAilment} from "./moves/moveAilment.js";
+export {default as moveBattleStyle} from "./moves/moveBattleStyle.js";
+export {default as moveCategory} from "./moves/moveCategory.js";
+export {default as moveDamageClass} from "./moves/moveDamageClass.js";
+export {default as moveLearnMethod} from "./moves/moveLearnMethod.js";
+export {default as moveTarget} from "./moves/moveTarget.js";
 
-module.exports.move = require('./moves/move')
-module.exports.moveAilment = require('./moves/moveAilment')
-module.exports.moveBattleStyle = require('./moves/moveBattleStyle')
-module.exports.moveCategory = require('./moves/moveCategory')
-module.exports.moveDamageClass = require('./moves/moveDamageClass')
-module.exports.moveLearnMethod = require('./moves/moveLearnMethod')
-module.exports.moveTarget = require('./moves/moveTarget')
+export {default as ability} from "./pokemons/ability.js";
+export {default as characteristic} from "./pokemons/characteristic.js";
+export {default as eggGroup} from "./pokemons/eggGroup.js";
+export {default as gender} from "./pokemons/gender.js";
+export {default as growthRate} from "./pokemons/growthRate.js";
+export {default as nature} from "./pokemons/nature.js";
+export {default as pokeathlonStat} from "./pokemons/pokeathlonStat.js";
+export {default as pokemon} from "./pokemons/pokemon.js";
+export {default as pokemonColor} from "./pokemons/pokemonColor.js";
+export {default as pokemonForm} from "./pokemons/pokemonForm.js";
+export {default as pokemonHabitat} from "./pokemons/pokemonHabitat.js";
+export {default as pokemonShape} from "./pokemons/pokemonShape.js";
+export {default as pokemonSpecies} from "./pokemons/pokemonSpecies.js";
+export {default as stat} from "./pokemons/stat.js";
+export {default as type} from "./pokemons/type.js";
 
-module.exports.ability = require('./pokemons/ability')
-module.exports.characteristic = require('./pokemons/characteristic')
-module.exports.eggGroup = require('./pokemons/eggGroup')
-module.exports.gender = require('./pokemons/gender')
-module.exports.growthRate = require('./pokemons/growthRate')
-module.exports.nature = require('./pokemons/nature')
-module.exports.pokeathlonStat = require('./pokemons/pokeathlonStat')
-module.exports.pokemon = require('./pokemons/pokemon')
-module.exports.pokemonColor = require('./pokemons/pokemonColor')
-module.exports.pokemonForm = require('./pokemons/pokemonForm')
-module.exports.pokemonHabitat = require('./pokemons/pokemonHabitat')
-module.exports.pokemonShape = require('./pokemons/pokemonShape')
-module.exports.pokemonSpecies = require('./pokemons/pokemonSpecies')
-module.exports.stat = require('./pokemons/stat')
-module.exports.type = require('./pokemons/type')
-
-
-module.exports.language = require('./utilities/languages')
+export {default as language} from "./utilities/languages.js";

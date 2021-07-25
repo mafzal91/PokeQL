@@ -1,51 +1,59 @@
-var mongo = require('../../services/mongodb');
-var { getProjection } = require('../../utils');
-var RegionSchema = require('./locationSchemas').Region;
+import mongo from "../../services/mongodb.js";
+import {getProjection} from "../../utils/index.js";
+const RegionSchema = require("./locationSchemas").Region;
 
 class Region {
-  static getRegions (parent, { query, skip, limit }, Models, info) {
+  static getRegions(parent, {query, skip, limit}, Models, info) {
     const projection = getProjection(info);
     // console.log(projection)
-    return Models.region.find(query)
-        .select(projection)
-        .skip(skip)
-        .limit(limit).sort({pokeapi_id: 1})
-        .then(data => data)
-        .catch(error => error)
+    return Models.region
+      .find(query)
+      .select(projection)
+      .skip(skip)
+      .limit(limit)
+      .sort({pokeapi_id: 1})
+      .then((data) => data)
+      .catch((error) => error);
   }
 
-  static getRegion (parent, {id}, Models, info) {
+  static getRegion(parent, {id}, Models, info) {
     const projection = getProjection(info);
-console.log("!!!", parent)
+    console.log("!!!", parent);
     if (parent) {
-      if (parent._id) { id = parent._id }
-      if (parent.region) { id = parent.region }
-      if (parent.main_region) { id = parent.main_region }
-      if (parent.location) { id = parent.location }
+      if (parent._id) {
+        id = parent._id;
+      }
+      if (parent.region) {
+        id = parent.region;
+      }
+      if (parent.main_region) {
+        id = parent.main_region;
+      }
+      if (parent.location) {
+        id = parent.location;
+      }
     }
 
-    return Models.region.findById(id)
-        .select(projection)
-        .then(data => data)
-        .catch(error => error)
+    return Models.region
+      .findById(id)
+      .select(projection)
+      .then((data) => data)
+      .catch((error) => error);
   }
 }
 
-RegionSchema.pre('save', function(next) {
+RegionSchema.pre("save", function (next) {
   next();
 });
 
-RegionSchema.virtual('id').get(function () {
+RegionSchema.virtual("id").get(function () {
   return this._id;
 });
 
-RegionSchema.set('toJSON', {
-  virtuals: true
+RegionSchema.set("toJSON", {
+  virtuals: true,
 });
 
-RegionSchema.loadClass(Region)
+RegionSchema.loadClass(Region);
 
-module.exports = mongo.model('Region', RegionSchema);
-
-// module.exports.fields = fields;
-module.exports.ObjectId = mongo.Types.ObjectId;
+export default mongo.model("Region", RegionSchema);

@@ -1,333 +1,868 @@
-var mongo = require('../../services/mongodb');
-var { Description, Name, GenerationGameIndex, FlavorText1, FlavorText, VersionFlavorText, VerboseEffect, Effect } = require('../commonModels')
-var Schema = mongo.Schema;
-var ObjectId = Schema.ObjectId;
-var jsonOptions = {
+import mongo from "../../services/mongodb.js";
+import {
+  Description,
+  Name,
+  GenerationGameIndex,
+  FlavorText1,
+  VersionFlavorText,
+  VerboseEffect,
+  Effect,
+} from "../commonModels.js";
+const Schema = mongo.Schema;
+const ObjectId = Schema.ObjectId;
+const jsonOptions = {
   virtuals: true,
-}
-var schemaOptions = {
+};
+const schemaOptions = {
+  timestamp: true,
   versionKey: false,
-  timestamp: true
-}
-var subSchemaOptions = {
-  _id: false
-}
+};
+const subSchemaOptions = {
+  _id: false,
+};
 
-var AbilityEffectChange = new Schema({
-  effect_entries:          [Effect],
-  version_group:           { type: ObjectId, ref: 'VersionGroup', default: null },
-},subSchemaOptions)
-var AbilityPokemon = new Schema({
-  is_hidden:               { type: Boolean, default: false },
-  slot:                    { type: Number, default: null },
-  pokemon:                 { type: ObjectId, ref:"Pokemon", default: null }
-},subSchemaOptions)
-var Ability = new Schema({
-  pokeapi_id:              { type: Number, required: true },
-  name:                    { type: String, required: true },
-  is_main_series:          { type: Boolean, default: false },
-  generation:              { type: ObjectId, ref: 'Generation', default: null },
-  names:                   [Name],
-  effect_entries:          [VerboseEffect],
-  effect_changes:          [AbilityEffectChange],
-  flavor_text_entries:     [FlavorText1],
-  pokemon:                 [AbilityPokemon],
-}, schemaOptions);
+const AbilityEffectChange = new Schema(
+  {
+    effect_entries: [Effect],
+    version_group: {
+      default: null,
+      ref: "VersionGroup",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const AbilityPokemon = new Schema(
+  {
+    is_hidden: {
+      default: false,
+      type: Boolean,
+    },
+    pokemon: {
+      default: null,
+      ref: "Pokemon",
+      type: ObjectId,
+    },
+    slot: {
+      default: null,
+      type: Number,
+    },
+  },
+  subSchemaOptions,
+);
+const Ability = new Schema(
+  {
+    effect_changes: [AbilityEffectChange],
+    effect_entries: [VerboseEffect],
+    flavor_text_entries: [FlavorText1],
+    generation: {
+      default: null,
+      ref: "Generation",
+      type: ObjectId,
+    },
+    is_main_series: {
+      default: false,
+      type: Boolean,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon: [AbilityPokemon],
+  },
+  schemaOptions,
+);
 
-var Characteristic = new Schema({
-  pokeapi_id:           {type: Number, required: true},
-  gene_modulo:          {type: Boolean, default: false},
-  possible_values:      [{type: Number, default: null}],
-  descriptions:         [Description],
-}, schemaOptions);
+const Characteristic = new Schema(
+  {
+    descriptions: [Description],
+    gene_modulo: {
+      default: false,
+      type: Boolean,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    possible_values: [
+      {
+        default: null,
+        type: Number,
+      },
+    ],
+  },
+  schemaOptions,
+);
 
-var EggGroup = new Schema({
-  pokeapi_id:           {type: Number, required: true},
-  name:                 {type: String, required: true},
-  names:                [Name],
-  pokemon_species:      [{type: ObjectId, ref:"PokemonSpecies", default: null}],
-}, schemaOptions);
+const EggGroup = new Schema(
+  {
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species: [
+      {
+        default: null,
+        ref: "PokemonSpecies",
+        type: ObjectId,
+      },
+    ],
+  },
+  schemaOptions,
+);
 
-var PokemonSpeciesGender = new Schema({
-  rate:                    {type: Number, required: true},
-  pokemon_species:         {type: ObjectId, ref:"PokemonSpecies", default: null},
-},subSchemaOptions)
-var Gender = new Schema({
-  pokeapi_id:              {type: Number, required: true},
-  name:                    {type: String, required: true},
-  pokemon_species_details: [PokemonSpeciesGender],
-  required_for_evolution:  [{type: ObjectId, ref:"PokemonSpecies", default: null}],
-},schemaOptions)
+const PokemonSpeciesGender = new Schema(
+  {
+    pokemon_species: {
+      default: null,
+      ref: "PokemonSpecies",
+      type: ObjectId,
+    },
+    rate: {
+      required: true,
+      type: Number,
+    },
+  },
+  subSchemaOptions,
+);
+const Gender = new Schema(
+  {
+    name: {
+      required: true,
+      type: String,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species_details: [PokemonSpeciesGender],
+    required_for_evolution: [
+      {
+        default: null,
+        ref: "PokemonSpecies",
+        type: ObjectId,
+      },
+    ],
+  },
+  schemaOptions,
+);
 
-var GrowthRateExperienceLevel = new Schema({
-  level:                  {type: Number, default: null},
-  experience:             {type: Number, default: null},
-},subSchemaOptions)
-var GrowthRate = new Schema({
-  pokeapi_id:             {type: Number, required: true},
-  name:                   {type: String, required: true},
-  formula:                {type: String, default: null},
-  descriptions:           [Description],
-  levels:                 [GrowthRateExperienceLevel],
-  pokemon_species:        [{type: ObjectId, ref:"PokemonSpecies", default: null}],
-},schemaOptions)
+const GrowthRateExperienceLevel = new Schema(
+  {
+    experience: {
+      default: null,
+      type: Number,
+    },
+    level: {
+      default: null,
+      type: Number,
+    },
+  },
+  subSchemaOptions,
+);
+const GrowthRate = new Schema(
+  {
+    descriptions: [Description],
+    formula: {
+      default: null,
+      type: String,
+    },
+    levels: [GrowthRateExperienceLevel],
+    name: {
+      required: true,
+      type: String,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species: [
+      {
+        default: null,
+        ref: "PokemonSpecies",
+        type: ObjectId,
+      },
+    ],
+  },
+  schemaOptions,
+);
 
+const NatureStatChange = new Schema(
+  {
+    max_change: {
+      required: true,
+      type: Number,
+    },
+    pokeathlon_stat: {
+      default: null,
+      ref: "PokeathlonStat",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const MoveBattleStylePreference = new Schema(
+  {
+    high_hp_preference: {
+      required: true,
+      type: Number,
+    },
+    low_hp_preference: {
+      required: true,
+      type: Number,
+    },
+    move_battle_style: {
+      default: null,
+      ref: "MoveBattleStyle",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const Nature = new Schema(
+  {
+    decreased_stat: {
+      default: null,
+      ref: "Stat",
+      type: ObjectId,
+    },
+    hates_flavor: {
+      default: null,
+      ref: "BerryFlavor",
+      type: ObjectId,
+    },
+    increased_stat: {
+      default: null,
+      ref: "Stat",
+      type: ObjectId,
+    },
+    likes_flavor: {
+      default: null,
+      ref: "BerryFlavor",
+      type: ObjectId,
+    },
+    move_battle_style_preferences: [MoveBattleStylePreference],
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokeathlon_stat_changes: [NatureStatChange],
+  },
+  schemaOptions,
+);
 
-var NatureStatChange = new Schema({
-  max_change:             {type: Number, required: true},
-  pokeathlon_stat:        {type: ObjectId, ref:"PokeathlonStat", default: null},
-},subSchemaOptions)
-var MoveBattleStylePreference = new Schema({
-  low_hp_preference:      {type: Number, required: true},
-  high_hp_preference:     {type: Number, required: true},
-  move_battle_style:      {type: ObjectId, ref:"MoveBattleStyle", default: null}
-},subSchemaOptions)
-var Nature = new Schema({
-  pokeapi_id:             {type: Number, required: true},
-  name:                   {type: String, required: true},
-  decreased_stat:         {type: ObjectId, ref:"Stat", default: null},
-  increased_stat:         {type: ObjectId, ref:"Stat", default: null},
-  hates_flavor:           {type: ObjectId, ref:"BerryFlavor", default: null},
-  likes_flavor:           {type: ObjectId, ref:"BerryFlavor", default: null},
-  pokeathlon_stat_changes:[NatureStatChange],
-  move_battle_style_preferences: [MoveBattleStylePreference],
-  names:                  [Name],
-},schemaOptions)
+const NaturePokeathlonStatAffect = new Schema(
+  {
+    max_change: {
+      required: true,
+      type: Number,
+    },
+    nature: {
+      default: null,
+      ref: "Nature",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const NaturePokeathlonStatAffectSets = new Schema(
+  {
+    decrease: [NaturePokeathlonStatAffect],
+    increase: [NaturePokeathlonStatAffect],
+  },
+  subSchemaOptions,
+);
+const PokeathlonStat = new Schema(
+  {
+    affecting_natures: {
+      type: NaturePokeathlonStatAffectSets,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+  },
+  schemaOptions,
+);
 
+const PokemonColor = new Schema(
+  {
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species: [
+      {
+        default: null,
+        ref: "PokemonSpecies",
+        type: ObjectId,
+      },
+    ],
+  },
+  schemaOptions,
+);
 
-var NaturePokeathlonStatAffect = new Schema({
-  max_change:             {type: Number, required: true},
-  nature:                 {type: ObjectId, ref:"Nature", default: null},
-},subSchemaOptions);
-var NaturePokeathlonStatAffectSets = new Schema({
-  increase:               [NaturePokeathlonStatAffect],
-  decrease:               [NaturePokeathlonStatAffect],
-},subSchemaOptions);
-var PokeathlonStat =  new Schema({
-  pokeapi_id:             {type: Number, required: true},
-  name:                   {type: String, required: true},
-  names:                  [Name],
-  affecting_natures:      {type: NaturePokeathlonStatAffectSets}
-},schemaOptions);
+const PokemonFormSprites = new Schema(
+  {
+    back_default: {
+      default: null,
+      type: String,
+    },
+    back_shiny: {
+      default: null,
+      type: String,
+    },
+    front_default: {
+      default: null,
+      type: String,
+    },
+    front_shiny: {
+      default: null,
+      type: String,
+    },
+  },
+  subSchemaOptions,
+);
+const PokemonForm = new Schema(
+  {
+    form_name: {
+      default: null,
+      type: String,
+    },
+    form_names: [Name],
+    form_order: {
+      default: null,
+      type: Number,
+    },
+    is_battle_only: {
+      default: false,
+      type: Boolean,
+    },
+    is_default: {
+      default: false,
+      type: Boolean,
+    },
+    is_mega: {
+      default: false,
+      type: Boolean,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    order: {
+      default: null,
+      type: Number,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon: {
+      default: null,
+      ref: "Pokemon",
+      type: ObjectId,
+    },
+    sprites: {
+      type: PokemonFormSprites,
+    },
+    version_group: {
+      default: null,
+      ref: "VersionGroup",
+      type: ObjectId,
+    },
+  },
+  schemaOptions,
+);
 
-var PokemonColor =  new Schema({
-  pokeapi_id:             {type: Number, required: true},
-  name:                   {type: String, required: true},
-  names:                  [Name],
-  pokemon_species:        [{type: ObjectId, ref:"PokemonSpecies", default: null}],
-},schemaOptions);
+const PokemonHabitat = new Schema(
+  {
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species: [
+      {
+        default: null,
+        ref: "PokemonSpecies",
+        type: ObjectId,
+      },
+    ],
+  },
+  schemaOptions,
+);
 
-var PokemonFormSprites = new Schema({
-  front_default:            {type: String, default: null},
-  front_shiny:              {type: String, default: null},
-  back_default:             {type: String, default: null},
-  back_shiny:               {type: String, default: null},
-}, subSchemaOptions)
-var PokemonForm = new Schema({
-  pokeapi_id:             {type: Number, required: true},
-  name:                   {type: String, required: true},
-  order:                  {type: Number, default: null},
-  form_order:             {type: Number, default: null},
-  is_default:             {type: Boolean, default: false},
-  is_battle_only:         {type: Boolean, default: false},
-  is_mega:                {type: Boolean, default: false},
-  form_name:              {type: String, default: null},
-  pokemon:                {type: ObjectId, ref:"Pokemon", default: null},
-  sprites:                {type: PokemonFormSprites },
-  version_group:          {type: ObjectId, ref:"VersionGroup", default: null},
-  names:                  [Name],
-  form_names:             [Name],
-}, schemaOptions)
+const AwesomeName = new Schema(
+  {
+    awesome_name: {
+      required: true,
+      type: String,
+    },
+    language: {
+      default: null,
+      ref: "Language",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const PokemonShape = new Schema(
+  {
+    awesome_names: [AwesomeName],
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon_species: [
+      {
+        default: null,
+        ref: "PokemonSpecies",
+        type: ObjectId,
+      },
+    ],
+  },
+  schemaOptions,
+);
 
-var PokemonHabitat =  new Schema({
-  pokeapi_id:             {type: Number, required: true},
-  name:                   {type: String, required: true},
-  names:                  [Name],
-  pokemon_species:        [{type: ObjectId, ref:"PokemonSpecies", default: null}],
-},schemaOptions);
+const Genus = new Schema(
+  {
+    genus: {
+      required: true,
+      type: String,
+    },
+    language: {
+      default: null,
+      ref: "Language",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const PokemonSpeciesDexEntry = new Schema(
+  {
+    entry_number: {
+      required: true,
+      type: Number,
+    },
+    pokedex: {
+      default: null,
+      ref: "Pokedex",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const PalParkEncounterArea = new Schema(
+  {
+    area: {
+      default: null,
+      ref: "PalParkArea",
+      type: ObjectId,
+    },
+    base_score: {
+      required: true,
+      type: Number,
+    },
+    rate: {
+      required: true,
+      type: Number,
+    },
+  },
+  subSchemaOptions,
+);
+const PokemonSpeciesVariety = new Schema(
+  {
+    is_default: {
+      default: false,
+      type: Boolean,
+    },
+    pokemon: {
+      default: null,
+      ref: "Pokemon",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const PokemonSpecies = new Schema(
+  {
+    base_happiness: {
+      default: null,
+      type: Number,
+    },
+    capture_rate: {
+      default: null,
+      type: Number,
+    },
+    color: {
+      default: null,
+      ref: "PokemonColor",
+      type: ObjectId,
+    },
+    constieties: [PokemonSpeciesVariety],
+    egg_groups: [
+      {
+        default: null,
+        ref: "EggGroup",
+        type: ObjectId,
+      },
+    ],
+    evolution_chain: {
+      default: null,
+      ref: "EvolutionChain",
+      type: ObjectId,
+    },
+    evolves_from_species: {
+      default: null,
+      ref: "PokemonSpecies",
+      type: ObjectId,
+    },
+    flavor_text_entries: [VersionFlavorText],
+    form_descriptions: [Description],
+    forms_switchable: {
+      default: false,
+      type: Boolean,
+    },
+    gender_rate: {
+      default: null,
+      type: Number,
+    },
+    genera: [Genus],
+    generation: {
+      default: null,
+      ref: "Generation",
+      type: ObjectId,
+    },
+    growth_rate: {
+      default: null,
+      ref: "GrowthRate",
+      type: ObjectId,
+    },
+    habitat: {
+      default: null,
+      ref: "PokemonHabitat",
+      type: ObjectId,
+    },
+    has_gender_differences: {
+      default: false,
+      type: Boolean,
+    },
+    hatch_counter: {
+      default: null,
+      type: Number,
+    },
+    is_baby: {
+      default: false,
+      type: Boolean,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    order: {
+      default: null,
+      type: Number,
+    },
+    pal_park_encounters: [PalParkEncounterArea],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokedex_numbers: [PokemonSpeciesDexEntry],
+    shape: {
+      default: null,
+      ref: "PokemonShape",
+      type: ObjectId,
+    },
+  },
+  schemaOptions,
+);
 
-var AwesomeName = new Schema({
-  awesome_name:           {type: String, required: true},
-  language:               {type: ObjectId, ref:"Language", default: null},
-},subSchemaOptions)
-var PokemonShape =  new Schema({
-  pokeapi_id:             {type: Number, required: true},
-  name:                   {type: String, required: true},
-  names:                  [Name],
-  pokemon_species:        [{type: ObjectId, ref:"PokemonSpecies", default: null}],
-  awesome_names:          [AwesomeName],
-},schemaOptions);
+const MoveStatAffect = new Schema(
+  {
+    change: {
+      required: true,
+      type: Number,
+    },
+    move: {
+      default: null,
+      ref: "Move",
+      type: ObjectId,
+    },
+  },
+  subSchemaOptions,
+);
+const MoveStatAffectSets = new Schema(
+  {
+    decrease: [MoveStatAffect],
+    increase: [MoveStatAffect],
+  },
+  subSchemaOptions,
+);
+const NatureStatAffectSets = new Schema(
+  {
+    decrease: [
+      {
+        default: null,
+        ref: "Nature",
+        type: ObjectId,
+      },
+    ],
+    increase: [
+      {
+        default: null,
+        ref: "Nature",
+        type: ObjectId,
+      },
+    ],
+  },
+  subSchemaOptions,
+);
+const Stat = new Schema(
+  {
+    affecting_moves: MoveStatAffectSets,
+    affecting_natures: NatureStatAffectSets,
+    characteristics: [
+      {
+        default: null,
+        ref: "Characteristic",
+        type: ObjectId,
+      },
+    ],
+    game_index: {
+      default: null,
+      type: String,
+    },
+    is_battle_only: {
+      default: false,
+      type: Boolean,
+    },
+    move_damage_class: {
+      default: null,
+      ref: "MoveDamageClass",
+      type: ObjectId,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+  },
+  schemaOptions,
+);
 
-var Genus = new Schema({
-  genus:                          {type: String, required: true},
-  language:                       {type: ObjectId, ref:"Language", default: null},
-},subSchemaOptions)
-var PokemonSpeciesDexEntry = new Schema({
-  entry_number:                   {type: Number, required: true},
-  pokedex:                        {type: ObjectId, ref:"Pokedex", default: null},
-},subSchemaOptions)
-var PalParkEncounterArea = new Schema({
-  base_score:                     {type: Number, required: true},
-  rate:                           {type: Number, required: true},
-  area:                           {type: ObjectId, ref:"PalParkArea", default: null},
-},subSchemaOptions)
-var PokemonSpeciesVariety = new Schema({
-  is_default:                     {type: Boolean, default: false},
-  pokemon:                        {type: ObjectId, ref:"Pokemon", default: null},
-},subSchemaOptions)
-var PokemonSpecies = new Schema({
-  pokeapi_id:                     {type: Number, required: true},
-  name:                           {type: String, required: true},
-  order:                          {type: Number, default: null},
-  gender_rate:                    {type: Number, default: null},
-  capture_rate:                   {type: Number, default: null},
-  base_happiness:                 {type: Number, default: null},
-  is_baby:                        {type: Boolean, default: false},
-  hatch_counter:                  {type: Number, default: null},
-  has_gender_differences:         {type: Boolean, default: false},
-  forms_switchable:               {type: Boolean, default: false},
-  growth_rate:                    {type: ObjectId, ref:"GrowthRate", default: null},
-  pokedex_numbers:                [PokemonSpeciesDexEntry],
-  egg_groups:                     [{type: ObjectId, ref:"EggGroup", default: null}],
-  color:                          {type: ObjectId, ref:"PokemonColor", default: null},
-  shape:                          {type: ObjectId, ref:"PokemonShape", default: null},
-  evolves_from_species:           {type: ObjectId, ref:"PokemonSpecies", default: null},
-  evolution_chain:                {type: ObjectId, ref:"EvolutionChain", default: null},
-  habitat:                        {type: ObjectId, ref:"PokemonHabitat", default: null},
-  generation:                     {type: ObjectId, ref:"Generation", default: null},
-  names:                          [Name],
-  pal_park_encounters:            [PalParkEncounterArea],
-  flavor_text_entries:            [VersionFlavorText],
-  form_descriptions:              [Description],
-  genera:                         [Genus],
-  varieties:                      [PokemonSpeciesVariety],
-},schemaOptions)
+const TypePokemon = new Schema(
+  {
+    pokemon: {
+      default: null,
+      ref: "Pokemon",
+      type: ObjectId,
+    },
+    slot: {
+      default: null,
+      type: Number,
+    },
+  },
+  subSchemaOptions,
+);
+const DamageRelations = new Schema(
+  {
+    double_damage_from: [
+      {
+        default: null,
+        ref: "Type",
+        type: ObjectId,
+      },
+    ],
+    double_damage_to: [
+      {
+        default: null,
+        ref: "Type",
+        type: ObjectId,
+      },
+    ],
+    half_damage_from: [
+      {
+        default: null,
+        ref: "Type",
+        type: ObjectId,
+      },
+    ],
+    half_damage_to: [
+      {
+        default: null,
+        ref: "Type",
+        type: ObjectId,
+      },
+    ],
+    no_damage_from: [
+      {
+        default: null,
+        ref: "Type",
+        type: ObjectId,
+      },
+    ],
+    no_damage_to: [
+      {
+        default: null,
+        ref: "Type",
+        type: ObjectId,
+      },
+    ],
+  },
+  subSchemaOptions,
+);
+const Type = new Schema(
+  {
+    damage_relations: DamageRelations,
+    game_indices: [GenerationGameIndex],
+    generation: {
+      default: null,
+      ref: "Generation",
+      type: ObjectId,
+    },
+    move_damage_class: {
+      default: null,
+      ref: "MoveDamageClass",
+      type: ObjectId,
+    },
+    moves: [
+      {
+        default: null,
+        ref: "Move",
+        type: ObjectId,
+      },
+    ],
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    pokemon: [TypePokemon],
+  },
+  schemaOptions,
+);
 
+Ability.pre("save", (next) => next());
+Characteristic.pre("save", (next) => next());
+EggGroup.pre("save", (next) => next());
+Gender.pre("save", (next) => next());
+GrowthRate.pre("save", (next) => next());
+Nature.pre("save", (next) => next());
+PokeathlonStat.pre("save", (next) => next());
+PokemonColor.pre("save", (next) => next());
+PokemonForm.pre("save", (next) => next());
+PokemonHabitat.pre("save", (next) => next());
+PokemonShape.pre("save", (next) => next());
+PokemonSpecies.pre("save", (next) => next());
+Stat.pre("save", (next) => next());
+Type.pre("save", (next) => next());
 
-var MoveStatAffect = new Schema({
-  change:                 { type: Number, required: true },
-  move:                   {type: ObjectId, ref:"Move", default: null}
-},subSchemaOptions)
-var MoveStatAffectSets = new Schema({
-  increase:               [MoveStatAffect],
-  decrease:               [MoveStatAffect],
-},subSchemaOptions)
-var NatureStatAffectSets = new Schema({
-  increase:               [{type: ObjectId, ref:"Nature", default: null}],
-  decrease:               [{type: ObjectId, ref:"Nature", default: null}],
-},subSchemaOptions)
-var Stat = new Schema({
-  pokeapi_id:              { type: Number, required: true },
-  name:                    { type: String, required: true },
-  game_index:              { type: String, default: null },
-  is_battle_only:          { type: Boolean, default: false },
-  affecting_moves:         MoveStatAffectSets,
-  affecting_natures:       NatureStatAffectSets,
-  characteristics:         [{type: ObjectId, ref:"Characteristic", default: null}],
-  move_damage_class:       {type: ObjectId, ref:"MoveDamageClass", default: null},
-  names:                   [Name],
-}, schemaOptions);
-
-
-var TypePokemon = new Schema({
-  slot:                    {type: Number, default: null},
-  pokemon:                 {type: ObjectId, ref: 'Pokemon', default: null},
-},subSchemaOptions)
-var DamageRelations = new Schema({
-  half_damage_from:    [{type: ObjectId, ref: 'Type', default: null}],
-  no_damage_from:      [{type: ObjectId, ref: 'Type', default: null}],
-  half_damage_to:      [{type: ObjectId, ref: 'Type', default: null}],
-  double_damage_from:  [{type: ObjectId, ref: 'Type', default: null}],
-  no_damage_to:        [{type: ObjectId, ref: 'Type', default: null}],
-  double_damage_to:    [{type: ObjectId, ref: 'Type', default: null}],
-},subSchemaOptions)
-var Type = new Schema({
-  pokeapi_id:              {type: Number, required: true},
-  name:                    {type: String, required: true},
-  damage_relations:        DamageRelations,
-  game_indices:            [GenerationGameIndex],
-  generation:              {type: ObjectId, ref: "Generation", default: null},
-  move_damage_class:       {type: ObjectId, ref: "MoveDamageClass", default: null},
-  names:                   [Name],
-  pokemon:                 [TypePokemon],
-  moves:                   [{ type: ObjectId, ref: 'Move', default: null}],
-}, schemaOptions);
-
-Ability.pre('save',(next)=>next())
-Characteristic.pre('save',(next)=>next());
-EggGroup.pre('save',(next)=>next());
-Gender.pre('save',(next)=>next());
-GrowthRate.pre('save',(next)=>next());
-Nature.pre('save',(next)=>next());
-PokeathlonStat.pre('save',(next)=>next());
-PokemonColor.pre('save',(next)=>next());
-PokemonForm.pre('save',(next)=>next());
-PokemonHabitat.pre('save',(next)=>next());
-PokemonShape.pre('save',(next)=>next());
-PokemonSpecies.pre('save',(next)=>next());
-Stat.pre('save',(next)=>next());
-Type.pre('save',(next)=>next());
-
-Ability.virtual('id').get(function() {
-  return this._id
+Ability.virtual("id").get(function () {
+  return this._id;
 });
-Characteristic.virtual('id').get(function() {
-  return this._id
+Characteristic.virtual("id").get(function () {
+  return this._id;
 });
-EggGroup.virtual('id').get(function() {
-  return this._id
+EggGroup.virtual("id").get(function () {
+  return this._id;
 });
-Gender.virtual('id').get(function() {
-  return this._id
+Gender.virtual("id").get(function () {
+  return this._id;
 });
-GrowthRate.virtual('id').get(function() {
-  return this._id
+GrowthRate.virtual("id").get(function () {
+  return this._id;
 });
-Nature.virtual('id').get(function() {
-  return this._id
+Nature.virtual("id").get(function () {
+  return this._id;
 });
-PokeathlonStat.virtual('id').get(function() {
-  return this._id
+PokeathlonStat.virtual("id").get(function () {
+  return this._id;
 });
-PokemonColor.virtual('id').get(function() {
-  return this._id
+PokemonColor.virtual("id").get(function () {
+  return this._id;
 });
-PokemonForm.virtual('id').get(function() {
-  return this._id
+PokemonForm.virtual("id").get(function () {
+  return this._id;
 });
-PokemonHabitat.virtual('id').get(function() {
-  return this._id
+PokemonHabitat.virtual("id").get(function () {
+  return this._id;
 });
-PokemonShape.virtual('id').get(function() {
-  return this._id
+PokemonShape.virtual("id").get(function () {
+  return this._id;
 });
-PokemonSpecies.virtual('id').get(function() {
-  return this._id
+PokemonSpecies.virtual("id").get(function () {
+  return this._id;
 });
-Stat.virtual('id').get(function() {
-  return this._id
+Stat.virtual("id").get(function () {
+  return this._id;
 });
-Type.virtual('id').get(function() {
-  return this._id
+Type.virtual("id").get(function () {
+  return this._id;
 });
 
-Ability.set('toJSON', jsonOptions);
-Characteristic.set('toJSON', jsonOptions);
-EggGroup.set('toJSON', jsonOptions);
-Gender.set('toJSON', jsonOptions);
-GrowthRate.set('toJSON', jsonOptions);
-Nature.set('toJSON', jsonOptions);
-PokeathlonStat.set('toJSON', jsonOptions);
-PokemonColor.set('toJSON', jsonOptions);
-PokemonForm.set('toJSON', jsonOptions);
-PokemonHabitat.set('toJSON', jsonOptions);
-PokemonShape.set('toJSON', jsonOptions);
-PokemonSpecies.set('toJSON', jsonOptions);
-Stat.set('toJSON', jsonOptions);
-Type.set('toJSON', jsonOptions);
+Ability.set("toJSON", jsonOptions);
+Characteristic.set("toJSON", jsonOptions);
+EggGroup.set("toJSON", jsonOptions);
+Gender.set("toJSON", jsonOptions);
+GrowthRate.set("toJSON", jsonOptions);
+Nature.set("toJSON", jsonOptions);
+PokeathlonStat.set("toJSON", jsonOptions);
+PokemonColor.set("toJSON", jsonOptions);
+PokemonForm.set("toJSON", jsonOptions);
+PokemonHabitat.set("toJSON", jsonOptions);
+PokemonShape.set("toJSON", jsonOptions);
+PokemonSpecies.set("toJSON", jsonOptions);
+Stat.set("toJSON", jsonOptions);
+Type.set("toJSON", jsonOptions);
 
-
-module.exports = {
+export {AbilityEffectChange};
+export default {
   Ability,
   Characteristic,
   EggGroup,
@@ -342,10 +877,4 @@ module.exports = {
   PokemonSpecies,
   Stat,
   Type,
-}
-
-module.exports.subSchema = {
-  AbilityEffectChange,
-}
-// module.exports.fields = fields;
-module.exports.ObjectId = mongo.Types.ObjectId;
+};

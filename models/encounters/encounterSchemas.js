@@ -1,62 +1,92 @@
-var mongo = require('../../services/mongodb');
-var { Name } = require('../commonModels')
-var Schema = mongo.Schema;
-var ObjectId = Schema.ObjectId;
-var jsonOptions = {
+import mongo from "../../services/mongodb.js";
+import {Name} from "../commonModels.js";
+const Schema = mongo.Schema;
+const ObjectId = Schema.ObjectId;
+const jsonOptions = {
   virtuals: true,
-}
-var schemaOptions = {
+};
+const schemaOptions = {
+  timestamp: true,
   versionKey: false,
-  timestamp: true
-}
-var subSchemaOptions = {
-  _id: false
-}
+};
 
+const EncounterMethod = new Schema(
+  {
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    order: {
+      default: null,
+      type: Number,
+    },
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+  },
+  schemaOptions,
+);
 
-var EncounterMethod = new Schema({
-  pokeapi_id:                 { type: Number, required: true },
-  name:                       { type: String, required: true },
-  order:                      { type: Number, default: null },
-  names:                      [Name],
-}, schemaOptions);
+const EncounterCondition = new Schema(
+  {
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+    values: [
+      {
+        default: null,
+        ref: "EncounterConditionValue",
+        type: ObjectId,
+      },
+    ],
+  },
+  schemaOptions,
+);
 
-var EncounterCondition = new Schema({
-  pokeapi_id:               { type: Number, required: true },
-  name:                     { type: String, required: true },
-  names:                    [Name],
-  values:                   [{ type: ObjectId, ref: "EncounterConditionValue", default: null }],
-}, schemaOptions);
+const EncounterConditionValue = new Schema(
+  {
+    condition: {
+      default: null,
+      ref: "EncounterCondition",
+      type: ObjectId,
+    },
+    name: {
+      required: true,
+      type: String,
+    },
+    names: [Name],
+    pokeapi_id: {
+      required: true,
+      type: Number,
+    },
+  },
+  schemaOptions,
+);
 
-var EncounterConditionValue = new Schema({
-  pokeapi_id:               { type: Number, required: true },
-  name:                     { type: String, required: true },
-  condition:                { type: ObjectId, ref: "EncounterCondition", default: null },
-  names:                    [Name],
-}, schemaOptions);
+EncounterMethod.pre("save", (next) => next());
+EncounterCondition.pre("save", (next) => next());
+EncounterConditionValue.pre("save", (next) => next());
 
-
-EncounterMethod.pre('save',next => next());
-EncounterCondition.pre('save',next => next());
-EncounterConditionValue.pre('save',next => next());
-
-EncounterMethod.virtual('id').get(function() {
-  return this._id
+EncounterMethod.virtual("id").get(function () {
+  return this._id;
 });
-EncounterCondition.virtual('id').get(function() {
-  return this._id
+EncounterCondition.virtual("id").get(function () {
+  return this._id;
 });
-EncounterConditionValue.virtual('id').get(function() {
-  return this._id
+EncounterConditionValue.virtual("id").get(function () {
+  return this._id;
 });
 
-EncounterMethod.set('toJSON', jsonOptions);
-EncounterCondition.set('toJSON', jsonOptions);
-EncounterConditionValue.set('toJSON', jsonOptions);
+EncounterMethod.set("toJSON", jsonOptions);
+EncounterCondition.set("toJSON", jsonOptions);
+EncounterConditionValue.set("toJSON", jsonOptions);
 
-
-module.exports = {
-  EncounterMethod,
-  EncounterCondition,
-  EncounterConditionValue,
-}
+export {EncounterCondition, EncounterConditionValue, EncounterMethod};

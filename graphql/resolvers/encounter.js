@@ -1,14 +1,13 @@
-const models = require('../../models')
+import * as models from "../../models";
 
-module.exports = {
-  EncounterMethod: {
-  },
+export default {
+  EncounterMethod: {},
 
   EncounterCondition: {
-    values: models.encounterConditionValue.getEncounterConditionValues
+    values: models.encounterConditionValue.getEncounterConditionValues,
   },
 
   EncounterConditionValue: {
-    condition: models.encounterCondition.getEncounterCondition
+    condition: models.encounterCondition.getEncounterCondition,
   },
-}
+};

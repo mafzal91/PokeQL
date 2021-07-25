@@ -1,6 +1,6 @@
-const models = require('../../models')
+import * as models from "../../models";
 
-module.exports = {
+export default {
   Location: {
     region: models.region.getRegion,
     areas: models.locationArea.getLocationAreas,
@@ -22,8 +22,7 @@ module.exports = {
   PalParkEncounterSpecies: {
     pokemon_species: models.pokemonSpecies.getPokemonSpecies,
   },
-  PalParkArea: {
-  },
+  PalParkArea: {},
 
   Region: {
     locations: models.location.getLocations,
@@ -31,4 +30,4 @@ module.exports = {
     pokedexes: models.pokedex.getPokedexes,
     version_groups: models.versionGroup.getVersionGroups,
   },
-}
+};

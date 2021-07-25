@@ -1,8 +1,8 @@
-const models = require('../../models')
+import * as models from "../../models";
 
-module.exports = {
+export default {
   EvolutionChain: {
-    baby_trigger_item: models.item.getItem
+    baby_trigger_item: models.item.getItem,
   },
 
   EvolutionDetail: {
@@ -22,8 +22,7 @@ module.exports = {
     species: models.pokemonSpecies.getPokemonSpecies,
   },
 
-
   EvolutionTrigger: {
     pokemon_species: models.pokemonSpecies.getPokemonSpeciess,
   },
-}
+};

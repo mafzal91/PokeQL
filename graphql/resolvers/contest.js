@@ -1,6 +1,6 @@
-const models = require('../../models')
+import * as models from "../../models";
 
-module.exports = {
+export default {
   ContestType: {
     berry_flavor: models.berryFlavor.getBerryFlavor,
   },
@@ -14,4 +14,4 @@ module.exports = {
     // flavor_text_entries: FlavorText
     moves: models.move.getMoves,
   },
-}
+};

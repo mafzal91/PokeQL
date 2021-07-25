@@ -1,6 +1,6 @@
-var commonModels = require('./typeDef/commonModel_types')
+import commonModels from "./typeDef/commonModel_types.js";
 
-module.exports = `
+export default `
   scalar Date
 
   type Berry {
