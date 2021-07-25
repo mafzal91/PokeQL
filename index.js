@@ -1,24 +1,25 @@
-// // Set options as a parameter, environment variable, or rc file.
-// require = require("esm")(module /*, options*/);
-import {readFileSync} from "fs";
+// Idk how to fix eslint Top level await error without using babel.
+// So ignoring eslint rules for this file for now
+import {readFile} from "fs/promises";
 import dotenv from "dotenv";
 import path from "path";
 
-const {NODE_ENV: env} = process.env;
-
-if (!env) {
+if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = "development";
 }
+const {NODE_ENV: env} = process.env;
 
-dotenv.config({path: path.resolve(import.meta.url, ".env")});
+dotenv.config({path: path.resolve(".env")});
 
-const envFile = ["local", "test"].includes(env) ? "" : `.${env}`;
+const envFile = ["development"].includes(env) ? "" : `.${env}`;
 if (!envFile) {
   const envConfig = dotenv.parse(
-    readFileSync(path.resolve(import.meta.url, `.env${envFile}`)),
+    await readFile(path.resolve(`.env${envFile}`)),
   );
+
   for (const k in envConfig) {
     process.env[k] = envConfig[k];
   }
 }
-import "./server.js";
+
+await import("./server.js");

@@ -1,8 +1,7 @@
 [
   {
     "name": "Pokemon Graphql",
-    "script": "./server.js",
-    "node_args": "--harmony",
+    "script": "./index.js",
     "env": {
       "NODE_ENV": "production"
     }

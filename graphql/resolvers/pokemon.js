@@ -21,9 +21,9 @@ export default {
   //   no_damage_from: models.type.getTypes,
   //   no_damage_to: models.type.getTypes,
   // },
-  DamageRelations: () => {
-    console.log("WIP");
-  },
+  // DamageRelations: () => {
+
+  // },
   EggGroup: {
     pokemon_species: models.pokemonSpecies.getPokemonSpeciess,
   },
