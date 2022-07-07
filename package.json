@@ -27,7 +27,7 @@
     "graphql-server-express": "^1.4.1",
     "graphql-subscriptions": "^1.2.1",
     "graphql-tools": "^7.0.5",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "mongoose": "^5.13.3"
   },
   "devDependencies": {
