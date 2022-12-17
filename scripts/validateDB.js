@@ -1,11 +1,10 @@
-var config = require("../config");
-var async = require("async");
-var models = require("../models");
-var mongo = require("mongodb").MongoClient;
+import {MongoClient} from "mongodb";
+import config from "../configs/index.js";
+import models from "../models/index";
 
-var url = `mongodb://${config.mongodb.hosts[0]}:${config.mongodb.port}/Pokemon`;
+const url = `mongodb://${config.mongodb.host}:${config.mongodb.port}/Pokemon`;
 mongo.connect(url, (err, db) => {
-  var routes = [
+  const routes = [
     {berry: "berry"},
     {"berry-firmness": "berryFirmness"},
     {"berry-flavor": "berryFlavor"},
