@@ -2,6 +2,16 @@ const env = process.env.NODE_ENV;
 import development from "./development.js";
 import production from "./production.js";
 
+let configEnvFile = development;
+switch (env) {
+  case "production":
+    configEnvFile = production;
+    break;
+  case "development":
+  default:
+    configEnvFile = development;
+}
+
 /**
  * Made this export self invoking function because I wanted to use a switch to set the config
  * (I may have more that two env in the future) and didn't want to reassign a variable.
@@ -14,12 +24,4 @@ import production from "./production.js";
  * (say not from dotenv) I can and pass that env into the config to be set.
  * (future proofing, may not be used)
  * */
-export default (() => {
-  switch (env) {
-    case "production":
-      return production;
-    case "development":
-    default:
-      return development;
-  }
-})()();
+export default configEnvFile(process.env);

@@ -1,12 +1,12 @@
+import "dotenv/config.js";
 import express from "express";
-import {graphqlHTTP} from "express-graphql";
+import graphqlHTTP from "express-graphql";
 // import {buildSchema} from "graphql";
 import {makeExecutableSchema} from "graphql-tools";
 import config from "./configs/index.js";
 import * as models from "./models/index.js";
 import types from "./graphql/types.js";
 import resolvers from "./graphql/resolvers.js";
-// console.log(models)
 
 const app = express();
 const executableSchema = makeExecutableSchema({
