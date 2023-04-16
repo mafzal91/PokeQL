@@ -2,6 +2,26 @@ import mongoose from "mongoose";
 import qs from "qs";
 import config from "../configs/index.js";
 
+function generateMongoDBConnectionString({
+  database,
+  host,
+  replSet,
+  username,
+  password,
+}) {
+  const url = new URL(
+    `mongodb+srv://${encodeURIComponent(username)}:${encodeURIComponent(
+      password,
+    )}@${encodeURIComponent(host)}/${encodeURIComponent(
+      database,
+    )}?retryWrites=true&w=majority`,
+  );
+  if (replSet) {
+    url.searchParams.set("replicaSet", encodeURIComponent(replSet));
+  }
+  return url.toString();
+}
+
 const options = {
   useCreateIndex: true,
   useFindAndModify: false,

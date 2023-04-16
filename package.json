@@ -11,8 +11,8 @@
     "node": ">=14"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "prod": "node index.js",
+    "dev": "NODE_ENV=development nodemon server.js",
+    "prod": "node server.js",
     "test": "node temp.js",
     "prepare": "husky install",
     "lint": "eslint --ignore-path .gitignore",
