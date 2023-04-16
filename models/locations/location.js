@@ -2,9 +2,6 @@ import mongo from "../../services/mongodb.js";
 import {Location as LocationSchema} from "./locationSchemas.js";
 import {getProjection} from "../../utils/index.js";
 
-import LocationSchemas from "./locationSchemas.js";
-const LocationSchema = LocationSchemas.Location;
-
 class Location {
   static getLocations(parent, {query, skip, limit}, Models, info) {
     const projection = getProjection(info);
