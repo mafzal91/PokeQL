@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {Type as TypeSchema} from "./pokemonSchemas.js";
 
 class Type {
-  static getTypes(parent, {query, skip, limit}, Models, info) {
+  static getTypes(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -36,7 +36,7 @@ class Type {
     //   }
     // }])
 
-    return Models.type
+    return models.type
       .find(query)
       .select(projection)
       .skip(skip)
@@ -46,7 +46,7 @@ class Type {
       .catch((error) => error);
   }
 
-  static getType(parent, {id}, Models, info) {
+  static getType(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     // console.log(Models)
     if (parent) {
@@ -66,7 +66,7 @@ class Type {
     // console.log("AFTER", id)
     // if(!id){ console.log("NULL!!!", parent); return null }
 
-    return Models.type
+    return models.type
       .findById(id)
       .select(projection)
       .then((data) => data)

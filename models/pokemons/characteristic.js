@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {Characteristic as CharacteristicSchema} from "./pokemonSchemas.js";
 
 class Characteristic {
-  static getCharacteristics(parent, {query, skip, limit}, Models, info) {
+  static getCharacteristics(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
     if (parent) {
@@ -12,7 +12,7 @@ class Characteristic {
       }
     }
 
-    return Models.characteristic
+    return models.characteristic
       .find(query)
       .select(projection)
       .skip(skip)
@@ -22,7 +22,7 @@ class Characteristic {
       .catch((error) => error);
   }
 
-  static getCharacteristic(parent, {id}, Models, info) {
+  static getCharacteristic(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -33,7 +33,7 @@ class Characteristic {
         id = parent.characteristic;
       }
     }
-    return Models.characteristic
+    return models.characteristic
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

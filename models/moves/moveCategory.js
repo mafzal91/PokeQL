@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {MoveCategory as MoveCategorySchema} from "./MoveSchemas.js";
 
 class MoveCategory {
-  static getMoveCategories(parent, {query, skip, limit}, Models, info) {
+  static getMoveCategories(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.moveCategory
+    return models.moveCategory
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class MoveCategory {
       .catch((error) => error);
   }
 
-  static getMoveCategory(parent, {id}, Models, info) {
+  static getMoveCategory(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
     if (parent) {
@@ -28,7 +28,7 @@ class MoveCategory {
       }
     }
 
-    return Models.moveCategory
+    return models.moveCategory
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

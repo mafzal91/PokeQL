@@ -230,7 +230,7 @@ const MoveSchema = new Schema(
 );
 
 class Move {
-  static getMoves(parent, {query, skip, limit}, Models, info) {
+  static getMoves(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent.moves);
     if (parent) {
@@ -239,7 +239,7 @@ class Move {
       }
     }
 
-    return Models.move
+    return models.move
       .find(query)
       .select(projection)
       .skip(skip)
@@ -249,7 +249,7 @@ class Move {
       .catch((error) => error);
   }
 
-  static getMove(parent, {id}, Models, info) {
+  static getMove(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -264,7 +264,7 @@ class Move {
       }
     }
 
-    return Models.move
+    return models.move
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

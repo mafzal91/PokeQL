@@ -216,11 +216,10 @@ const PokemonSchema = new Schema(
 );
 
 class Pokemon {
-  static getPokemons(parent, {query, skip, limit}, Models, info) {
+  static getPokemons(parent, {limit, query, skip}, {models}, info) {
     const projection = getProjection(info);
-    console.log(projection);
 
-    return Models.pokemon
+    return models.pokemon
       .find(query)
       .select(projection)
       .skip(skip)
@@ -230,7 +229,7 @@ class Pokemon {
       .catch((error) => error);
   }
 
-  static getPokemon(parent, {id}, Models, info) {
+  static getPokemon(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
     if (parent) {
@@ -242,14 +241,14 @@ class Pokemon {
       }
     }
 
-    return Models.pokemon
+    return models.pokemon
       .findById(id)
       .select(projection)
       .then((data) => data)
       .catch((error) => error);
   }
 
-  static getStats(parent, {query = {}}, Models, info, field) {
+  static getStats(parent, {query = {}}, {models}, info, field) {
     const projection = getProjection(info);
     console.log(parent);
     console.log(projection);
@@ -257,11 +256,11 @@ class Pokemon {
 
     if (parent) {
       Object.keys(projection).forEach(() => {
-        query._id = {$in: parent[field].map((i) => Models.type.ObjectId(i))};
+        query._id = {$in: parent[field].map((i) => models.type.ObjectId(i))};
       });
     }
 
-    return Models.type
+    return models.type
       .find(query)
       .select(projection)
       .then((data) => data)

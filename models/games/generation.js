@@ -64,10 +64,10 @@ const GenerationSchema = new Schema(
 );
 
 class Generation {
-  static getGenerations(parent, {query, skip, limit}, Models, info) {
+  static getGenerations(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.generation
+    return models.generation
       .find(query)
       .select(projection)
       .skip(skip)
@@ -77,7 +77,7 @@ class Generation {
       .catch((error) => error);
   }
 
-  static getGeneration(parent, {id}, Models, info) {
+  static getGeneration(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -89,7 +89,7 @@ class Generation {
       }
     }
 
-    return Models.generation
+    return models.generation
       .findById(id)
       .select(projection)
       .then((data) => data)

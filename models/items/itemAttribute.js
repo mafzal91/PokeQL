@@ -3,11 +3,11 @@ import {getProjection} from "../../utils/index.js";
 import {ItemAttribute as ItemAttributeSchema} from "./itemSchemas.js";
 
 class ItemAttribute {
-  static getItemAttributes(parent, {query, skip, limit}, Models, info) {
+  static getItemAttributes(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     return new Promise((resolve, reject) => {
-      Models.itemAttribute
+      models.itemAttribute
         .find(query)
         .select(projection)
         .skip(skip)
@@ -18,7 +18,7 @@ class ItemAttribute {
     });
   }
 
-  static getItemAttribute(parent, {id}, Models, info) {
+  static getItemAttribute(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     return new Promise((resolve, reject) => {
       if (parent) {
@@ -27,7 +27,7 @@ class ItemAttribute {
         }
       }
 
-      Models.itemAttribute
+      models.itemAttribute
         .findById(id)
         .select(projection)
         .then((data) => resolve(data))

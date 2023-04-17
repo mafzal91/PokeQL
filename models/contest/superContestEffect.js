@@ -30,10 +30,10 @@ const SuperContestEffectSchema = new Schema(
 );
 
 class SuperContestEffect {
-  static getSuperContestEffects(parent, {query, skip, limit}, Models, info) {
+  static getSuperContestEffects(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.superContestEffect
+    return models.superContestEffect
       .find(query)
       .select(projection)
       .skip(skip)
@@ -43,7 +43,7 @@ class SuperContestEffect {
       .catch((error) => error);
   }
 
-  static getSuperContestEffect(parent, {id}, Models, info) {
+  static getSuperContestEffect(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -55,7 +55,7 @@ class SuperContestEffect {
       }
     }
 
-    return Models.superContestEffect
+    return models.superContestEffect
       .findById(id)
       .select(projection)
       .then((data) => data)

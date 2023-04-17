@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {MoveAilment as MoveAilmentSchema} from "./MoveSchemas.js";
 
 class MoveAilment {
-  static getMoveAilments(parent, {query, skip, limit}, Models, info) {
+  static getMoveAilments(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.moveAilment
+    return models.moveAilment
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class MoveAilment {
       .catch((error) => error);
   }
 
-  static getMoveAilment(parent, {id}, Models, info) {
+  static getMoveAilment(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     if (parent) {
       console.log("MOVE AILMENT", parent);
@@ -28,7 +28,7 @@ class MoveAilment {
       }
     }
 
-    return Models.moveAilment
+    return models.moveAilment
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

@@ -4,7 +4,7 @@ import {getProjection} from "../../utils/index.js";
 import {Gender as GenderSchema} from "./pokemonSchemas.js";
 
 class Gender {
-  static getGenders(parent, {query, skip, limit}, Models, info) {
+  static getGenders(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -16,7 +16,7 @@ class Gender {
       }
     }
 
-    return Models.gender
+    return models.gender
       .find(query)
       .select(projection)
       .skip(skip)
@@ -26,7 +26,7 @@ class Gender {
       .catch((error) => error);
   }
 
-  static getGender(parent, {id}, Models, info) {
+  static getGender(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -35,7 +35,7 @@ class Gender {
       }
     }
 
-    return Models.gender
+    return models.gender
       .findById(id)
       .select(projection)
       .then((data) => data)

@@ -59,7 +59,7 @@ const VersionGroupSchema = new Schema(
 );
 
 class VersionGroup {
-  static getVersionGroups(parent, {query, skip, limit}, Models, info) {
+  static getVersionGroups(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -68,7 +68,7 @@ class VersionGroup {
       }
     }
 
-    return Models.versionGroup
+    return models.versionGroup
       .find(query)
       .select(projection)
       .skip(skip)
@@ -78,7 +78,7 @@ class VersionGroup {
       .catch((error) => error);
   }
 
-  static getVersionGroup(parent, {id}, Models, info) {
+  static getVersionGroup(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -90,7 +90,7 @@ class VersionGroup {
       }
     }
 
-    return Models.versionGroup
+    return models.versionGroup
       .findById(id)
       .select(projection)
       .then((data) => data)

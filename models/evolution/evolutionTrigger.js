@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {EvolutionTrigger as EvolutionTriggerSchema} from "./evolutionSchemas.js";
 
 class EvolutionTrigger {
-  static getEvolutionTriggers(parent, {query, skip, limit}, Models, info) {
+  static getEvolutionTriggers(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.evolutionTrigger
+    return models.evolutionTrigger
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class EvolutionTrigger {
       .catch((error) => error);
   }
 
-  static getEvolutionTrigger(parent, {id}, Models, info) {
+  static getEvolutionTrigger(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -28,7 +28,7 @@ class EvolutionTrigger {
       }
     }
 
-    return Models.evolutionTrigger
+    return models.evolutionTrigger
       .findById(id)
       .select(projection)
       .then((data) => data)

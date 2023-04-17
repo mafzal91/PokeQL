@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {Region as RegionSchema} from "./locationSchemas.js";
 
 class Region {
-  static getRegions(parent, {query, skip, limit}, Models, info) {
+  static getRegions(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
     // console.log(projection)
-    return Models.region
+    return models.region
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class Region {
       .catch((error) => error);
   }
 
-  static getRegion(parent, {id}, Models, info) {
+  static getRegion(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log("!!!", parent);
     if (parent) {
@@ -34,7 +34,7 @@ class Region {
       }
     }
 
-    return Models.region
+    return models.region
       .findById(id)
       .select(projection)
       .then((data) => data)

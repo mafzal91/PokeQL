@@ -4,9 +4,9 @@ import {getProjection} from "../../utils/index.js";
 import {Nature as NatureSchema} from "./pokemonSchemas.js";
 
 class Nature {
-  static getNatures(parent, {query, skip, limit}, Models, info) {
+  static getNatures(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
-    return Models.nature
+    return models.nature
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class Nature {
       .catch((error) => error);
   }
 
-  static getNature(parent, {id}, Models, info) {
+  static getNature(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -28,7 +28,7 @@ class Nature {
       }
     }
 
-    return Models.nature
+    return models.nature
       .findById(id)
       .select(projection)
       .then((data) => data)

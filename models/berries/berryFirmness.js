@@ -30,10 +30,10 @@ const BerryFirmnessSchema = new Schema(
 );
 
 class BerryFirmness {
-  static getBerryFirmnesses(parent, {query, skip, limit}, Models, info) {
+  static getBerryFirmnesses(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.berryFirmness
+    return models.berryFirmness
       .find(query)
       .select(projection)
       .skip(skip)
@@ -43,7 +43,7 @@ class BerryFirmness {
       .catch((error) => error);
   }
 
-  static getBerryFirmness(parent, {id}, Models, info) {
+  static getBerryFirmness(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     if (parent) {
       if (parent._id) {
@@ -54,7 +54,7 @@ class BerryFirmness {
       }
     }
 
-    return Models.berryFirmness
+    return models.berryFirmness
       .findById(id)
       .select(projection)
       .then((data) => data)

@@ -33,10 +33,10 @@ const ContestEffectSchema = new Schema(
 );
 
 class ContestEffect {
-  static getContestEffects(parent, {query, skip, limit}, Models, info) {
+  static getContestEffects(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.contestEffect
+    return models.contestEffect
       .find(query)
       .select(projection)
       .skip(skip)
@@ -46,7 +46,7 @@ class ContestEffect {
       .catch((error) => error);
   }
 
-  static getContestEffect(parent, {id}, Models, info) {
+  static getContestEffect(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -58,7 +58,7 @@ class ContestEffect {
       }
     }
 
-    return Models.contestEffect
+    return models.contestEffect
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

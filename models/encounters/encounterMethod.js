@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {EncounterMethod as EncounterMethodSchema} from "./encounterSchemas.js";
 
 class EncounterMethod {
-  static getEncounterMethods(parent, {query, skip, limit}, Models, info) {
+  static getEncounterMethods(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.encounterMethod
+    return models.encounterMethod
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class EncounterMethod {
       .catch((error) => error);
   }
 
-  static getEncounterMethod(parent, {id}, Models, info) {
+  static getEncounterMethod(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -31,7 +31,7 @@ class EncounterMethod {
       }
     }
 
-    return Models.encounterMethod
+    return models.encounterMethod
       .findById(id)
       .select(projection)
       .then((data) => data)

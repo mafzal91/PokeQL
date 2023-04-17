@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {MoveBattleStyle as MoveBattleStyleSchema} from "./MoveSchemas.js";
 
 class MoveBattleStyle {
-  static getMoveBattleStyles(parent, {query, skip, limit}, Models, info) {
+  static getMoveBattleStyles(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.moveBattleStyle
+    return models.moveBattleStyle
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class MoveBattleStyle {
       .catch((error) => error);
   }
 
-  static getMoveBattleStyle(parent, {id}, Models, info) {
+  static getMoveBattleStyle(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -28,7 +28,7 @@ class MoveBattleStyle {
       }
     }
 
-    return Models.moveBattleStyle
+    return models.moveBattleStyle
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

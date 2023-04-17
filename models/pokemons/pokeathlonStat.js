@@ -4,9 +4,9 @@ import {getProjection} from "../../utils/index.js";
 import {PokeathlonStat as PokeathlonStatSchema} from "./pokemonSchemas.js";
 
 class PokeathlonStat {
-  static getPokeathlonStats(parent, {query, skip, limit}, Models, info) {
+  static getPokeathlonStats(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
-    return Models.pokeathlonStat
+    return models.pokeathlonStat
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class PokeathlonStat {
       .catch((error) => error);
   }
 
-  static getPokeathlonStat(parent, {id}, Models, info) {
+  static getPokeathlonStat(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -27,7 +27,7 @@ class PokeathlonStat {
         id = parent.pokeathlon_stat;
       }
     }
-    return Models.pokeathlonStat
+    return models.pokeathlonStat
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

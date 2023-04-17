@@ -32,10 +32,10 @@ const MachineSchema = new Schema(
 );
 
 class Machine {
-  static getMachines(parent, {query, skip, limit}, Models, info) {
+  static getMachines(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.machine
+    return models.machine
       .find(query)
       .select(projection)
       .skip(skip)
@@ -45,7 +45,7 @@ class Machine {
       .catch((error) => error);
   }
 
-  static getMachine(parent, {id}, Models, info) {
+  static getMachine(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     if (parent) {
       if (parent._id) {
@@ -56,7 +56,7 @@ class Machine {
       }
     }
 
-    return Models.machine
+    return models.machine
       .findById(id)
       .select(projection)
       .then((data) => data)

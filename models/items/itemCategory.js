@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {ItemCategory as ItemCategorySchema} from "./itemSchemas.js";
 
 class ItemCategory {
-  static getItemCategories(parent, {query, skip, limit}, Models, info) {
+  static getItemCategories(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.itemCategory
+    return models.itemCategory
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class ItemCategory {
       .catch((error) => error);
   }
 
-  static getItemCategory(parent, {id}, Models, info) {
+  static getItemCategory(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -28,7 +28,7 @@ class ItemCategory {
       }
     }
 
-    return Models.itemCategory
+    return models.itemCategory
       .findById(id)
       .select(projection)
       .then((data) => data)

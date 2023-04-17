@@ -3,11 +3,11 @@ import {Ability as AbilitySchema} from "./pokemonSchemas.js";
 import {getProjection} from "../../utils/index.js";
 
 class Ability {
-  static getAbilities(parent, {query, skip, limit}, Models, info) {
+  static getAbilities(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
     // console.log(projection)
 
-    return Models.ability
+    return models.ability
       .find(query)
       .select(projection)
       .skip(skip)
@@ -17,7 +17,7 @@ class Ability {
       .catch((error) => error);
   }
 
-  static getAbility(parent, id, Models, info) {
+  static getAbility(parent, id, {models}, info) {
     const projection = getProjection(info);
     console.log(parent, projection);
     console.log("############");
@@ -30,7 +30,7 @@ class Ability {
       }
     }
 
-    return Models.ability
+    return models.ability
       .findById(id)
       .select(projection)
       .then((data) => data)

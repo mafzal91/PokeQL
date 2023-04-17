@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {EncounterCondition as EncounterConditionSchema} from "./encounterSchemas.js";
 
 class EncounterCondition {
-  static getEncounterConditions(parent, {query, skip, limit}, Models, info) {
+  static getEncounterConditions(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.encounterCondition
+    return models.encounterCondition
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class EncounterCondition {
       .catch((error) => error);
   }
 
-  static getEncounterCondition(parent, {id}, Models, info) {
+  static getEncounterCondition(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -28,7 +28,7 @@ class EncounterCondition {
       }
     }
 
-    return Models.encounterCondition
+    return models.encounterCondition
       .findById(id)
       .select(projection)
       .then((data) => data)

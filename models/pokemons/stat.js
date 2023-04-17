@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {Stat as StatSchema} from "./pokemonSchemas.js";
 
 class Stat {
-  static getStats(parent, {query, skip, limit}, Models, info) {
+  static getStats(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
     console.log(projection);
 
@@ -16,7 +16,7 @@ class Stat {
       }
     }
 
-    return Models.stat
+    return models.stat
       .find(query)
       .select(projection)
       .skip(skip)
@@ -26,7 +26,7 @@ class Stat {
       .catch((error) => error);
   }
 
-  static getStat(parent, id, Models, info) {
+  static getStat(parent, id, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -38,7 +38,7 @@ class Stat {
       }
     }
 
-    return Models.stat
+    return models.stat
       .findById(id)
       .select(projection)
       .then((data) => data)

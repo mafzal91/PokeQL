@@ -29,10 +29,10 @@ const VersionSchema = new Schema(
 );
 
 class Version {
-  static getVersions(parent, {query, skip, limit}, Models, info) {
+  static getVersions(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.version
+    return models.version
       .find(query)
       .select(projection)
       .skip(skip)
@@ -42,7 +42,7 @@ class Version {
       .catch((error) => error);
   }
 
-  static getVersion(parent, id, Models, info) {
+  static getVersion(parent, id, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -52,7 +52,7 @@ class Version {
       }
     }
 
-    return Models.version
+    return models.version
       .findById(id)
       .select(projection)
       .then((data) => data)

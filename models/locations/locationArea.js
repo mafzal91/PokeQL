@@ -3,7 +3,7 @@ import {LocationArea as LocationAreaSchema} from "./locationSchemas.js";
 import {getProjection} from "../../utils/index.js";
 
 class LocationArea {
-  static getLocationAreas(parent, {query, skip, limit}, Models, info) {
+  static getLocationAreas(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -12,7 +12,7 @@ class LocationArea {
       }
     }
 
-    return Models.locationArea
+    return models.locationArea
       .find(query)
       .select(projection)
       .skip(skip)
@@ -22,7 +22,7 @@ class LocationArea {
       .catch((error) => error);
   }
 
-  static getLocationArea(parent, {id}, Models, info) {
+  static getLocationArea(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
     if (parent) {
@@ -34,7 +34,7 @@ class LocationArea {
       }
     }
 
-    return Models.locationArea
+    return models.locationArea
       .findById(id)
       .select(projection)
       .exec()

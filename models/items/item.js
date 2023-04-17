@@ -4,7 +4,7 @@ import {getProjection} from "../../utils/index.js";
 import {Item as ItemSchema} from "./itemSchemas.js";
 
 class Item {
-  static getItems(parent, {query, skip, limit}, Models, info) {
+  static getItems(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     /** WIP */
@@ -24,7 +24,7 @@ class Item {
     //   }
     // }
 
-    return Models.item
+    return models.item
       .find(query)
       .select(projection)
       .skip(skip)
@@ -34,7 +34,7 @@ class Item {
       .catch((error) => error);
   }
 
-  static getItem(parent, {id}, Models, info) {
+  static getItem(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     //TODO fix to select the id for the correct file when parent has for multiple fields of the same type
@@ -57,7 +57,7 @@ class Item {
     console.log(id);
     console.log("__________________________________");
 
-    return Models.item
+    return models.item
       .findById(id)
       .select(projection)
       .then((data) => data)
