@@ -3,9 +3,9 @@ import {getProjection} from "../../utils/index.js";
 import {PokemonHabitat as PokemonHabitatSchema} from "./pokemonSchemas.js";
 
 class PokemonHabitat {
-  static getPokemonHabitats(parent, {query, skip, limit}, Models, info) {
+  static getPokemonHabitats(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
-    return Models.pokemonHabitat
+    return models.pokemonHabitat
       .find(query)
       .select(projection)
       .skip(skip)
@@ -15,7 +15,7 @@ class PokemonHabitat {
       .catch((error) => error);
   }
 
-  static getPokemonHabitat(parent, {id}, Models, info) {
+  static getPokemonHabitat(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -27,7 +27,7 @@ class PokemonHabitat {
       }
     }
 
-    return Models.pokemonHabitat
+    return models.pokemonHabitat
       .findById(id)
       .select(projection)
       .then((data) => data)

@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {MoveLearnMethod as MoveLearnMethodSchema} from "./MoveSchemas.js";
 
 class MoveLearnMethod {
-  static getMoveLearnMethods(parent, {query, skip, limit}, Models, info) {
+  static getMoveLearnMethods(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.moveLearnMethod
+    return models.moveLearnMethod
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class MoveLearnMethod {
       .catch((error) => error);
   }
 
-  static getMoveLearnMethod(parent, {id}, Models, info) {
+  static getMoveLearnMethod(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -28,7 +28,7 @@ class MoveLearnMethod {
       }
     }
 
-    return Models.moveLearnMethod
+    return models.moveLearnMethod
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

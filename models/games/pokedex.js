@@ -59,7 +59,7 @@ const PokedexSchema = new Schema(
 );
 
 class Pokedex {
-  static getPokedexes(parent, {query, skip, limit}, Models, info) {
+  static getPokedexes(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
     // console.log(projection)
 
@@ -69,7 +69,7 @@ class Pokedex {
       }
     }
 
-    return Models.pokedex
+    return models.pokedex
       .find(query)
       .select(projection)
       .skip(skip)
@@ -79,7 +79,7 @@ class Pokedex {
       .catch((error) => error);
   }
 
-  static getPokedex(parent, {id}, Models, info) {
+  static getPokedex(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     if (parent) {
       if (parent._id) {
@@ -89,7 +89,7 @@ class Pokedex {
         id = parent.pokedex;
       }
     }
-    return Models.pokedex
+    return models.pokedex
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

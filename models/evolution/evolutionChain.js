@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {EvolutionChain as EvolutionChainSchema} from "./evolutionSchemas.js";
 
 class EvolutionChain {
-  static getEvolutionChains(parent, {query, skip, limit}, Models, info) {
+  static getEvolutionChains(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.evolutionChain
+    return models.evolutionChain
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class EvolutionChain {
       .catch((error) => error);
   }
 
-  static getEvolutionChain(parent, {id}, Models, info) {
+  static getEvolutionChain(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -31,7 +31,7 @@ class EvolutionChain {
       }
     }
 
-    return Models.evolutionChain
+    return models.evolutionChain
       .findById(id)
       .select(projection)
       .then((data) => data)

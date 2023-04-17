@@ -3,12 +3,12 @@ import {getProjection} from "../../utils/index.js";
 import {ItemFlingEffect as ItemFlingEffectSchema} from "./itemSchemas.js";
 
 class ItemFlingEffect {
-  static getItemFlingEffects(parent, {query, skip, limit}, Models, info) {
+  static getItemFlingEffects(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     let sort = {pokeapi_id: 1};
 
-    return Models.itemFlingEffect
+    return models.itemFlingEffect
       .find(query)
       .select(projection)
       .skip(skip)
@@ -18,7 +18,7 @@ class ItemFlingEffect {
       .catch((error) => error);
   }
 
-  static getItemFlingEffect(parent, {id}, Models, info) {
+  static getItemFlingEffect(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
     if (parent) {
@@ -28,7 +28,7 @@ class ItemFlingEffect {
       }
     }
 
-    return Models.itemFlingEffect
+    return models.itemFlingEffect
       .findById(id)
       .select(projection)
       .then((data) => data)

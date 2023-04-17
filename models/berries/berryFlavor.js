@@ -44,11 +44,11 @@ const BerryFlavorSchema = new Schema(
 );
 
 class BerryFlavor {
-  static getBerryFlavors(parent, {query, skip, limit}, Models, info) {
+  static getBerryFlavors(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
     console.log("berry flavor", projection);
 
-    return Models.berryFlavor
+    return models.berryFlavor
       .find(query)
       .select(projection)
       .skip(skip)
@@ -58,7 +58,7 @@ class BerryFlavor {
       .catch((error) => error);
   }
 
-  static getBerryFlavor(parent, {id}, Models, info) {
+  static getBerryFlavor(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
     if (parent) {
@@ -79,7 +79,7 @@ class BerryFlavor {
       }
     }
 
-    return Models.berryFlavor
+    return models.berryFlavor
       .findById(id)
       .select(projection)
       .then((data) => data)

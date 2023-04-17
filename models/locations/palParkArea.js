@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {PalParkArea as PalParkAreaSchema} from "./locationSchemas.js";
 
 class PalParkArea {
-  static getPalParkAreas(parent, {query, skip, limit}, Models, info) {
+  static getPalParkAreas(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.palParkArea
+    return models.palParkArea
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class PalParkArea {
       .catch((error) => error);
   }
 
-  static getPalParkArea(parent, {id}, Models, info) {
+  static getPalParkArea(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
 
@@ -29,7 +29,7 @@ class PalParkArea {
       }
     }
 
-    return Models.palParkArea
+    return models.palParkArea
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

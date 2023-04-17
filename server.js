@@ -1,17 +1,32 @@
 import "dotenv/config.js";
 import express from "express";
-import graphqlHTTP from "express-graphql";
-// import {buildSchema} from "graphql";
-import {makeExecutableSchema} from "graphql-tools";
+import {createYoga, createSchema} from "graphql-yoga";
+
 import config from "./configs/index.js";
 import * as models from "./models/index.js";
 import types from "./graphql/types.js";
 import resolvers from "./graphql/resolvers.js";
 
 const app = express();
-const executableSchema = makeExecutableSchema({
-  resolvers,
-  typeDefs: types,
+const graphQLServer = createYoga({
+  context: {
+    models,
+  },
+  graphiql: {
+    defaultQuery:
+      /* GraphQL */
+      `
+        query {
+          Pokemons(skip: 0, limit: 10) {
+            name
+          }
+        }
+      `,
+  },
+  schema: createSchema({
+    resolvers,
+    typeDefs: types,
+  }),
 });
 
 app.use("*", (req, res, next) => {
@@ -21,18 +36,7 @@ app.use("*", (req, res, next) => {
 app.use("/heyo", (req, res) => {
   res.json({hello: "world"});
 });
-app.use(
-  "/",
-  graphqlHTTP(() => {
-    return {
-      // schema: buildSchema(types),
-      context: models,
-      graphiql: true,
-      rootValue: resolvers,
-      schema: executableSchema,
-    };
-  }),
-);
+app.use("/", graphQLServer);
 
 app.listen(config.port, () => {
   console.log(

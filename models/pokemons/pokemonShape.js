@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {PokemonShape as PokemonShapeSchema} from "./pokemonSchemas.js";
 
 class PokemonShape {
-  static getPokemonShapes(parent, {query, skip, limit}, Models, info) {
+  static getPokemonShapes(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.pokemonShape
+    return models.pokemonShape
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class PokemonShape {
       .catch((error) => error);
   }
 
-  static getPokemonShape(parent, {id}, Models, info) {
+  static getPokemonShape(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -28,7 +28,7 @@ class PokemonShape {
       }
     }
 
-    return Models.pokemonShape
+    return models.pokemonShape
       .findById(id)
       .select(projection)
       .then((data) => data)

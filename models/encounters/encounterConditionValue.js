@@ -7,7 +7,7 @@ class EncounterConditionValue {
   static getEncounterConditionValues(
     parent,
     {query, skip, limit},
-    Models,
+    {models},
     info,
   ) {
     const projection = getProjection(info);
@@ -18,7 +18,7 @@ class EncounterConditionValue {
         query = {_id: {$in: parent.condition_values}};
     }
     if (query) {
-      return Models.encounterConditionValue
+      return models.encounterConditionValue
         .find(query)
         .select(projection)
         .skip(skip)
@@ -31,7 +31,7 @@ class EncounterConditionValue {
     }
   }
 
-  static getEncounterConditionValue(parent, {id}, Models, info) {
+  static getEncounterConditionValue(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -40,7 +40,7 @@ class EncounterConditionValue {
       }
     }
 
-    return Models.encounterConditionValue
+    return models.encounterConditionValue
       .findById(id)
       .select(projection)
       .then((data) => data)

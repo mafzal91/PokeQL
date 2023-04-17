@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {MoveTarget as MoveTargetSchema} from "./MoveSchemas.js";
 
 class MoveTarget {
-  static getMoveTargets(parent, {query, skip, limit}, Models, info) {
+  static getMoveTargets(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.moveTarget
+    return models.moveTarget
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class MoveTarget {
       .catch((error) => error);
   }
 
-  static getMoveTarget(parent, {id}, Models, info) {
+  static getMoveTarget(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -28,7 +28,7 @@ class MoveTarget {
       }
     }
 
-    return Models.moveTarget
+    return models.moveTarget
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

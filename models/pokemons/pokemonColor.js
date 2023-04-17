@@ -3,9 +3,9 @@ import {getProjection} from "../../utils/index.js";
 import {PokemonColor as PokemonColorSchema} from "./pokemonSchemas.js";
 
 class PokemonColor {
-  static getPokemonColors(parent, {query, skip, limit}, Models, info) {
+  static getPokemonColors(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
-    return Models.pokemonColor
+    return models.pokemonColor
       .find(query)
       .select(projection)
       .skip(skip)
@@ -15,7 +15,7 @@ class PokemonColor {
       .catch((error) => error);
   }
 
-  static getPokemonColor(parent, {id}, Models, info) {
+  static getPokemonColor(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -27,7 +27,7 @@ class PokemonColor {
       }
     }
 
-    return Models.pokemonColor
+    return models.pokemonColor
       .findById(id)
       .select(projection)
       .then((data) => data)

@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {MoveDamageClass as MoveDamageClassSchema} from "./MoveSchemas.js";
 
 class MoveDamageClass {
-  static getMoveDamageClasses(parent, {query, skip, limit}, Models, info) {
+  static getMoveDamageClasses(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.moveDamageClass
+    return models.moveDamageClass
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class MoveDamageClass {
       .catch((error) => error);
   }
 
-  static getMoveDamageClass(parent, {id}, Models, info) {
+  static getMoveDamageClass(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -31,7 +31,7 @@ class MoveDamageClass {
       }
     }
 
-    return Models.moveDamageClass
+    return models.moveDamageClass
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

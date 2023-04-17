@@ -46,10 +46,10 @@ const ContestTypeSchema = new Schema(
 );
 
 class ContestType {
-  static getContestTypes(parent, {query, skip, limit}, Models, info) {
+  static getContestTypes(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.contestType
+    return models.contestType
       .find(query)
       .select(projection)
       .skip(skip)
@@ -59,7 +59,7 @@ class ContestType {
       .catch((error) => error);
   }
 
-  static getContestType(parent, {id}, Models, info) {
+  static getContestType(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -71,7 +71,7 @@ class ContestType {
       }
     }
 
-    return Models.contestType
+    return models.contestType
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {EggGroup as EggGroupSchema} from "./pokemonSchemas.js";
 
 class EggGroup {
-  static getEggGroups(parent, {query, skip, limit}, Models, info) {
+  static getEggGroups(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -12,7 +12,7 @@ class EggGroup {
       }
     }
 
-    return Models.eggGroup
+    return models.eggGroup
       .find(query)
       .select(projection)
       .skip(skip)
@@ -22,7 +22,7 @@ class EggGroup {
       .catch((error) => error);
   }
 
-  static getEggGroup(parent, {id}, Models, info) {
+  static getEggGroup(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -34,7 +34,7 @@ class EggGroup {
       }
     }
 
-    return Models.eggGroup
+    return models.eggGroup
       .findById(id)
       .select(projection)
       .then((data) => data)

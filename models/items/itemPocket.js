@@ -3,10 +3,10 @@ import {getProjection} from "../../utils/index.js";
 import {ItemPocket as ItemPocketSchema} from "./itemSchemas.js";
 
 class ItemPocket {
-  static getItemPockets(parent, {query, skip, limit}, Models, info) {
+  static getItemPockets(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
-    return Models.itemPocket
+    return models.itemPocket
       .find(query)
       .select(projection)
       .skip(skip)
@@ -16,7 +16,7 @@ class ItemPocket {
       .catch((error) => error);
   }
 
-  static getItemPocket(parent, {id}, Models, info) {
+  static getItemPocket(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
     if (parent) {
@@ -28,7 +28,7 @@ class ItemPocket {
       }
     }
 
-    return Models.itemPocket
+    return models.itemPocket
       .findById(id)
       .select(projection)
       .then((data) => data)

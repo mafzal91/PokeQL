@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {PokemonForm as PokemonFormSchema} from "./pokemonSchemas.js";
 
 class PokemonForm {
-  static getPokemonForms(parent, {query, skip, limit}, Models, info) {
+  static getPokemonForms(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -12,7 +12,7 @@ class PokemonForm {
       }
     }
 
-    return Models.pokemonForm
+    return models.pokemonForm
       .find(query)
       .select(projection)
       .skip(skip)
@@ -22,7 +22,7 @@ class PokemonForm {
       .catch((error) => error);
   }
 
-  static getPokemonForm(parent, {id}, Models, info) {
+  static getPokemonForm(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -34,7 +34,7 @@ class PokemonForm {
       }
     }
 
-    return Models.pokemonForm
+    return models.pokemonForm
       .findById({_id: id})
       .select(projection)
       .then((data) => data)

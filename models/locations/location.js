@@ -3,7 +3,7 @@ import {Location as LocationSchema} from "./locationSchemas.js";
 import {getProjection} from "../../utils/index.js";
 
 class Location {
-  static getLocations(parent, {query, skip, limit}, Models, info) {
+  static getLocations(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -12,7 +12,7 @@ class Location {
       }
     }
 
-    return Models.location
+    return models.location
       .find(query)
       .select(projection)
       .skip(skip)
@@ -22,7 +22,7 @@ class Location {
       .catch((error) => error);
   }
 
-  static getLocation(parent, {id}, Models, info) {
+  static getLocation(parent, {id}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -34,7 +34,7 @@ class Location {
       }
     }
 
-    return Models.location
+    return models.location
       .findById(id)
       .select(projection)
       .then((data) => data)

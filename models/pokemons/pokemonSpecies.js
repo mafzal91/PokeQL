@@ -3,7 +3,7 @@ import {getProjection} from "../../utils/index.js";
 import {PokemonSpecies as PokemonSpeciesSchema} from "./pokemonSchemas.js";
 
 class PokemonSpecies {
-  static getPokemonSpeciess(parent, {query, skip, limit}, Models, info) {
+  static getPokemonSpeciess(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
 
     if (parent) {
@@ -12,7 +12,7 @@ class PokemonSpecies {
       }
     }
 
-    return Models.pokemonSpecies
+    return models.pokemonSpecies
       .find(query)
       .select(projection)
       .skip(skip)
@@ -23,7 +23,7 @@ class PokemonSpecies {
       .catch((error) => error);
   }
 
-  static getPokemonSpecies(parent, {id}, Models, info) {
+  static getPokemonSpecies(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     // console.log("SPECIES", parent)
     if (parent) {
@@ -41,7 +41,7 @@ class PokemonSpecies {
       }
     }
 
-    return Models.pokemonSpecies
+    return models.pokemonSpecies
       .findById(id)
       .select(projection)
       .then((data) => data)

@@ -130,11 +130,11 @@ export default {
   // },
 
   // DamageRelations:{
-  //   half_damage_from: (parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'half_damage_from'),
-  //   no_damage_from: (parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'no_damage_from'),
-  //   half_damage_to: (parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'half_damage_to'),
-  //   double_damage_from:(parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'double_damage_from'),
-  //   no_damage_to:(parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'no_damage_to'),
-  //   double_damage_to:(parent, query, Models, info) => models.type.getDamageRelations(parent, query, Models, info, 'double_damage_to'),
+  //   half_damage_from: (parent, query, { models}, info) => models.type.getDamageRelations(parent, query, { models}, info, 'half_damage_from'),
+  //   no_damage_from: (parent, query, { models}, info) => models.type.getDamageRelations(parent, query, { models}, info, 'no_damage_from'),
+  //   half_damage_to: (parent, query, { models}, info) => models.type.getDamageRelations(parent, query, { models}, info, 'half_damage_to'),
+  //   double_damage_from:(parent, query, { models}, info) => models.type.getDamageRelations(parent, query, { models}, info, 'double_damage_from'),
+  //   no_damage_to:(parent, query, { models}, info) => models.type.getDamageRelations(parent, query, { models}, info, 'no_damage_to'),
+  //   double_damage_to:(parent, query, { models}, info) => models.type.getDamageRelations(parent, query, { models}, info, 'double_damage_to'),
   // },
 };

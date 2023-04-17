@@ -34,10 +34,10 @@ const LanguageSchema = new Schema(
 );
 
 class Language {
-  static getLanguages(parent, {query, skip, limit}, Models, info) {
+  static getLanguages(parent, {query, skip, limit}, {models}, info) {
     const projection = getProjection(info);
     // console.log(projection)
-    return Models.language
+    return models.language
       .find(query)
       .select(projection)
       .skip(skip)
@@ -47,7 +47,7 @@ class Language {
       .catch((error) => error);
   }
 
-  static getLanguage(parent, {id}, Models, info) {
+  static getLanguage(parent, {id}, {models}, info) {
     const projection = getProjection(info);
     console.log(parent);
     if (parent) {
@@ -59,7 +59,7 @@ class Language {
       }
     }
 
-    return Models.language
+    return models.language
       .findById(id)
       .select(projection)
       .then((data) => data)
