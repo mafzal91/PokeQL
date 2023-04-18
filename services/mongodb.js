@@ -1,4 +1,4 @@
-import mongo from "mongoose";
+import mongoose from "mongoose";
 import config from "../configs/index.js";
 
 function generateMongoDBConnectionString({
@@ -11,10 +11,12 @@ function generateMongoDBConnectionString({
   const url = new URL(
     `mongodb+srv://${encodeURIComponent(username)}:${encodeURIComponent(
       password,
-    )}@${encodeURIComponent(host)}/${encodeURIComponent(
-      database,
-    )}?retryWrites=true&w=majority`,
+    )}@${encodeURIComponent(host)}/${encodeURIComponent(database)}`,
   );
+
+  url.searchParams.set("retryWrites", true);
+  url.searchParams.set("w", "majority");
+
   if (replSet) {
     url.searchParams.set("replicaSet", encodeURIComponent(replSet));
   }
@@ -22,8 +24,6 @@ function generateMongoDBConnectionString({
 }
 
 const options = {
-  useCreateIndex: true,
-  useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
@@ -35,9 +35,10 @@ const connectionURL = generateMongoDBConnectionString({
   replSet: config.mongodb.replSet,
   username: config.mongodb.user,
 });
-console.log(config.mongodb);
-mongo.set("debug", config.mongodb.debug);
-mongo.connect(connectionURL, options).then(
+
+mongoose.set("debug", config.mongodb.debug);
+
+mongoose.connect(connectionURL, options).then(
   () => {
     console.log("Connected");
   },
@@ -46,4 +47,19 @@ mongo.connect(connectionURL, options).then(
   },
 );
 
-export default mongo;
+// Get the default connection object
+const db = mongoose.connection;
+// Listen to the connection events
+db.on("connected", function () {
+  console.log("Mongoose connected to the database");
+});
+
+db.on("error", function (err) {
+  console.error("Mongoose connection error:", err);
+});
+
+db.on("disconnected", function () {
+  console.log("Mongoose disconnected from the database");
+});
+
+export default mongoose;

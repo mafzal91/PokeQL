@@ -24,7 +24,7 @@
     "express": "^4.17.1",
     "graphql-yoga": "^3.9.0",
     "moment": "^2.29.1",
-    "mongoose": "^5.13.3"
+    "mongoose": "^7.0.4"
   },
   "devDependencies": {
     "eslint": "^7.31.0",

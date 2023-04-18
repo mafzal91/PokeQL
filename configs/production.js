@@ -1,7 +1,7 @@
 export default (env = process.env) => ({
   mongodb: {
     database: env.MONGO_DATABASE,
-    debug: false,
+    debug: true,
     host: env.MONGO_HOST,
     password: env.MONGO_PASSWORD,
     port: env.MONGO_PORT,
